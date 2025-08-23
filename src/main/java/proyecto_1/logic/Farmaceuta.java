@@ -1,17 +1,16 @@
-package main.java.proyecto_1.data;
+package main.java.proyecto_1.logic;
 
-public class Medico {
+public class Farmaceuta {
     private String id;
     private String nombre;
-    private String especialidad;
     private String password;
 
-    public  Medico(String id, String nombre, String especialidad, String password) {
+    public  Farmaceuta(String id, String nombre, String password) {
         this.id = id;
         this.nombre = nombre;
-        this.especialidad = especialidad;
         this.password = password;
     }
+
     public String getId() {
         return id;
     }
@@ -23,12 +22,6 @@ public class Medico {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    public String getEspecialidad() {
-        return especialidad;
-    }
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
     }
     public String getPassword(){
         return password;
