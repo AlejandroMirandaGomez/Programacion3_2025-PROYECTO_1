@@ -12,6 +12,13 @@ public class Medico {
         this.especialidad = especialidad;
         this.password = password;
     }
+
+    public Medico(){
+        id = "";
+        nombre = "";
+        especialidad = "";
+        password = "";
+    }
     public String getId() {
         return id;
     }
