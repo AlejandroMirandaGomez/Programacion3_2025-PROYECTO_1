@@ -1,6 +1,6 @@
-package main.java.proyecto_1.data;
+package proyecto_1.data;
 
-import main.java.proyecto_1.logic.Medico;
+import proyecto_1.logic.Medico;
 
 import java.util.ArrayList;
 import java.util.List;

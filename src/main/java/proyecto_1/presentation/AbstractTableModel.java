@@ -1,4 +1,4 @@
-package main.java.proyecto_1.presentation;
+package proyecto_1.presentation;
 
 import java.util.List;
 

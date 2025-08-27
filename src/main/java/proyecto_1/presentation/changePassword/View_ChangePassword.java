@@ -1,4 +1,4 @@
-package main.java.proyecto_1.presentation.changePassword;
+package proyecto_1.presentation.changePassword;
 
 import javax.swing.*;
 

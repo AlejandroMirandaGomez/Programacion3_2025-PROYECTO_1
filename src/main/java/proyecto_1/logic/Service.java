@@ -1,6 +1,6 @@
-package main.java.proyecto_1.logic;
+package proyecto_1.logic;
 
-import main.java.proyecto_1.data.Data;
+import proyecto_1.data.Data;
 
 public class Service {
     private static  Service Instance;

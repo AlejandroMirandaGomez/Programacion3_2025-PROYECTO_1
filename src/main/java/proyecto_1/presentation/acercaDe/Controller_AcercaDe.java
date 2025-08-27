@@ -1,4 +1,4 @@
-package main.java.proyecto_1.presentation.acercaDe;
+package proyecto_1.presentation.acercaDe;
 
 public class Controller_AcercaDe {
     View_AcercaDe view;

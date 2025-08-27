@@ -1,11 +1,11 @@
-package main.java.proyecto_1;
+package proyecto_1;
 
-import main.java.proyecto_1.presentation.acercaDe.Controller_AcercaDe;
-import main.java.proyecto_1.presentation.acercaDe.Model_AcercaDe;
-import main.java.proyecto_1.presentation.acercaDe.View_AcercaDe;
-import main.java.proyecto_1.presentation.login.Controller_Login;
-import main.java.proyecto_1.presentation.login.Model_Login;
-import main.java.proyecto_1.presentation.login.View_Login;
+import proyecto_1.presentation.acercaDe.Controller_AcercaDe;
+import proyecto_1.presentation.acercaDe.Model_AcercaDe;
+import proyecto_1.presentation.acercaDe.View_AcercaDe;
+import proyecto_1.presentation.login.Controller_Login;
+import proyecto_1.presentation.login.Model_Login;
+import proyecto_1.presentation.login.View_Login;
 
 import javax.swing.*;
 

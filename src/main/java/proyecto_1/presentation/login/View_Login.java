@@ -1,6 +1,6 @@
-package main.java.proyecto_1.presentation.login;
+package proyecto_1.presentation.login;
 
-import main.java.proyecto_1.logic.Medico;
+import proyecto_1.logic.Medico;
 
 import javax.swing.*;
 import java.awt.*;

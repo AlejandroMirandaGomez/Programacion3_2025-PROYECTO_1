@@ -1,6 +1,6 @@
-package main.java.proyecto_1.presentation.acercaDe;
+package proyecto_1.presentation.acercaDe;
 
-import main.java.proyecto_1.presentation.AbstractModel;
+import proyecto_1.presentation.AbstractModel;
 
 public class Model_AcercaDe extends AbstractModel {
 

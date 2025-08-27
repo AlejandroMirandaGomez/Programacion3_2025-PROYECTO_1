@@ -1,4 +1,4 @@
-package main.java.proyecto_1.logic;
+package proyecto_1.logic;
 
 public class Medico {
     private String id;
