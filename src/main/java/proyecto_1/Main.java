@@ -41,12 +41,13 @@ public class Main {
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        window.setSize(600,300);
+        window.setSize(1380,720);
         window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Estevan");
         window.setContentPane(tabbedPane);
         window.setVisible(true);
-
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //tabbedPane.addTab("Login", view.getPanel());
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
