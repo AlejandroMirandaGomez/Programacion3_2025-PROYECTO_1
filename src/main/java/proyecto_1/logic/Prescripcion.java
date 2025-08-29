@@ -5,15 +5,18 @@ public class Prescripcion {
     private String indicaciones;
     private int duracion; // en días
     private Medicamento medicamento;
+    private int cantidad;
 
     // --- Constructores ---
     public Prescripcion() {
+
     }
 
-    public Prescripcion(String indicaciones, int duracion, Medicamento medicamento) {
+    public Prescripcion(String indicaciones, int duracion, Medicamento medicamento, int  cantidad) {
         this.indicaciones = indicaciones;
         this.duracion = duracion;
         this.medicamento = medicamento;
+        this.cantidad = cantidad;
     }
 
     // --- Getters y Setters ---
@@ -39,5 +42,13 @@ public class Prescripcion {
 
     public void setMedicamento(Medicamento medicamento) {
         this.medicamento = medicamento;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

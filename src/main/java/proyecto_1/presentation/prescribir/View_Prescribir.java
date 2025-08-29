@@ -8,15 +8,29 @@ import java.beans.PropertyChangeListener;
 
 public class View_Prescribir implements PropertyChangeListener {
     private JPanel panel;
-    private JButton button1;
-    private JButton button2;
+    private JPanel control;
+    private JButton buscarPacienteBtn;
+    private JButton agregarMedicamentoBtn;
+    private DatePicker fechaRetiro;
+    private JLabel nombrePaciente;
+    private JTable tablaPrescripciones;
+    private JPanel ajustar;
+    private JButton guardar;
+    private JButton limpiar;
+    private JButton descartar;
+    private JButton detalles;
+
+    Controller_Prescribir controller;
+    Model_Prescribir model;
+
+    public View_Prescribir(){
+
+    }
 
     public JPanel getPanel() {
         return panel;
     }
 
-    Controller_Prescribir controller;
-    Model_Prescribir model;
 
     public void setController(Controller_Prescribir controller) {
         this.controller = controller;
@@ -29,6 +43,9 @@ public class View_Prescribir implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        if (evt.getPropertyName().equals(Model_Prescribir.PRESCRIPCIONES)) {
+            int[] cols = {TableModel.MEDICAMENTO, TableModel.PRESENTACION, TableModel.INDICACION, TableModel.CANTIDAD, TableModel.DURACION};
+            tablaPrescripciones.setModel(new TableModel(cols, model.getPrescripciones()));
+        }
     }
 }
