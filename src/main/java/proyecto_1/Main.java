@@ -20,22 +20,23 @@ public class Main {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch (Exception ex) {};
 
+        // Login MVC:
         View_Login view = new View_Login();
         Model_Login model = new Model_Login();
         Controller_Login controller = new Controller_Login(view, model);
+        // *************************************************************************************************************
 
-        // Acerca De
+        // AcercaDe MVC:
         View_AcercaDe view_acercaDe = new View_AcercaDe();
         Model_AcercaDe model_acercaDe = new Model_AcercaDe();
         Controller_AcercaDe controller_acercaDe = new Controller_AcercaDe(view_acercaDe, model_acercaDe);
-        // *********************************************
+        // *************************************************************************************************************
 
-        //Prescribir
+        //Prescribir MVC:
         View_Prescribir view_prescribir = new View_Prescribir();
         Model_Prescribir  model_prescribir = new Model_Prescribir();
         Controller_Prescribir controller_Prescribir = new Controller_Prescribir(view_prescribir, model_prescribir);
-        // *********************************************
-
+        // *************************************************************************************************************
 
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -46,8 +47,8 @@ public class Main {
         window.setContentPane(tabbedPane);
         window.setVisible(true);
 
+        //tabbedPane.addTab("Login", view.getPanel());
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
-        tabbedPane.addTab("Login", view.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
     }
 }
