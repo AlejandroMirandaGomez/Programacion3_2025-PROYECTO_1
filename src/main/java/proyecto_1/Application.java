@@ -3,6 +3,9 @@ package proyecto_1;
 import proyecto_1.presentation.acercaDe.Controller_AcercaDe;
 import proyecto_1.presentation.acercaDe.Model_AcercaDe;
 import proyecto_1.presentation.acercaDe.View_AcercaDe;
+import proyecto_1.presentation.despacho.Controller_Despacho;
+import proyecto_1.presentation.despacho.Model_Despacho;
+import proyecto_1.presentation.despacho.View_Despacho;
 import proyecto_1.presentation.login.Controller_Login;
 import proyecto_1.presentation.login.Model_Login;
 import proyecto_1.presentation.login.View_Login;
@@ -45,6 +48,13 @@ public class Application {
         View_Medicos view_medicos = new View_Medicos();
         Model_Medicos model_medicos = new Model_Medicos();
         Controller_Medicos controller_medicos = new Controller_Medicos(view_medicos, model_medicos);
+        // *************************************************************************************************************
+
+        //Despacho MVC:
+        View_Despacho view_despacho = new View_Despacho();
+        Model_Despacho model_despacho = new Model_Despacho();
+        Controller_Despacho controller_despacho = new Controller_Despacho(view_despacho, model_despacho);
+        // *************************************************************************************************************
 
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -57,6 +67,7 @@ public class Application {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //tabbedPane.addTab("Login", view.getPanel());
+        tabbedPane.addTab("Despacho", view_despacho.getPanel());
         tabbedPane.addTab("Medicos", view_medicos.getPanel());
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());

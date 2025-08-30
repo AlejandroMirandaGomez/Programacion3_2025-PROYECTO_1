@@ -34,6 +34,16 @@ public class View_Despacho implements PropertyChangeListener {
                 dialog.setVisible(true); // muestra el diálogo
             }
         });
+        verTodoRadioBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(verTodoRadioBtn.isSelected()) {
+                    controller.getRecetas();
+                } else{
+                    controller.limpiarRecetas();
+                }
+            }
+        });
     }
 
     public void setController(Controller_Despacho controller) {

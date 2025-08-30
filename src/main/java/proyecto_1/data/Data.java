@@ -7,17 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// package proyecto_1.logic;  // <- descomenta/ajusta según tu paquete
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Data {
     private List<Medico> medicos;
     private List<Paciente> pacientes;
-    private static List<Receta> recetas;
+    private List<Receta> recetas;
     private List<Medicamento> medicamentos;
 
     public Data() {
@@ -30,11 +23,9 @@ public class Data {
     }
 
     public List<Medico> getMedicos() { return medicos; }
-    public static List<Receta> getRecetas() { return recetas; }
+    public List<Receta> getRecetas() { return recetas; }
     public List<Paciente> getPacientes() { return pacientes; }
     public List<Medicamento> getMedicamentos() { return medicamentos; }
-
-
 
     // --- Carga de datos de prueba ---
     private void seed() {

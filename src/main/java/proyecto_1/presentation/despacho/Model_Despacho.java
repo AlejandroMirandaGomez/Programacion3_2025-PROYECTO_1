@@ -14,9 +14,7 @@ public class Model_Despacho extends AbstractModel {
     public static final String LIST = "List";
 
     public Model_Despacho() {
-        //recetas = new ArrayList<Receta>();
-        Data data = new Data();
-        this.recetas = data.getRecetas();
+        recetas = new ArrayList<Receta>();
     }
 
     @Override

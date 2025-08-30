@@ -26,8 +26,6 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-
-
     }
     public void setController(Controller_Prescribir controller) {
         this.controller = controller;

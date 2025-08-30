@@ -116,7 +116,7 @@ public class Service {
         return result;
     }
 
-    //--Buscar Medicamento--
+    //--Medicamento--
 
     public List<Medicamento> getListaMedicamentos() {
         return data.getMedicamentos();
@@ -144,4 +144,29 @@ public class Service {
 
         return result;
     }
+
+    //--Recetas--
+
+    public List<Receta> getListaRecetas() {
+        return data.getRecetas();
+    }
+    public List<Receta> filtrarRecetas(String tipo, String texto) {
+        List<Receta> result=new ArrayList<Receta>();
+
+        switch (tipo){
+            case "ID_PACIENTE":
+                result = data.getRecetas().stream()
+                        .filter(r -> r.getPaciente().getId().toLowerCase().contains(texto.toLowerCase()))
+                        .collect(Collectors.toList());
+                break;
+            case "ESTADO":
+                result = data.getRecetas().stream()
+                        .filter(r -> r.getEstado().toLowerCase().contains(texto.toLowerCase()))
+                        .collect(Collectors.toList());
+                break;
+        }
+
+        return result;
+    }
+
 }
