@@ -52,6 +52,10 @@ public class Service {
         }
     }
 
+    public List<Medico> findAll(){
+        return data.getMedicos();
+    }
+
     //--Pacientes--
     public List<Paciente> getListaPacientes() {
         return data.getPacientes();

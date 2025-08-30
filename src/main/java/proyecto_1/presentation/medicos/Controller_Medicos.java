@@ -1,0 +1,43 @@
+package proyecto_1.presentation.medicos;
+
+import proyecto_1.logic.Medico;
+import proyecto_1.logic.Service;
+
+import javax.swing.text.View;
+
+public class Controller_Medicos {
+    View_Medicos view;
+    Model_Medicos  model;
+
+    public Controller_Medicos(View_Medicos view, Model_Medicos model) {
+        this.view = view;
+        this.model = model;
+        view.setController(this);
+        view.setModel(model);
+    }
+
+    public void create(Medico e) throws Exception{
+        Service.getInstance().create(e);
+        model.setCurrent(new Medico());
+        model.setMedicos(Service.getInstance().findAll());
+    }
+
+    public void read(String id) throws Exception{
+        Medico m = new Medico();
+        m.setId(id);
+        try {
+            model.setCurrent(Service.getInstance().read(m));
+        } catch (Exception ex) {
+            Medico b = new Medico();
+            b.setId(id);
+            model.setCurrent(b);
+            throw ex;
+        }
+    }
+
+    public void clear() {
+        model.setCurrent(new Medico());
+    }
+
+
+}
