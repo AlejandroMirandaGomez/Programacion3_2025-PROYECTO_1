@@ -12,6 +12,12 @@ public class Paciente {
     // --- Constructores ---
     public Paciente() {
     }
+    public Paciente(String id, String nombre, String telefono) {
+        this.id = id;
+        this.nombre = nombre;
+        this.telefono = telefono;
+
+    }
 
     public Paciente(String id, String nombre, String telefono, LocalDate fechaNacimiento) {
         this.id = id;
