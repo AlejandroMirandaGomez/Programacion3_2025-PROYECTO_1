@@ -6,9 +6,6 @@ import proyecto_1.presentation.acercaDe.View_AcercaDe;
 import proyecto_1.presentation.login.Controller_Login;
 import proyecto_1.presentation.login.Model_Login;
 import proyecto_1.presentation.login.View_Login;
-import proyecto_1.presentation.medicos.Controller_Medicos;
-import proyecto_1.presentation.medicos.Model_Medicos;
-import proyecto_1.presentation.medicos.View_Medicos;
 import proyecto_1.presentation.prescribir.Controller_Prescribir;
 import proyecto_1.presentation.prescribir.Model_Prescribir;
 import proyecto_1.presentation.prescribir.View_Prescribir;
@@ -41,11 +38,6 @@ public class Main {
         Controller_Prescribir controller_Prescribir = new Controller_Prescribir(view_prescribir, model_prescribir);
         // *************************************************************************************************************
 
-        //Medicos MVC:
-        View_Medicos view_Medicos = new View_Medicos();
-        Model_Medicos model_Medicos = new Model_Medicos();
-        Controller_Medicos controller_Medicos = new Controller_Medicos(view_Medicos,  model_Medicos);
-
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -59,6 +51,5 @@ public class Main {
         //tabbedPane.addTab("Login", view.getPanel());
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
-        tabbedPane.addTab("Medicos", view_Medicos.getPanel());
     }
 }

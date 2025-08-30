@@ -6,34 +6,27 @@ import java.util.List;
 
 public class Receta {
     // --- Atributos ---
-    private String id;
     private LocalDate fechaDeRetiro;
     private Paciente paciente;
     private Medico medico;
     private List<Prescripcion> prescripciones;
+    private String estado;
 
     // --- Constructores ---
     public Receta() {
         this.prescripciones = new ArrayList<>();
+        this.estado = "Confeccionada";
     }
 
-    public Receta(String id, LocalDate fechaDeRetiro, Paciente paciente, Medico medico, List<Prescripcion> prescripciones) {
-        this.id = id;
+    public Receta(LocalDate fechaDeRetiro, Paciente paciente, Medico medico, List<Prescripcion> prescripciones) {
         this.fechaDeRetiro = fechaDeRetiro;
         this.paciente = paciente;
         this.medico = medico;
         this.prescripciones = prescripciones != null ? prescripciones : new ArrayList<>();
+        this.estado = "Confeccionada";
     }
 
     // --- Getters y Setters ---
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public LocalDate getFechaDeRetiro() {
         return fechaDeRetiro;
     }
@@ -50,9 +43,7 @@ public class Receta {
         this.paciente = paciente;
     }
 
-    public Medico getMedico() {
-        return medico;
-    }
+    public Medico getMedico() { return medico; }
 
     public void setMedico(Medico medico) {
         this.medico = medico;
@@ -65,6 +56,10 @@ public class Receta {
     public void setPrescripciones(List<Prescripcion> prescripciones) {
         this.prescripciones = prescripciones;
     }
+
+    public String getEstado() { return estado; }
+
+    public void setEstado(String estado) { this.estado = estado; }
 
     // --- Métodos de utilidad ---
     public void agregarPrescripcion(Prescripcion p) {
