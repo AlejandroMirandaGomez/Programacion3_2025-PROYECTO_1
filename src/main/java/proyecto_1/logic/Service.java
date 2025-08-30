@@ -56,6 +56,32 @@ public class Service {
         return data.getMedicos();
     }
 
+    public List<Medico> filtrarMedicos(String texto){
+        List<Medico> list = new ArrayList<>();
+
+        list = data.getMedicos().stream()
+                .filter(i -> i.getNombre().toLowerCase().contains(texto.toLowerCase()))
+                .collect(Collectors.toList());
+
+        return list;
+
+    }
+
+    public void removeMedico(Medico e) throws Exception{
+        Medico result = data.getMedicos().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (result != null) {
+            data.getMedicos().remove(result);
+        }else {
+            throw new Exception("Medico no existe");
+        }
+
+
+    }
+
     //--Pacientes--
     public List<Paciente> getListaPacientes() {
         return data.getPacientes();

@@ -18,17 +18,23 @@ public class Data {
     private List<Medico> medicos;
     private List<Paciente> pacientes;
     private static List<Receta> recetas;
+    private List<Medicamento> medicamentos;
 
     public Data() {
         medicos = new ArrayList<>();
         recetas = new ArrayList<>();
         pacientes = new ArrayList<>();
+        medicamentos = new ArrayList<>();
+
         seed();
     }
 
     public List<Medico> getMedicos() { return medicos; }
     public static List<Receta> getRecetas() { return recetas; }
     public List<Paciente> getPacientes() { return pacientes; }
+    public List<Medicamento> getMedicamentos() { return medicamentos; }
+
+
 
     // --- Carga de datos de prueba ---
     private void seed() {

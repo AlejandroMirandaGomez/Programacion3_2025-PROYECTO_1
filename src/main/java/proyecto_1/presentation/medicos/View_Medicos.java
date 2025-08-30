@@ -28,6 +28,7 @@ public class View_Medicos implements PropertyChangeListener{
 
     public View_Medicos(){
 
+
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,6 +62,45 @@ public class View_Medicos implements PropertyChangeListener{
                 }
             }
         });
+
+        Nombre2Fld.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String texto = Nombre2Fld.getText();
+                if (texto.isEmpty()) {
+                    controller.getMedicos();
+                }else{
+                    controller.filtrarMedicos(texto);
+                }
+            }
+        });
+
+        borrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int respuesta = JOptionPane.showConfirmDialog(
+                        panel,
+                        "¿Está seguro de que desea eliminar este elemento?",
+                        "Confirmar borrado",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    try {
+                        controller.remove(model.getCurrent());
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(
+                                panel,
+                                ex.getMessage(),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                }
+            }
+        });
+
     }
 
 
@@ -93,10 +133,17 @@ public class View_Medicos implements PropertyChangeListener{
                 NombreFld.setText(model.getCurrent().getNombre());
                 EspecialidadFld.setText(model.getCurrent().getEspecialidad());
 
+                if(model.getCurrent().getId().isEmpty()){
+                    IdFld.setEnabled(true);
+                }else {
+                    IdFld.setEnabled(false);
+                }
+
                 IdFld.setBackground(null);
                 IdFld.setToolTipText(null);
                 NombreFld.setBackground(null);
                 NombreFld.setToolTipText(null);
+                EspecialidadFld.setBackground(null);
 
         }
         this.panel.revalidate();

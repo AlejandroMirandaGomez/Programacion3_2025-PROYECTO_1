@@ -4,6 +4,7 @@ import proyecto_1.logic.Medico;
 import proyecto_1.logic.Service;
 
 import javax.swing.text.View;
+import java.util.List;
 
 public class Controller_Medicos {
     View_Medicos view;
@@ -14,6 +15,7 @@ public class Controller_Medicos {
         this.model = model;
         view.setController(this);
         view.setModel(model);
+        getMedicos();
     }
 
     public void create(Medico e) throws Exception{
@@ -37,6 +39,22 @@ public class Controller_Medicos {
 
     public void clear() {
         model.setCurrent(new Medico());
+    }
+
+    public void getMedicos(){
+        List<Medico> list = Service.getInstance().findAll();
+        model.setMedicos(list);
+    }
+
+    public void filtrarMedicos(String texto){
+        List<Medico> list = Service.getInstance().filtrarMedicos(texto);
+        model.setMedicos(list);
+    }
+
+    public void remove(Medico e) throws Exception{
+        Service.getInstance().removeMedico(e);
+        model.setCurrent(new Medico());
+        model.setMedicos(Service.getInstance().findAll());
     }
 
 
