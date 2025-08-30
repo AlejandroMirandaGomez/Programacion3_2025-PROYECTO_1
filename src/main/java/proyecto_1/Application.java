@@ -1,8 +1,12 @@
 package proyecto_1;
 
+import proyecto_1.data.Data;
 import proyecto_1.presentation.acercaDe.Controller_AcercaDe;
 import proyecto_1.presentation.acercaDe.Model_AcercaDe;
 import proyecto_1.presentation.acercaDe.View_AcercaDe;
+import proyecto_1.presentation.despacho.Controller_Despacho;
+import proyecto_1.presentation.despacho.Model_Despacho;
+import proyecto_1.presentation.despacho.View_Despacho;
 import proyecto_1.presentation.login.Controller_Login;
 import proyecto_1.presentation.login.Model_Login;
 import proyecto_1.presentation.login.View_Login;
@@ -14,7 +18,7 @@ import javax.swing.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public class Application {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
@@ -38,6 +42,12 @@ public class Main {
         Controller_Prescribir controller_Prescribir = new Controller_Prescribir(view_prescribir, model_prescribir);
         // *************************************************************************************************************
 
+        // Despacho:
+        View_Despacho view_despacho = new View_Despacho();
+        Model_Despacho model_despacho = new Model_Despacho();
+        Controller_Despacho controller_despacho = new Controller_Despacho(view_despacho, model_despacho);
+        // *************************************************************************************************************
+
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -49,7 +59,8 @@ public class Main {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //tabbedPane.addTab("Login", view.getPanel());
-        tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
+        tabbedPane.addTab("Despacho", view_despacho.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
+        tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
     }
 }
