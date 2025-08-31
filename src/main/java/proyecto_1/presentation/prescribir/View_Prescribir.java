@@ -32,7 +32,7 @@ public class View_Prescribir implements PropertyChangeListener {
         buscarPacienteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                View_BuscarPaciente dialog = new View_BuscarPaciente((JFrame) SwingUtilities.getWindowAncestor(panel), model, controller);
+                    View_BuscarPaciente dialog = new View_BuscarPaciente((JFrame) SwingUtilities.getWindowAncestor(panel), model, controller);
                 dialog.setSize(600,400);
                 dialog.setTitle("Buscar Paciente");
                 dialog.setVisible(true);

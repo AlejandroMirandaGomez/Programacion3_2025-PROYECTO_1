@@ -1,5 +1,6 @@
 package proyecto_1.presentation.despacho;
 
+import proyecto_1.logic.Paciente;
 import proyecto_1.logic.Receta;
 import proyecto_1.logic.Service;
 
@@ -29,5 +30,15 @@ public class Controller_Despacho {
     public void limpiarRecetas() {
         List<Receta> recetas = new ArrayList<Receta>();
         model.setRecetas(recetas);
+    }
+
+    //--Buscar Paciente--
+    public void getPacientes() {
+        List<Paciente> pacientes= Service.getInstance().getListaPacientes();
+        model.setPacientes(pacientes);
+    }
+    public void filtrarPacientes(String tipo, String texto) {
+        List<Paciente> result =Service.getInstance().filtrarPacientes(tipo, texto);
+        model.setPacientes(result);
     }
 }

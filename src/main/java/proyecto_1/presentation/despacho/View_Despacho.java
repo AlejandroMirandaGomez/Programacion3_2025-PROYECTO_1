@@ -20,20 +20,18 @@ public class View_Despacho implements PropertyChangeListener {
     private JButton estadoBtn;
     private JButton limpiarBtn;
 
+    private View_BuscarPaciente buscarPaciente;
+
     public View_Despacho() {
+        buscarPaciente = new View_BuscarPaciente();
+
         pacienteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                View_BuscarPaciente buscarPaciente = new View_BuscarPaciente();
-
-                // Crear un JDialog para mostrarlo
-                JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(panel), "Buscar Paciente", true);
-                dialog.setContentPane(buscarPaciente.getPanel()); // el panel principal de BuscarPaciente
-                dialog.pack();  // ajusta el tamaño al contenido
-                dialog.setLocationRelativeTo(panel); // centra respecto a la ventana actual
-                dialog.setVisible(true); // muestra el diálogo
+                buscarPaciente.setVisible(true);
             }
         });
+
         verTodoRadioBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,18 +46,23 @@ public class View_Despacho implements PropertyChangeListener {
 
     public void setController(Controller_Despacho controller) {
         this.controller = controller;
+        this.buscarPaciente.setController(controller);
     }
     public void setModel(Model_Despacho model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+
+        this.buscarPaciente.setModel(model);
+        model.addPropertyChangeListener(buscarPaciente);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Model_Despacho.LIST:
+            case Model_Despacho.RECETAS:
                 int[] cols = {TableModel.ID_PACIENTE, TableModel.NOMBRE_PACIENTE, TableModel.FECHA_RETIRO, TableModel.NOMBRE_MEDICO, TableModel.ESTADO};
                 tablaListaRecetas.setModel(new TableModel(cols, model.getRecetas()));
+                break;
         }
     }
 

@@ -22,9 +22,7 @@ public class Controller_Prescribir {
         this.model = model;
         view.setController(this);
         view.setModel(model);
-
         getPacientes();
-
     }
 
     //--Buscar Paciente--

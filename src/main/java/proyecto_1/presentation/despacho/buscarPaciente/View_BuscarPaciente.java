@@ -1,22 +1,138 @@
 package proyecto_1.presentation.despacho.buscarPaciente;
 
-import javax.swing.*;
+import proyecto_1.logic.Paciente;
+import proyecto_1.presentation.despacho.Controller_Despacho;
+import proyecto_1.presentation.despacho.Model_Despacho;
 
-public class View_BuscarPaciente extends JDialog {
-    private JPanel panel;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class View_BuscarPaciente extends JDialog  implements PropertyChangeListener {
+    private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JPanel panelFiltros;
-    private JPanel panelListaPacientes;
-    private JPanel panelBarraBotones;
-    private JComboBox comboBox1;
-    private JTextField textField1;
-    private JTable table1;
+    private JTextField busqueda;
+    private JTable tablaPacientes;
+    private JComboBox tipo;
 
-    public View_BuscarPaciente() {
-        setContentPane(panel);
+    public View_BuscarPaciente(Model_Despacho model, Controller_Despacho controller)  {
+        setController(controller);
+        setModel(model);
+
+        setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        setLocationRelativeTo(null);
+        setTitle("Buscar Paciente");
+        setSize(600,400);
+
+        busqueda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String texto=busqueda.getText();
+                if (texto.isEmpty()) {
+                    controller.getPacientes();
+                } else{
+                    String tipoElegido = tipo.getSelectedItem().toString();
+                    controller.filtrarPacientes(tipoElegido, texto);
+                }
+
+            }
+        });
+
+        tablaPacientes.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaPacientes.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int row = tablaPacientes.getSelectedRow();
+                if (row >= 0) {
+                    Paciente p = model.getPacientes().get(row);
+                    model.setCurrentaciente(p);
+                }
+                //dispose();//Con solo tocar la fila, sale de la ventana y marca el nombre
+            }
+        });
+
+        buttonOK.addActionListener(e -> {
+            int row = tablaPacientes.getSelectedRow();
+            if (row >= 0) {
+                Paciente p = model.getPacientes().get(row);
+                model.setCurrentaciente(p);
+            }
+            dispose();
+        });
+        buttonCancel.addActionListener(e -> dispose());
     }
-    public JPanel getPanel() {return panel;}
+
+    public View_BuscarPaciente() {
+        setContentPane(contentPane);
+        setModal(true);
+        getRootPane().setDefaultButton(buttonOK);
+        setLocationRelativeTo(null);
+        setTitle("Buscar Paciente");
+        setSize(600,400);
+
+        busqueda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String texto=busqueda.getText();
+                if (texto.isEmpty()) {
+                    controller.getPacientes();
+                } else{
+                    String tipoElegido = tipo.getSelectedItem().toString();
+                    controller.filtrarPacientes(tipoElegido, texto);
+                }
+
+            }
+        });
+
+        tablaPacientes.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaPacientes.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int row = tablaPacientes.getSelectedRow();
+                if (row >= 0) {
+                    Paciente p = model.getPacientes().get(row);
+                    model.setCurrentaciente(p);
+                }
+                //dispose();//Con solo tocar la fila, sale de la ventana y marca el nombre
+            }
+        });
+
+        buttonOK.addActionListener(e -> {
+            int row = tablaPacientes.getSelectedRow();
+            if (row >= 0) {
+                Paciente p = model.getPacientes().get(row);
+                model.setCurrentaciente(p);
+            }
+            dispose();
+        });
+        buttonCancel.addActionListener(e -> dispose());
+    }
+
+    private Model_Despacho model;
+    private Controller_Despacho controller;
+
+    public void setController(Controller_Despacho controller) {
+        this.controller = controller;
+    }
+
+    public void setModel(Model_Despacho model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        switch (evt.getPropertyName()) {
+            case Model_Despacho.PACIENTES:
+                int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FECHANACIMIENTO};
+                tablaPacientes.setModel(new TableModel(cols, model.getPacientes()));
+                break;
+
+        }
+    }
+
+
 }
