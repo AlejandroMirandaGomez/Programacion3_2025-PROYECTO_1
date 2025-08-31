@@ -10,6 +10,11 @@ public class Farmaceuta {
         this.nombre = nombre;
         this.password = password;
     }
+    public Farmaceuta(){
+        this.id = "";
+        this.nombre = "";
+        this.password = "";
+    }
 
     public String getId() {
         return id;

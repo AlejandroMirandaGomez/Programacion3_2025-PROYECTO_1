@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Data {
     private List<Medico> medicos;
+    private List<Farmaceuta> farmaceutas;
     private List<Paciente> pacientes;
     private List<Receta> recetas;
     private List<Medicamento> medicamentos;
@@ -18,11 +19,13 @@ public class Data {
         recetas = new ArrayList<>();
         pacientes = new ArrayList<>();
         medicamentos = new ArrayList<>();
+        farmaceutas = new ArrayList<>();
 
         seed();
     }
 
     public List<Medico> getMedicos() { return medicos; }
+    public List<Farmaceuta> getFarmaceutas() { return farmaceutas; }
     public List<Receta> getRecetas() { return recetas; }
     public List<Paciente> getPacientes() { return pacientes; }
     public List<Medicamento> getMedicamentos() { return medicamentos; }

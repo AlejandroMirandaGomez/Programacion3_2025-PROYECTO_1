@@ -90,6 +90,56 @@ public class Service {
 
 
     }
+    //Farmaceutas
+
+    public void create(Farmaceuta e) throws Exception {
+        Farmaceuta result = data.getFarmaceutas().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result == null) {
+            data.getFarmaceutas().add(e);
+        } else {
+            throw new Exception("Farmaceuta ya existe");
+        }
+    }
+
+    public List<Farmaceuta> findAllFarmaceutas(){
+        return data.getFarmaceutas();
+    }
+
+    public List<Farmaceuta> filtrarFarmaceutas(String tipo, String texto) {
+        List<Farmaceuta> list = new ArrayList<>();
+
+        switch (tipo) {
+            case "Id":
+                list = data.getFarmaceutas().stream()
+                        .filter(m -> m.getId().toLowerCase().contains(texto.toLowerCase()))
+                        .collect(Collectors.toList());
+                break;
+            case "Nombre":
+                list = data.getFarmaceutas().stream()
+                        .filter(m -> m.getNombre().toLowerCase().contains(texto.toLowerCase()))
+                        .collect(Collectors.toList());
+                break;
+
+
+        }
+        return list;
+    }
+
+    public void removeFarmaceuta(Farmaceuta e) throws Exception {
+        Farmaceuta result = data.getFarmaceutas().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (result != null) {
+            data.getFarmaceutas().remove(result);
+        } else {
+            throw new Exception("Farmaceuta no existe");
+        }
+    }
 
     //--Pacientes--
     public List<Paciente> getListaPacientes() {

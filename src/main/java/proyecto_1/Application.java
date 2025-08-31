@@ -6,6 +6,9 @@ import proyecto_1.presentation.acercaDe.View_AcercaDe;
 import proyecto_1.presentation.despacho.Controller_Despacho;
 import proyecto_1.presentation.despacho.Model_Despacho;
 import proyecto_1.presentation.despacho.View_Despacho;
+import proyecto_1.presentation.farmaceutas.Controller_Farmaceutas;
+import proyecto_1.presentation.farmaceutas.Model_Farmaceutas;
+import proyecto_1.presentation.farmaceutas.View_Farmaceutas;
 import proyecto_1.presentation.login.Controller_Login;
 import proyecto_1.presentation.login.Model_Login;
 import proyecto_1.presentation.login.View_Login;
@@ -56,6 +59,12 @@ public class Application {
         Controller_Despacho controller_despacho = new Controller_Despacho(view_despacho, model_despacho);
         // *************************************************************************************************************
 
+        //Farmaceutas MVC
+        View_Farmaceutas view_farmaceutas = new View_Farmaceutas();
+        Model_Farmaceutas model_farmaceutas = new Model_Farmaceutas();
+        Controller_Farmaceutas controller_farmaceutas = new Controller_Farmaceutas(view_farmaceutas, model_farmaceutas);
+        // *************************************************************************************************************
+
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -69,6 +78,7 @@ public class Application {
         //tabbedPane.addTab("Login", view.getPanel());
         tabbedPane.addTab("Despacho", view_despacho.getPanel());
         tabbedPane.addTab("Medicos", view_medicos.getPanel());
+        tabbedPane.addTab("Farmaceutas", view_farmaceutas.getPanel());
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
 
