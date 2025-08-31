@@ -56,15 +56,24 @@ public class Service {
         return data.getMedicos();
     }
 
-    public List<Medico> filtrarMedicos(String texto){
+    public List<Medico> filtrarMedicos(String tipo, String texto) {
         List<Medico> list = new ArrayList<>();
 
-        list = data.getMedicos().stream()
-                .filter(i -> i.getNombre().toLowerCase().contains(texto.toLowerCase()))
-                .collect(Collectors.toList());
+        switch (tipo) {
+            case "Id":
+                list = data.getMedicos().stream()
+                        .filter(m -> m.getId().toLowerCase().contains(texto.toLowerCase()))
+                        .collect(Collectors.toList());
+                break;
+            case "Nombre":
+                list = data.getMedicos().stream()
+                        .filter(m -> m.getNombre().toLowerCase().contains(texto.toLowerCase()))
+                        .collect(Collectors.toList());
+                break;
 
+
+        }
         return list;
-
     }
 
     public void removeMedico(Medico e) throws Exception{

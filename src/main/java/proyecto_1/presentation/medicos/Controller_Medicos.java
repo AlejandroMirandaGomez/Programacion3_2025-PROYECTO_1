@@ -46,8 +46,8 @@ public class Controller_Medicos {
         model.setMedicos(list);
     }
 
-    public void filtrarMedicos(String texto){
-        List<Medico> list = Service.getInstance().filtrarMedicos(texto);
+    public void filtrarMedicos(String tipo, String texto){
+        List<Medico> list = Service.getInstance().filtrarMedicos(tipo, texto);
         model.setMedicos(list);
     }
 
@@ -55,6 +55,12 @@ public class Controller_Medicos {
         Service.getInstance().removeMedico(e);
         model.setCurrent(new Medico());
         model.setMedicos(Service.getInstance().findAll());
+    }
+
+    public void edit(Medico e, Medico n) throws Exception{
+        e.setNombre(n.getNombre());
+        e.setEspecialidad(n.getEspecialidad());
+
     }
 
 

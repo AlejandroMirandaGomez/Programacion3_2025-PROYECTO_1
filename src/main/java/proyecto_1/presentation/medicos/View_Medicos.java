@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Objects;
 
 public class View_Medicos implements PropertyChangeListener{
     private JPanel panel;
@@ -20,11 +21,13 @@ public class View_Medicos implements PropertyChangeListener{
     private JLabel EspecialidadLab;
     private JTextField EspecialidadFld;
     private JLabel BusquedaLab;
-    private JLabel Nombre2Lab;
+    private JLabel FiltrarLab;
     private JButton buscarButton;
     private JButton reporteButton;
-    private JTextField Nombre2Fld;
+    private JTextField FiltrarFld;
     private JTable medicos;
+    private JComboBox filtrar;
+    private JButton limpiarBusqueda;
 
     public View_Medicos(){
 
@@ -35,8 +38,14 @@ public class View_Medicos implements PropertyChangeListener{
                 if(validate()){
                     Medico n = take();
                     try{
-                        controller.create(n);
-                        JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        if(Objects.equals(model.getCurrent().getId(), "")){
+                            controller.create(n);
+                            JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        } else{
+                            controller.edit(model.getCurrent(), n);
+                            FiltrarFld.postActionEvent();
+                        }
+
                     }catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -63,14 +72,15 @@ public class View_Medicos implements PropertyChangeListener{
             }
         });
 
-        Nombre2Fld.addActionListener(new ActionListener() {
+        FiltrarFld.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String texto = Nombre2Fld.getText();
+                String texto = FiltrarFld.getText();
                 if (texto.isEmpty()) {
                     controller.getMedicos();
                 }else{
-                    controller.filtrarMedicos(texto);
+                    String tipoFiltrado = filtrar.getSelectedItem().toString();
+                    controller.filtrarMedicos(tipoFiltrado, texto);
                 }
             }
         });
@@ -101,6 +111,19 @@ public class View_Medicos implements PropertyChangeListener{
             }
         });
 
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FiltrarFld.postActionEvent();
+            }
+        });
+        limpiarBusqueda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FiltrarFld.setText("");
+                controller.getMedicos();
+            }
+        });
     }
 
 
