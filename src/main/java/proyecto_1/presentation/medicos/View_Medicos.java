@@ -44,6 +44,7 @@ public class View_Medicos implements PropertyChangeListener{
                         } else{
                             controller.edit(model.getCurrent(), n);
                             FiltrarFld.postActionEvent();
+                            JOptionPane.showMessageDialog(panel, "EDICION APLICADA", "Registro", JOptionPane.INFORMATION_MESSAGE);
                         }
 
                     }catch (Exception ex) {
