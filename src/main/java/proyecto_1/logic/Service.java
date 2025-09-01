@@ -228,4 +228,18 @@ public class Service {
         return result;
     }
 
+    public List<Receta> filtrarRecetas(String tipo, String texto1, String texto2){
+        List<Receta> result = new ArrayList<Receta>();
+        switch (tipo) {
+            case "ID_PACIENTE_Y_ESTADO":
+                result = data.getRecetas().stream()
+                        .filter(r -> r.getPaciente().getId().toLowerCase().contains(texto1.toLowerCase()))
+                        .collect(Collectors.toList()).stream().filter(r -> r.getEstado().toLowerCase().contains(texto2.toLowerCase()))
+                        .collect(Collectors.toList());
+                break;
+        }
+
+        return result;
+    }
+
 }

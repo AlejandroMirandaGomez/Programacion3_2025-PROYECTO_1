@@ -27,6 +27,10 @@ public class Controller_Despacho {
         List<Receta> result = Service.getInstance().filtrarRecetas(tipo, texto);
         model.setRecetas(result);
     }
+    public void filtrarRecetas(String tipo, String texto1,  String texto2) {
+        List<Receta> result = Service.getInstance().filtrarRecetas(tipo, texto1, texto2);
+        model.setRecetas(result);
+    }
     public void limpiarRecetas() {
         List<Receta> recetas = new ArrayList<Receta>();
         model.setRecetas(recetas);
@@ -40,5 +44,14 @@ public class Controller_Despacho {
     public void filtrarPacientes(String tipo, String texto) {
         List<Paciente> result =Service.getInstance().filtrarPacientes(tipo, texto);
         model.setPacientes(result);
+    }
+
+    // Atributos
+    public void setCurrentEstado(String s){
+        model.setCurrentEstado(s);
+    }
+
+    public void setCurrentPaciente(Paciente p){
+        model.setCurrentaciente(p);
     }
 }

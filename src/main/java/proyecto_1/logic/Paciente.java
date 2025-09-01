@@ -1,6 +1,7 @@
 package proyecto_1.logic;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Paciente {
     // --- Atributos ---
@@ -57,5 +58,18 @@ public class Paciente {
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;  // mismo objeto
+        if (o == null || getClass() != o.getClass()) return false; // distinto tipo
+        Paciente paciente = (Paciente) o;
+        return Objects.equals(id, paciente.id); // compara id
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

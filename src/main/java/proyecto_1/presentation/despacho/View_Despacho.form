@@ -16,40 +16,52 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="31908" binding="buscarPor" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="31908" binding="control" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="300" height="82"/>
+                <preferred-size width="450" height="82"/>
               </grid>
             </constraints>
             <properties/>
-            <border type="line" title="Buscar receta por" title-position="2">
+            <border type="line" title="Control" title-position="2">
               <color color="-4276286"/>
             </border>
             <children>
               <component id="e5d87" class="javax.swing.JButton" binding="pacienteBtn">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="30"/>
+                  </grid>
                 </constraints>
                 <properties>
-                  <text value="Paciente"/>
-                </properties>
-              </component>
-              <component id="93771" class="javax.swing.JButton" binding="estadoBtn">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Estado"/>
+                  <text value="Buscar Paciente"/>
                 </properties>
               </component>
               <component id="7316a" class="javax.swing.JRadioButton" binding="verTodoRadioBtn">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="30"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value="Ver Todo"/>
+                </properties>
+              </component>
+              <component id="ca528" class="javax.swing.JComboBox" binding="estadoComboBox">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="30"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <model>
+                    <item value="Seleccione un estado..."/>
+                    <item value="Confeccionada"/>
+                    <item value="En Proceso"/>
+                    <item value="Lista"/>
+                    <item value="Entregada"/>
+                  </model>
                 </properties>
               </component>
             </children>
@@ -81,22 +93,20 @@
                   </component>
                 </children>
               </scrollpane>
-              <component id="26bb9" class="javax.swing.JTextField" binding="buscarPorPacienteEstevanTextField" default-binding="true">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="0" indent="0" use-parent-layout="false">
-                    <preferred-size width="400" height="34"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <text value="Buscar por paciente: Estevan Brenes"/>
-                </properties>
-              </component>
               <component id="57c82" class="javax.swing.JButton" binding="limpiarBtn">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Limpiar"/>
+                </properties>
+              </component>
+              <component id="4b6cf" class="javax.swing.JLabel" binding="filtroActualLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Aún no se han aplicado filtros"/>
                 </properties>
               </component>
             </children>
