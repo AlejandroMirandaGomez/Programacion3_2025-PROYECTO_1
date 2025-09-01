@@ -70,7 +70,7 @@ public class Application {
 
         window.setSize(1380,720);
         window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        window.setTitle("Estevan");
+        window.setTitle("ALL TABS");
         window.setContentPane(tabbedPane);
         window.setVisible(true);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

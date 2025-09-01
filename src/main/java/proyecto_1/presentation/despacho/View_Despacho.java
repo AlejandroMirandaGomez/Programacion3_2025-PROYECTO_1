@@ -23,20 +23,20 @@ public class View_Despacho implements PropertyChangeListener {
     private JLabel filtroActualLabel;
     private JComboBox estadoComboBox;
 
-    //private View_BuscarPaciente buscarPaciente;
+    private View_BuscarPaciente buscarPaciente;
     private String filtroBusqueda;
 
     public View_Despacho() {
-        //buscarPaciente = new View_BuscarPaciente();
+        buscarPaciente = new View_BuscarPaciente();
 
         pacienteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                View_BuscarPaciente buscarPaciente = new View_BuscarPaciente(model, controller);
-                controller.getPacientes();
                 buscarPaciente.setVisible(true);
             }
         });
+
+        tablaListaRecetas.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         verTodoRadioBtn.addActionListener(new ActionListener() {
             @Override
@@ -87,14 +87,14 @@ public class View_Despacho implements PropertyChangeListener {
 
     public void setController(Controller_Despacho controller) {
         this.controller = controller;
-        //this.buscarPaciente.setController(controller);
+        this.buscarPaciente.setController(controller);
     }
     public void setModel(Model_Despacho model) {
         this.model = model;
         model.addPropertyChangeListener(this);
 
-        //this.buscarPaciente.setModel(model);
-        //model.addPropertyChangeListener(buscarPaciente);
+        this.buscarPaciente.setModel(model);
+        model.addPropertyChangeListener(buscarPaciente);
     }
 
     @Override

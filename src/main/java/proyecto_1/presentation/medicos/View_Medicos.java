@@ -20,7 +20,6 @@ public class View_Medicos implements PropertyChangeListener{
     private JButton borrarButton;
     private JLabel EspecialidadLab;
     private JTextField EspecialidadFld;
-    private JLabel BusquedaLab;
     private JLabel FiltrarLab;
     private JButton buscarButton;
     private JButton reporteButton;
@@ -28,6 +27,7 @@ public class View_Medicos implements PropertyChangeListener{
     private JTable medicos;
     private JComboBox filtrar;
     private JButton limpiarBusqueda;
+    private JPanel Listado;
 
     public View_Medicos(){
 

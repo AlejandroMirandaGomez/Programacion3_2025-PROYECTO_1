@@ -28,7 +28,7 @@ public class View_Farmaceutas implements PropertyChangeListener {
     private JComboBox filtrar;
     private JButton limpiarBusqueda;
     private JTable farmaceutas;
-    private JLabel BusquedaLab;
+    private JPanel Farmaceutas;
 
 
     public View_Farmaceutas(){

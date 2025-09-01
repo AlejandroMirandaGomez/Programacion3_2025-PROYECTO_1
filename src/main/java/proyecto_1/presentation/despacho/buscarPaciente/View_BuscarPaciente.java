@@ -18,54 +18,6 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
     private JTable tablaPacientes;
     private JComboBox tipo;
 
-    public View_BuscarPaciente(Model_Despacho model, Controller_Despacho controller)  {
-        setController(controller);
-        setModel(model);
-
-        setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
-        setLocationRelativeTo(null);
-        setTitle("Buscar Paciente");
-        setSize(600,400);
-
-        busqueda.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String texto=busqueda.getText();
-                if (texto.isEmpty()) {
-                    controller.getPacientes();
-                } else{
-                    String tipoElegido = tipo.getSelectedItem().toString();
-                    controller.filtrarPacientes(tipoElegido, texto);
-                }
-
-            }
-        });
-
-        tablaPacientes.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tablaPacientes.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                int row = tablaPacientes.getSelectedRow();
-                if (row >= 0) {
-                    Paciente p = model.getPacientes().get(row);
-                    model.setCurrentaciente(p);
-                }
-                //dispose();//Con solo tocar la fila, sale de la ventana y marca el nombre
-            }
-        });
-
-        buttonOK.addActionListener(e -> {
-            int row = tablaPacientes.getSelectedRow();
-            if (row >= 0) {
-                Paciente p = model.getPacientes().get(row);
-                model.setCurrentaciente(p);
-            }
-            dispose();
-        });
-        buttonCancel.addActionListener(e -> dispose());
-    }
-
     public View_BuscarPaciente() {
         setContentPane(contentPane);
         setModal(true);
@@ -96,7 +48,7 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
                     Paciente p = model.getPacientes().get(row);
                     model.setCurrentaciente(p);
                 }
-                //dispose();//Con solo tocar la fila, sale de la ventana y marca el nombre
+                //dispose(); //Con solo tocar la fila, sale de la ventana y marca el nombre
             }
         });
 
@@ -132,7 +84,6 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
                 break;
 
         }
+        this.contentPane.revalidate();
     }
-
-
 }
