@@ -56,6 +56,8 @@ public class Data {
         Medicamento m6 = new Medicamento("M-006", "Salbutamol",   "Inhalador 100 mcg");
         Medicamento m7 = new Medicamento("M-007", "Vitamina C",   "1 g efervescente");
 
+        medicamentos.addAll(Arrays.asList(m1, m2, m3, m4, m5, m6, m7));
+
         // 3) Recetas + Prescripciones (todas con médico asignado)
         // --- Receta 1: María López (Dra. Ruiz)
         Receta r1 = new Receta();
