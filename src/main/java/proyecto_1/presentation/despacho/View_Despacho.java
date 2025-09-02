@@ -1,7 +1,9 @@
 package proyecto_1.presentation.despacho;
 
 import proyecto_1.logic.Paciente;
+import proyecto_1.logic.Receta;
 import proyecto_1.presentation.despacho.buscarPaciente.View_BuscarPaciente;
+import proyecto_1.presentation.despacho.editarEstado.View_EditarEstado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,10 +26,12 @@ public class View_Despacho implements PropertyChangeListener {
     private JComboBox estadoComboBox;
 
     private View_BuscarPaciente buscarPaciente;
+    private View_EditarEstado editarEstado;
     private String filtroBusqueda;
 
     public View_Despacho() {
         buscarPaciente = new View_BuscarPaciente();
+        editarEstado = new View_EditarEstado();
 
         pacienteBtn.addActionListener(new ActionListener() {
             @Override
@@ -37,6 +41,17 @@ public class View_Despacho implements PropertyChangeListener {
         });
 
         tablaListaRecetas.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        tablaListaRecetas.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int row = tablaListaRecetas.getSelectedRow();
+                if (row >= 0) {
+                    Receta r = model.getRecetas().get(row);
+                    model.setCurrentReceta(r);
+                    editarEstado.setVisible(true);
+                }
+            }
+        });
 
         verTodoRadioBtn.addActionListener(new ActionListener() {
             @Override
@@ -48,6 +63,7 @@ public class View_Despacho implements PropertyChangeListener {
                 }
             }
         });
+
         estadoComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -88,6 +104,7 @@ public class View_Despacho implements PropertyChangeListener {
     public void setController(Controller_Despacho controller) {
         this.controller = controller;
         this.buscarPaciente.setController(controller);
+        this.editarEstado.setController(controller);
     }
     public void setModel(Model_Despacho model) {
         this.model = model;
@@ -95,6 +112,9 @@ public class View_Despacho implements PropertyChangeListener {
 
         this.buscarPaciente.setModel(model);
         model.addPropertyChangeListener(buscarPaciente);
+
+        this.editarEstado.setModel(model);
+        model.addPropertyChangeListener(editarEstado);
     }
 
     @Override

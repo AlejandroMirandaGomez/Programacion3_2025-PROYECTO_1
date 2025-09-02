@@ -54,4 +54,8 @@ public class Controller_Despacho {
     public void setCurrentPaciente(Paciente p){
         model.setCurrentaciente(p);
     }
+
+    public void setCurrentReceta(Receta r){ model.setCurrentReceta(r); }
+
+    public void setEstado_of_CurrentReceta(String newEstado) { model.setEstado_of_CurrentReceta(newEstado); }
 }

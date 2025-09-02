@@ -12,17 +12,20 @@ public class Model_Despacho extends AbstractModel {
     List<Receta> recetas;
     List<Paciente> pacientes;
     private Paciente currentPaciente;
+    private Receta currentReceta;
     private String currentEstado;
 
     public static final String RECETAS = "recetas";
     public static final String PACIENTES = "pacientes";
     public static final String CURRENT_PACIENTE = "currentPaciente";
+    public static final String CURRENT_RECETA = "currentReceta";
     public static final String CURRENT_ESTADO = "currentEstado";
 
     public Model_Despacho() {
         recetas = new ArrayList<Receta>();
         pacientes = new ArrayList<Paciente>();
         currentPaciente = new Paciente();
+        currentReceta = new Receta();
     }
 
     @Override
@@ -57,6 +60,18 @@ public class Model_Despacho extends AbstractModel {
     public void setCurrentEstado(String currentEstado) {
         this.currentEstado = currentEstado;
         firePropertyChange(CURRENT_ESTADO);
+    }
+
+    public Receta getCurrentReceta() { return currentReceta; }
+
+    public void setCurrentReceta(Receta currentReceta) {
+        this.currentReceta = currentReceta;
+        firePropertyChange(CURRENT_RECETA);
+    }
+
+    public void setEstado_of_CurrentReceta(String newEstado) {
+        this.currentReceta.setEstado(newEstado);
+        firePropertyChange(RECETAS);
     }
 
 }

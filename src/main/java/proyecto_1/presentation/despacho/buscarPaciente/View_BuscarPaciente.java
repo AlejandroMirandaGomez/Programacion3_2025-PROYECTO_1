@@ -82,7 +82,6 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
                 int[] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FECHANACIMIENTO};
                 tablaPacientes.setModel(new TableModel(cols, model.getPacientes()));
                 break;
-
         }
         this.contentPane.revalidate();
     }
