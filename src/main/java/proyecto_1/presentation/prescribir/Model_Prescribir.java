@@ -21,11 +21,15 @@ public class Model_Prescribir extends AbstractModel{
     //--Buscar Medicamentos--
     List<Medicamento> medicamentos;
 
+    //--Detalle Medicamento--
+    Prescripcion currentDetalle;
+
 
     public static final String CURRENT = "currentReceta";
     public static final String PRESCRIPCIONES = "prescripciones";
     public static final String PACIENTES = "pacientes";
     public static final String MEDICAMENTOS = "medicamentos";
+    public static final String CURRENTDETALLE = "currentDetalle";
 
     public Model_Prescribir() {
         currentReceta = new Receta();
@@ -34,13 +38,15 @@ public class Model_Prescribir extends AbstractModel{
         pacientes= new ArrayList<Paciente>();
         medicamentos=new ArrayList<Medicamento>();
 
+        currentDetalle=new Prescripcion();
 
 
+        /*
         prescripciones.add(new Prescripcion("Tomar una al dia",14,new Medicamento("111","Acetaminofen","Pastilla"),500));
         prescripciones.add(new Prescripcion("Tomar una en mañana",6,new Medicamento("112","Panadol","Pastilla"),450));
         prescripciones.add(new Prescripcion("Tomar una en noche",8,new Medicamento("113","Paracetamol","Pastilla"),350));
         prescripciones.add(new Prescripcion("Tomar dos al dia",1,new Medicamento("114","Ibrupofeno","Pastilla"),230));
-        prescripciones.add(new Prescripcion("Tomar cada dos dias",7,new Medicamento("115","Crema de rosas","Crema"),25));
+        prescripciones.add(new Prescripcion("Tomar cada dos dias",7,new Medicamento("115","Crema de rosas","Crema"),25));*/
     }
 
     @Override
@@ -51,6 +57,8 @@ public class Model_Prescribir extends AbstractModel{
 
         firePropertyChange(PACIENTES);
         firePropertyChange(MEDICAMENTOS);
+
+        firePropertyChange(CURRENTDETALLE);
     }
 
     public Receta getCurrentReceta() {
@@ -87,5 +95,24 @@ public class Model_Prescribir extends AbstractModel{
     public void setMedicamentos(List<Medicamento> medicamentos) {
         this.medicamentos = medicamentos;
         firePropertyChange(MEDICAMENTOS);
+    }
+
+    public Prescripcion getCurrentDetalle() {
+        return currentDetalle;
+    }
+
+    public void setCurrentDetalle(Prescripcion currentDetalle) {
+        this.currentDetalle = currentDetalle;
+        firePropertyChange(CURRENTDETALLE);
+    }
+
+    public void borrarPrescripcion(int row){
+        prescripciones.remove(row);
+        firePropertyChange(PRESCRIPCIONES);
+    }
+
+    public void agregarPrescripcion(Prescripcion prescripcion){
+        prescripciones.add(prescripcion);
+        firePropertyChange(PRESCRIPCIONES);
     }
 }

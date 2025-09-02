@@ -1,9 +1,6 @@
 package proyecto_1.presentation.prescribir;
 
-import proyecto_1.logic.Medicamento;
-import proyecto_1.logic.Paciente;
-import proyecto_1.logic.Receta;
-import proyecto_1.logic.Service;
+import proyecto_1.logic.*;
 import proyecto_1.presentation.prescribir.Model_Prescribir;
 import proyecto_1.presentation.prescribir.View_Prescribir;
 
@@ -23,7 +20,13 @@ public class Controller_Prescribir {
         this.model = model;
         view.setController(this);
         view.setModel(model);
+        //---Prueba: Pone los valores en las tablas---
         getPacientes();
+        getMedicamentos();
+    }
+    //--Recetas--
+    public void clear(){
+        model.setCurrentReceta(new Receta());
     }
 
     //--Buscar Paciente--
@@ -50,6 +53,31 @@ public class Controller_Prescribir {
     public void filtrarMedicamentos(String tipo, String texto) {
         List<Medicamento> medicamentos= Service.getInstance().filtrarMedicamentos(tipo, texto);
         model.setMedicamentos(medicamentos);
+    }
+
+    //--Borrar prescripcion--
+    public void borrarPrescripcion(int row){
+        model.borrarPrescripcion(row);
+    }
+
+    //--Detalle prescripcion--
+    public void crearPrescripcion(Prescripcion prescripcion){
+        model.agregarPrescripcion(prescripcion);
+    }
+
+    public void seleccionarMedicamentoParaPrescripcion(int row) {
+        Medicamento m = model.getMedicamentos().get(row);
+        Prescripcion p = new Prescripcion();
+        p.setMedicamento(m);
+        model.setCurrentDetalle(p);
+        view.abrirGuardarMedicamento();
+    }
+
+    public void seleccionarPrescripcionDetalle(int row) {
+        Prescripcion p= model.getPrescripciones().get(row);
+
+        model.setCurrentDetalle(p);
+        view.abrirGuardarMedicamento();
     }
 
 }

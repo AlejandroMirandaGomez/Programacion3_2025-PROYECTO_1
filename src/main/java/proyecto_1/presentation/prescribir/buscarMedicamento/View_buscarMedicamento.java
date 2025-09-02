@@ -5,7 +5,10 @@ import proyecto_1.logic.Paciente;
 import proyecto_1.logic.Receta;
 import proyecto_1.presentation.prescribir.Controller_Prescribir;
 import proyecto_1.presentation.prescribir.Model_Prescribir;
+import proyecto_1.presentation.prescribir.View_Prescribir;
 import proyecto_1.presentation.prescribir.buscarMedicamento.TableModel;
+import proyecto_1.presentation.prescribir.guardarMedicamento.View_GuardarMedicamento;
+
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -23,9 +26,8 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
     private Model_Prescribir model;
     private Controller_Prescribir controller;
 
-    public void setController(Controller_Prescribir controller) {
-        this.controller = controller;
-    }
+    //private proyecto_1.presentation.prescribir.guardarMedicamento.View_GuardarMedicamento guardarMedicamentoView;
+
 
     public View_buscarMedicamento() {
         setContentPane(contentPane);
@@ -35,6 +37,8 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
         setLocationRelativeTo(null);
         setTitle("Buscar medicamentos");
         setSize(400, 250);
+
+        //guardarMedicamentoView =new View_GuardarMedicamento();
 
 
         busqueda.addActionListener(new ActionListener() {
@@ -58,7 +62,7 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
         buttonOK.addActionListener(e -> {
             int row = tablaMedicamentos.getSelectedRow();
             if (row >= 0) {
-                Medicamento medicamento = model.getMedicamentos().get(row);
+                controller.seleccionarMedicamentoParaPrescripcion(row);
 
             }
             dispose();
@@ -86,6 +90,10 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
 
+    }
+
+    public void setController(Controller_Prescribir controller) {
+        this.controller = controller;
     }
 
     public void setModel(Model_Prescribir model) {
