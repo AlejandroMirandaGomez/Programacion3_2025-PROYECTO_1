@@ -100,13 +100,14 @@ public class Application {
         window.setIconImage(new ImageIcon(Application.class.getResource("/Icons/hospital.png")).getImage());
         //tabbedPane.addTab("Login", view.getPanel());
 
-        tabbedPane.addTab("Medicos", new ImageIcon(Application.class.getResource("/Icons/medico.png")), view_medicos.getPanel());
+
+        tabbedPane.addTab("Medicos", view_medicos.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
         tabbedPane.addTab("Despacho", view_despacho.getPanel());
         tabbedPane.addTab("Farmaceutas", view_farmaceutas.getPanel());
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
         tabbedPane.addTab("Pacientes", view_pacientes.getPanel());
-        tabbedPane.addTab("Medicamentos", new ImageIcon(Application.class.getResource("/Icons/medicamento.png")), view_medicamentos.getPanel());
+        tabbedPane.addTab("Medicamentos", view_medicamentos.getPanel());
 
 
     }

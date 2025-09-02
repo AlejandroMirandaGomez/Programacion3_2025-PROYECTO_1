@@ -45,6 +45,7 @@
                   </grid>
                 </constraints>
                 <properties>
+                  <selected value="true"/>
                   <text value="Ver Todo"/>
                 </properties>
               </component>

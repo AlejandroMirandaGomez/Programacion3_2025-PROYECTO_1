@@ -16,6 +16,8 @@ public class Controller_Despacho {
         this.model = model;
         view.setController(this);
         view.setModel(model);
+        getPacientes();
+        getRecetas();
     }
 
     //--Buscar Recetas--
