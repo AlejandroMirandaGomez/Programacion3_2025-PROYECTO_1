@@ -24,29 +24,34 @@ public class View_Prescribir implements PropertyChangeListener {
     private JButton descartar;
     private JButton detalles;
 
+    private proyecto_1.presentation.prescribir.buscarPaciente.View_BuscarPaciente buscarPacienteView;
+    private proyecto_1.presentation.prescribir.buscarMedicamento.View_buscarMedicamento buscarMedicamentoView;
+
     Controller_Prescribir controller;
     Model_Prescribir model;
 
     public View_Prescribir(){
+        buscarPacienteView = new  View_BuscarPaciente();
+        buscarMedicamentoView = new View_buscarMedicamento();
+
+
 
         buscarPacienteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                View_BuscarPaciente dialog = new View_BuscarPaciente((JFrame) SwingUtilities.getWindowAncestor(panel), model, controller);
-                dialog.setSize(600,400);
-                dialog.setTitle("Buscar Paciente");
-                dialog.setVisible(true);
+
+                buscarPacienteView.setVisible(true);
             }
         });
         agregarMedicamentoBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                View_buscarMedicamento dialog = new View_buscarMedicamento((JFrame) SwingUtilities.getWindowAncestor(panel), model, controller);
-                dialog.setSize(600,400);
-                dialog.setTitle("Buscar Medicamento");
-                dialog.setVisible(true);
+                buscarMedicamentoView.setVisible(true);
             }
         });
+
+        tablaPrescripciones.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
     }
 
     public JPanel getPanel() {
@@ -56,11 +61,15 @@ public class View_Prescribir implements PropertyChangeListener {
 
     public void setController(Controller_Prescribir controller) {
         this.controller = controller;
+        buscarPacienteView.setController(controller);
     }
 
     public void setModel(Model_Prescribir model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+
+        buscarPacienteView.setModel(model);
+        model.addPropertyChangeListener(buscarPacienteView);
     }
 
     @Override

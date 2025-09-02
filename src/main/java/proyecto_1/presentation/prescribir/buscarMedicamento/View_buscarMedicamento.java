@@ -27,19 +27,15 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
         this.controller = controller;
     }
 
-    public void setModel(Model_Prescribir model) {
-        this.model = model;
-        model.addPropertyChangeListener(this);
-    }
-
-    public View_buscarMedicamento(JFrame parent, Model_Prescribir model, Controller_Prescribir controller) {
-        super(parent, true);
+    public View_buscarMedicamento() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        setController(controller);
-        setModel(model);
+        setLocationRelativeTo(null);
+        setTitle("Buscar medicamentos");
+        setSize(400, 250);
+
 
         busqueda.addActionListener(new ActionListener() {
             @Override
@@ -88,9 +84,16 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+
     }
 
+    public void setModel(Model_Prescribir model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
 
+
+    }
 
     private void onCancel() {
         dispose();

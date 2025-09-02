@@ -22,7 +22,7 @@ public class Model_Prescribir extends AbstractModel{
     List<Medicamento> medicamentos;
 
 
-    public static final String CURRENT = "current";
+    public static final String CURRENT = "currentReceta";
     public static final String PRESCRIPCIONES = "prescripciones";
     public static final String PACIENTES = "pacientes";
     public static final String MEDICAMENTOS = "medicamentos";
@@ -55,6 +55,7 @@ public class Model_Prescribir extends AbstractModel{
 
     public Receta getCurrentReceta() {
         return currentReceta;
+
     }
 
     public void setCurrentReceta(Receta currentReceta) {

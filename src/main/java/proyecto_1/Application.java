@@ -76,11 +76,11 @@ public class Application {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //tabbedPane.addTab("Login", view.getPanel());
+        tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
         tabbedPane.addTab("Despacho", view_despacho.getPanel());
         tabbedPane.addTab("Medicos", view_medicos.getPanel());
         tabbedPane.addTab("Farmaceutas", view_farmaceutas.getPanel());
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
-        tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
 
     }
 }

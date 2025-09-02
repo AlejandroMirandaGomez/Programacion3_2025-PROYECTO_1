@@ -26,25 +26,10 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-    }
-    public void setController(Controller_Prescribir controller) {
-        this.controller = controller;
-    }
 
-    public void setModel(Model_Prescribir model) {
-        this.model = model;
-        model.addPropertyChangeListener(this);
-    }
-
-    public View_BuscarPaciente(JFrame parent, Model_Prescribir model, Controller_Prescribir controller)  {
-        super(parent, true);
-
-        setController(controller);
-        setModel(model);
-
-        setContentPane(contentPane);
-        getRootPane().setDefaultButton(buttonOK);
-
+        setLocationRelativeTo(null);
+        setTitle("Buscar pacientes");
+        setSize(400, 250);
 
         busqueda.addActionListener(new ActionListener() {
             @Override
@@ -65,10 +50,8 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
             if (!e.getValueIsAdjusting()) {
                 int row = tablaPacientes.getSelectedRow();
                 if (row >= 0) {
-                    Paciente p = model.getPacientes().get(row);
-                    Receta r = new Receta();
-                    r.setPaciente(p);
-                    model.setCurrentReceta(r);
+
+                    controller.setPaciente(row);
                 }
                 //dispose();//Con solo tocar la fila, sale de la ventana y marca el nombre
             }
@@ -77,19 +60,22 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
         buttonOK.addActionListener(e -> {
             int row = tablaPacientes.getSelectedRow();
             if (row >= 0) {
-                Paciente p = model.getPacientes().get(row);
-                Receta r = new Receta();
-                r.setPaciente(p);
-                model.setCurrentReceta(r);
+                controller.setPaciente(row);
             }
             dispose();
         });
 
         buttonCancel.addActionListener(e -> dispose());
-
-
-
     }
+    public void setController(Controller_Prescribir controller) {
+        this.controller = controller;
+    }
+
+    public void setModel(Model_Prescribir model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
+    }
+
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {

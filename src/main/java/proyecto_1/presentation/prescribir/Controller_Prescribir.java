@@ -2,6 +2,7 @@ package proyecto_1.presentation.prescribir;
 
 import proyecto_1.logic.Medicamento;
 import proyecto_1.logic.Paciente;
+import proyecto_1.logic.Receta;
 import proyecto_1.logic.Service;
 import proyecto_1.presentation.prescribir.Model_Prescribir;
 import proyecto_1.presentation.prescribir.View_Prescribir;
@@ -34,6 +35,12 @@ public class Controller_Prescribir {
         List<Paciente> result =Service.getInstance().filtrarPacientes(tipo, texto);
         model.setPacientes(result);
     }
+    public void setPaciente(int row){
+        Paciente paciente = model.getPacientes().get(row);
+        Receta receta = new Receta();
+        receta.setPaciente(paciente);
+        model.setCurrentReceta(receta);
+    }
 
     //--Buscar Medicamentos--
     public void getMedicamentos(){
@@ -44,4 +51,5 @@ public class Controller_Prescribir {
         List<Medicamento> medicamentos= Service.getInstance().filtrarMedicamentos(tipo, texto);
         model.setMedicamentos(medicamentos);
     }
+
 }
