@@ -1,6 +1,7 @@
 package proyecto_1.presentation.farmaceutas;
 
 import proyecto_1.logic.Farmaceuta;
+import proyecto_1.logic.Paciente;
 import proyecto_1.presentation.AbstractTableModel;
 
 import java.util.List;

@@ -1,0 +1,55 @@
+package proyecto_1.presentation.pacientes;
+
+import proyecto_1.logic.Paciente;
+import proyecto_1.logic.Service;
+
+import java.util.List;
+
+public class Controller_Pacientes {
+    View_Pacientes view;
+    Model_Pacientes model;
+
+    public Controller_Pacientes(View_Pacientes view, Model_Pacientes model) {
+        this.view = view;
+        this.model = model;
+        view.setController(this);
+        view.setModel(model);
+        getPacientes();
+    }
+
+    public void create(Paciente e) throws Exception{
+        Service.getInstance().create(e);
+        model.setCurrent(new Paciente());
+        model.setPacientes(Service.getInstance().getListaPacientes());
+    }
+
+
+    public void clear() {
+        model.setCurrent(new Paciente());
+    }
+
+    public void getPacientes(){
+        List<Paciente> list = Service.getInstance().getListaPacientes();
+        model.setPacientes(list);
+    }
+
+    public void filtrarPacientes(String tipo, String texto){
+        List<Paciente> list = Service.getInstance().filtrarPacientes(tipo, texto);
+        model.setPacientes(list);
+    }
+
+    public void remove(Paciente e) throws Exception{
+        Service.getInstance().removePaciente(e);
+        model.setCurrent(new Paciente());
+        model.setPacientes(Service.getInstance().getListaPacientes());
+    }
+
+    public void edit(Paciente e, Paciente n) throws Exception{
+        e.setNombre(n.getNombre());
+        e.setTelefono(n.getTelefono());
+        e.setFechaNacimiento(n.getFechaNacimiento());
+
+    }
+
+
+}

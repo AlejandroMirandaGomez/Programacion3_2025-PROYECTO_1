@@ -11,13 +11,17 @@ public class Paciente {
     private LocalDate fechaNacimiento;
 
     // --- Constructores ---
-    public Paciente() {
-    }
     public Paciente(String id, String nombre, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
 
+    }
+    public Paciente(){
+        this.id = "";
+        this.nombre = "";
+        this.telefono = "";
+        this.fechaNacimiento =  LocalDate.now();
     }
 
     public Paciente(String id, String nombre, String telefono, LocalDate fechaNacimiento) {

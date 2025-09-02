@@ -1,6 +1,8 @@
-package proyecto_1.presentation.medicos;
+package proyecto_1.presentation.medicamentos;
 
-import proyecto_1.logic.Medico;
+import proyecto_1.logic.Medicamento;
+import proyecto_1.presentation.prescribir.buscarMedicamento.TableModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,38 +11,38 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Objects;
 
-public class View_Medicos implements PropertyChangeListener{
+public class View_Medicamentos implements PropertyChangeListener {
     private JPanel panel;
+    private JPanel Medicamentos;
     private JLabel IdLab;
     private JTextField IdFld;
     private JTextField NombreFld;
-    private JLabel NombreLab;
-    private JButton guardarButton;
     private JButton limpiarButton;
+    private JButton guardarButton;
     private JButton borrarButton;
-    private JLabel EspecialidadLab;
-    private JTextField EspecialidadFld;
+    private JLabel NombreLab;
     private JLabel FiltrarLab;
-    private JButton buscarButton;
     private JButton reporteButton;
+    private JButton buscarButton;
     private JTextField FiltrarFld;
-    private JTable medicos;
     private JComboBox filtrar;
     private JButton limpiarBusqueda;
-    private JPanel Listado;
+    private JTable medicamentos;
+    private JTextField presentacionFld;
 
-    public View_Medicos(){
+
+    public View_Medicamentos(){
 
 
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(validate()){
-                    Medico n = take();
+                    Medicamento n = take();
                     try{
-                        if(Objects.equals(model.getCurrent().getId(), "")){
+                        if(Objects.equals(model.getCurrent().getCodigo(), "")){
                             controller.create(n);
-                            JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "Registro", JOptionPane.INFORMATION_MESSAGE);
                         } else{
                             controller.edit(model.getCurrent(), n);
                             FiltrarFld.postActionEvent();
@@ -62,12 +64,12 @@ public class View_Medicos implements PropertyChangeListener{
             }
         });
 
-        medicos.getSelectionModel().addListSelectionListener(e -> {
+        medicamentos.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
-                int viewRow = medicos.getSelectedRow();
+                int viewRow = medicamentos.getSelectedRow();
                 if (viewRow != -1) {
-                    int modelRow = medicos.convertRowIndexToModel(viewRow);
-                    Medico n = model.getMedicos().get(modelRow);
+                    int modelRow = medicamentos.convertRowIndexToModel(viewRow);
+                    Medicamento n = model.getMedicamentos().get(modelRow);
                     model.setCurrent(n);
                 }
             }
@@ -78,10 +80,10 @@ public class View_Medicos implements PropertyChangeListener{
             public void actionPerformed(ActionEvent e) {
                 String texto = FiltrarFld.getText();
                 if (texto.isEmpty()) {
-                    controller.getMedicos();
+                    controller.getMedicamentos();
                 }else{
                     String tipoFiltrado = filtrar.getSelectedItem().toString();
-                    controller.filtrarMedicos(tipoFiltrado, texto);
+                    controller.filtrarMedicamentos(tipoFiltrado, texto);
                 }
             }
         });
@@ -122,11 +124,11 @@ public class View_Medicos implements PropertyChangeListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltrarFld.setText("");
-                controller.getMedicos();
+                controller.getMedicamentos();
             }
         });
 
-        medicos.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        medicamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
 
@@ -134,14 +136,14 @@ public class View_Medicos implements PropertyChangeListener{
         return panel;
     }
 
-    Controller_Medicos controller;
-    Model_Medicos model;
+    Controller_Medicamentos controller;
+    Model_Medicamentos model;
 
-    public void setController(Controller_Medicos controller) {
+    public void setController(Controller_Medicamentos controller) {
         this.controller = controller;
     }
 
-    public void setModel(Model_Medicos model) {
+    public void setModel(Model_Medicamentos model) {
         this.model = model;
         model.addPropertyChangeListener(this);
     }
@@ -150,37 +152,31 @@ public class View_Medicos implements PropertyChangeListener{
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Model_Medicos.MEDICOS:
-                int [] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.ESPECIALIDAD};
-                medicos.setModel(new TableModel(cols, model.getMedicos()));
+            case Model_Medicamentos.MEDICAMENTOS:
+                int [] cols = {TableModel.CODIGO, TableModel.NOMBRE, TableModel.PRESENTACION};
+                medicamentos.setModel(new TableModel(cols, model.getMedicamentos()));
                 break;
-            case Model_Medicos.CURRENT:
-                IdFld.setText(model.getCurrent().getId());
+            case Model_Medicamentos.CURRENT:
+                IdFld.setText(model.getCurrent().getCodigo());
                 NombreFld.setText(model.getCurrent().getNombre());
-                EspecialidadFld.setText(model.getCurrent().getEspecialidad());
+                presentacionFld.setText(model.getCurrent().getPresentacion());
 
-                if(model.getCurrent().getId().isEmpty()){
-                    IdFld.setEnabled(true);
-                }else {
-                    IdFld.setEnabled(false);
-                }
+                IdFld.setEnabled(model.getCurrent().getCodigo().isEmpty());
 
                 IdFld.setBackground(null);
                 IdFld.setToolTipText(null);
                 NombreFld.setBackground(null);
                 NombreFld.setToolTipText(null);
-                EspecialidadFld.setBackground(null);
 
         }
         this.panel.revalidate();
     }
 
-    public Medico take(){
-        Medico e = new Medico();
-        e.setId(this.IdFld.getText());
+    public Medicamento take(){
+        Medicamento e = new Medicamento();
+        e.setCodigo(this.IdFld.getText());
         e.setNombre(this.NombreFld.getText());
-        e.setEspecialidad(this.EspecialidadFld.getText());
-        e.setPassword(IdFld.getText());
+        e.setPresentacion(this.presentacionFld.getText());
 
         return e;
 
@@ -191,7 +187,7 @@ public class View_Medicos implements PropertyChangeListener{
         if (this.IdFld.getText().isEmpty()){
             valid = false;
             IdFld.setBackground(Color.RED);
-            IdFld.setToolTipText("Id requerido");
+            IdFld.setToolTipText("Codigo requerido");
         } else{
             IdFld.setBackground(null);
             IdFld.setToolTipText(null);
@@ -203,12 +199,6 @@ public class View_Medicos implements PropertyChangeListener{
         }  else{
             NombreFld.setBackground(null);
             NombreFld.setToolTipText(null);
-        }
-        if (this.EspecialidadFld.getText().isEmpty()){
-            valid = false;
-            EspecialidadFld.setBackground(Color.RED);
-        }  else{
-            EspecialidadFld.setBackground(null);
         }
         return valid;
     }

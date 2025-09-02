@@ -1,46 +1,51 @@
-package proyecto_1.presentation.medicos;
+package proyecto_1.presentation.pacientes;
 
-import proyecto_1.logic.Medico;
+import proyecto_1.logic.Paciente;
+import com.github.lgooddatepicker.components.DatePicker;
+import proyecto_1.presentation.prescribir.buscarPaciente.TableModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Date;
 import java.util.Objects;
 
-public class View_Medicos implements PropertyChangeListener{
+public class View_Pacientes implements PropertyChangeListener {
+
+
     private JPanel panel;
+    private JPanel Farmaceutas;
     private JLabel IdLab;
     private JTextField IdFld;
     private JTextField NombreFld;
-    private JLabel NombreLab;
-    private JButton guardarButton;
     private JButton limpiarButton;
+    private JButton guardarButton;
     private JButton borrarButton;
-    private JLabel EspecialidadLab;
-    private JTextField EspecialidadFld;
+    private JLabel NombreLab;
     private JLabel FiltrarLab;
-    private JButton buscarButton;
     private JButton reporteButton;
+    private JButton buscarButton;
     private JTextField FiltrarFld;
-    private JTable medicos;
     private JComboBox filtrar;
     private JButton limpiarBusqueda;
-    private JPanel Listado;
+    private JTable pacientes;
+    private DatePicker datePicker;
+    private JTextField telefonoFld;
 
-    public View_Medicos(){
 
-
+    public View_Pacientes(){
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(validate()){
-                    Medico n = take();
+                    Paciente n = take();
                     try{
                         if(Objects.equals(model.getCurrent().getId(), "")){
                             controller.create(n);
-                            JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "Registro", JOptionPane.INFORMATION_MESSAGE);
                         } else{
                             controller.edit(model.getCurrent(), n);
                             FiltrarFld.postActionEvent();
@@ -62,12 +67,12 @@ public class View_Medicos implements PropertyChangeListener{
             }
         });
 
-        medicos.getSelectionModel().addListSelectionListener(e -> {
+        pacientes.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
-                int viewRow = medicos.getSelectedRow();
+                int viewRow = pacientes.getSelectedRow();
                 if (viewRow != -1) {
-                    int modelRow = medicos.convertRowIndexToModel(viewRow);
-                    Medico n = model.getMedicos().get(modelRow);
+                    int modelRow = pacientes.convertRowIndexToModel(viewRow);
+                    Paciente n = model.getPacientes().get(modelRow);
                     model.setCurrent(n);
                 }
             }
@@ -78,10 +83,10 @@ public class View_Medicos implements PropertyChangeListener{
             public void actionPerformed(ActionEvent e) {
                 String texto = FiltrarFld.getText();
                 if (texto.isEmpty()) {
-                    controller.getMedicos();
+                    controller.getPacientes();
                 }else{
                     String tipoFiltrado = filtrar.getSelectedItem().toString();
-                    controller.filtrarMedicos(tipoFiltrado, texto);
+                    controller.filtrarPacientes(tipoFiltrado, texto);
                 }
             }
         });
@@ -122,11 +127,11 @@ public class View_Medicos implements PropertyChangeListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltrarFld.setText("");
-                controller.getMedicos();
+                controller.getPacientes();
             }
         });
 
-        medicos.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        pacientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
 
@@ -134,14 +139,14 @@ public class View_Medicos implements PropertyChangeListener{
         return panel;
     }
 
-    Controller_Medicos controller;
-    Model_Medicos model;
+    Controller_Pacientes controller;
+    Model_Pacientes model;
 
-    public void setController(Controller_Medicos controller) {
+    public void setController(Controller_Pacientes controller) {
         this.controller = controller;
     }
 
-    public void setModel(Model_Medicos model) {
+    public void setModel(Model_Pacientes model) {
         this.model = model;
         model.addPropertyChangeListener(this);
     }
@@ -150,14 +155,15 @@ public class View_Medicos implements PropertyChangeListener{
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
-            case Model_Medicos.MEDICOS:
-                int [] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.ESPECIALIDAD};
-                medicos.setModel(new TableModel(cols, model.getMedicos()));
+            case Model_Pacientes.PACIENTES:
+                int [] cols = {TableModel.ID, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.FECHANACIMIENTO};
+                pacientes.setModel(new TableModel(cols, model.getPacientes()));
                 break;
-            case Model_Medicos.CURRENT:
+            case Model_Pacientes.CURRENT:
                 IdFld.setText(model.getCurrent().getId());
                 NombreFld.setText(model.getCurrent().getNombre());
-                EspecialidadFld.setText(model.getCurrent().getEspecialidad());
+                datePicker.setDate(model.getCurrent().getFechaNacimiento());
+                telefonoFld.setText(model.getCurrent().getTelefono());
 
                 if(model.getCurrent().getId().isEmpty()){
                     IdFld.setEnabled(true);
@@ -169,18 +175,17 @@ public class View_Medicos implements PropertyChangeListener{
                 IdFld.setToolTipText(null);
                 NombreFld.setBackground(null);
                 NombreFld.setToolTipText(null);
-                EspecialidadFld.setBackground(null);
 
         }
         this.panel.revalidate();
     }
 
-    public Medico take(){
-        Medico e = new Medico();
+    public Paciente take(){
+        Paciente e = new Paciente();
         e.setId(this.IdFld.getText());
         e.setNombre(this.NombreFld.getText());
-        e.setEspecialidad(this.EspecialidadFld.getText());
-        e.setPassword(IdFld.getText());
+        e.setFechaNacimiento(this.datePicker.getDate());
+        e.setTelefono(this.telefonoFld.getText());
 
         return e;
 
@@ -204,13 +209,10 @@ public class View_Medicos implements PropertyChangeListener{
             NombreFld.setBackground(null);
             NombreFld.setToolTipText(null);
         }
-        if (this.EspecialidadFld.getText().isEmpty()){
-            valid = false;
-            EspecialidadFld.setBackground(Color.RED);
-        }  else{
-            EspecialidadFld.setBackground(null);
-        }
         return valid;
     }
 
 }
+
+
+

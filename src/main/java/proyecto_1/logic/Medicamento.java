@@ -8,6 +8,9 @@ public class Medicamento {
 
     // --- Constructores ---
     public Medicamento() {
+        this.codigo = "";
+        this.nombre = "";
+        this.presentacion = "";
     }
 
     public Medicamento(String codigo, String nombre, String presentacion) {

@@ -1,8 +1,6 @@
 package proyecto_1.presentation.farmaceutas;
 
 import proyecto_1.logic.Farmaceuta;
-import proyecto_1.logic.Medico;
-import proyecto_1.presentation.farmaceutas.TableModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -127,6 +125,8 @@ public class View_Farmaceutas implements PropertyChangeListener {
                 controller.getFarmaceutas();
             }
         });
+
+        farmaceutas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
 

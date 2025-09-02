@@ -12,9 +12,15 @@ import proyecto_1.presentation.farmaceutas.View_Farmaceutas;
 import proyecto_1.presentation.login.Controller_Login;
 import proyecto_1.presentation.login.Model_Login;
 import proyecto_1.presentation.login.View_Login;
+import proyecto_1.presentation.medicamentos.Controller_Medicamentos;
+import proyecto_1.presentation.medicamentos.Model_Medicamentos;
+import proyecto_1.presentation.medicamentos.View_Medicamentos;
 import proyecto_1.presentation.medicos.Controller_Medicos;
 import proyecto_1.presentation.medicos.Model_Medicos;
 import proyecto_1.presentation.medicos.View_Medicos;
+import proyecto_1.presentation.pacientes.Controller_Pacientes;
+import proyecto_1.presentation.pacientes.Model_Pacientes;
+import proyecto_1.presentation.pacientes.View_Pacientes;
 import proyecto_1.presentation.prescribir.Controller_Prescribir;
 import proyecto_1.presentation.prescribir.Model_Prescribir;
 import proyecto_1.presentation.prescribir.View_Prescribir;
@@ -65,6 +71,21 @@ public class Application {
         Controller_Farmaceutas controller_farmaceutas = new Controller_Farmaceutas(view_farmaceutas, model_farmaceutas);
         // *************************************************************************************************************
 
+        //Pacientes MVC
+        View_Pacientes view_pacientes = new View_Pacientes();
+        Model_Pacientes model_pacientes = new Model_Pacientes();
+        Controller_Pacientes controller_pacientes = new Controller_Pacientes(view_pacientes, model_pacientes);
+        // *************************************************************************************************************
+
+        //Medicamentos MVC
+        View_Medicamentos view_medicamentos = new View_Medicamentos();
+        Model_Medicamentos model_medicamentos = new Model_Medicamentos();
+        Controller_Medicamentos controller_medicamentos = new Controller_Medicamentos(view_medicamentos, model_medicamentos);
+
+
+        // *************************************************************************************************************
+
+
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -75,12 +96,18 @@ public class Application {
         window.setVisible(true);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        window.setIconImage(new ImageIcon(Application.class.getResource("/Icons/hospital.png")).getImage());
         //tabbedPane.addTab("Login", view.getPanel());
+
+        tabbedPane.addTab("Medicos", new ImageIcon(Application.class.getResource("/Icons/medico.png")), view_medicos.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
         tabbedPane.addTab("Despacho", view_despacho.getPanel());
-        tabbedPane.addTab("Medicos", view_medicos.getPanel());
         tabbedPane.addTab("Farmaceutas", view_farmaceutas.getPanel());
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
+        tabbedPane.addTab("Pacientes", view_pacientes.getPanel());
+        tabbedPane.addTab("Medicamentos", new ImageIcon(Application.class.getResource("/Icons/medicamento.png")), view_medicamentos.getPanel());
+
 
     }
 }

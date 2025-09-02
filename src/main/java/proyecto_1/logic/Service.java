@@ -142,6 +142,19 @@ public class Service {
     }
 
     //--Pacientes--
+
+    public void create(Paciente e) throws Exception {
+        Paciente result = data.getPacientes().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+        if (result == null) {
+            data.getPacientes().add(e);
+        } else {
+            throw new Exception("Paciente ya existe");
+        }
+    }
+
     public List<Paciente> getListaPacientes() {
         return data.getPacientes();
     }
@@ -175,7 +188,33 @@ public class Service {
         return result;
     }
 
+    public void removePaciente(Paciente e) throws Exception {
+        Paciente result = data.getPacientes().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (result != null) {
+            data.getPacientes().remove(result);
+        } else {
+            throw new Exception("Paciente no existe");
+        }
+    }
+
     //--Medicamento--
+
+    public void create(Medicamento e) throws Exception {
+        Medicamento result = data.getMedicamentos().stream()
+                .filter(i -> i.getCodigo().equals(e.getCodigo()))
+                .findFirst()
+                .orElse(null);
+
+        if (result == null) {
+            data.getMedicamentos().add(e);
+        } else {
+            throw new Exception("Medicamento ya existe");
+        }
+    }
 
     public List<Medicamento> getListaMedicamentos() {
         return data.getMedicamentos();
@@ -202,6 +241,19 @@ public class Service {
         }
 
         return result;
+    }
+
+    public void removeMedicamento(Medicamento e) throws Exception {
+        Medicamento result = data.getMedicamentos().stream()
+                .filter(i -> i.getCodigo().equals(e.getCodigo()))
+                .findFirst()
+                .orElse(null);
+
+        if (result != null) {
+            data.getMedicamentos().remove(result);
+        } else {
+            throw new Exception("Medicamento no existe");
+        }
     }
 
     //--Recetas--
