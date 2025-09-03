@@ -63,7 +63,6 @@ public class Model_Prescribir extends AbstractModel{
 
     public Receta getCurrentReceta() {
         return currentReceta;
-
     }
 
     public void setCurrentReceta(Receta currentReceta) {
@@ -77,6 +76,8 @@ public class Model_Prescribir extends AbstractModel{
 
     public void setPrescripciones(List<Prescripcion> prescripciones) {
         this.prescripciones = prescripciones;
+        currentReceta.setPrescripciones(prescripciones);
+
         firePropertyChange(PRESCRIPCIONES);
     }
 
@@ -108,11 +109,23 @@ public class Model_Prescribir extends AbstractModel{
 
     public void borrarPrescripcion(int row){
         prescripciones.remove(row);
+        currentReceta.setPrescripciones(prescripciones);
         firePropertyChange(PRESCRIPCIONES);
     }
 
     public void agregarPrescripcion(Prescripcion prescripcion){
         prescripciones.add(prescripcion);
+        currentReceta.setPrescripciones(prescripciones);
         firePropertyChange(PRESCRIPCIONES);
+    }
+    public void actualizarPrescripcion(int row,Prescripcion prescripcion){
+        prescripciones.set(row,prescripcion);
+        currentReceta.setPrescripciones(prescripciones);
+        firePropertyChange(PRESCRIPCIONES);
+    }
+
+    public void marcarPaciente(Paciente paciente){
+        currentReceta.setPaciente(paciente);
+        firePropertyChange(CURRENT);
     }
 }

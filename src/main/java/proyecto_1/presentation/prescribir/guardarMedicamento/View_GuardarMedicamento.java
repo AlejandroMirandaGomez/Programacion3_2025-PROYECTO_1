@@ -20,7 +20,13 @@ public class View_GuardarMedicamento extends JDialog  implements PropertyChangeL
     private JTextArea instrucciones;
     private JButton guardar;
     private JButton cancelar;
+    private JLabel cantidadTxt;
+    private JLabel duracionTxt;
+    private JLabel instruccionesTxt;
     private JButton buttonOK;
+
+    boolean paraDetalle;
+    int rowDetalle;
 
 
 
@@ -36,25 +42,32 @@ public class View_GuardarMedicamento extends JDialog  implements PropertyChangeL
         setTitle("Detalles medicamento");
         setSize(400, 250);
 
+        paraDetalle=false;
+        rowDetalle=0;
 
         guardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validar()) {
-
-                    Prescripcion n = take();
-
-                    try {
-
-                        controller.crearPrescripcion(n);
-
-
-                        JOptionPane.showMessageDialog(null, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                if(paraDetalle){
+                    if(validar()){
+                        Prescripcion n = take();
+                        controller.actualizarPrescripcion(rowDetalle,n);
                     }
-                    dispose();
+                }else{
+                    if (validar()) {
+                        Prescripcion n = take();
+                        try {
+                            controller.crearPrescripcion(n);
+
+                            JOptionPane.showMessageDialog(null, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    }
                 }
+                dispose();
+
             }
         });
 
@@ -68,6 +81,18 @@ public class View_GuardarMedicamento extends JDialog  implements PropertyChangeL
     public void setModel(Model_Prescribir model) {
         this.model = model;
         model.addPropertyChangeListener(this);
+    }
+
+    public boolean isParaDetalle() {
+        return paraDetalle;
+    }
+
+    public void setRowDetalle(int rowDetalle) {
+        this.rowDetalle = rowDetalle;
+    }
+
+    public void setParaDetalle(boolean paraDetalle) {
+        this.paraDetalle = paraDetalle;
     }
 
     @Override
@@ -94,29 +119,35 @@ public class View_GuardarMedicamento extends JDialog  implements PropertyChangeL
 
     private boolean validar() {
         boolean valid = true;
-        if ((Integer)cantidad.getValue()==0) {
+        if ((Integer)cantidad.getValue()<=0) {
             valid = false;
-            cantidad.setBackground(Color.RED);
-            cantidad.setToolTipText("cantidad requerida");
+            cantidadTxt.setBackground(Color.RED);
+            cantidadTxt.setToolTipText("cantidad requerida");
         } else {
-            cantidad.setBackground(null);
-            cantidad.setToolTipText(null);
+            cantidadTxt.setBackground(null);
+            cantidadTxt.setToolTipText(null);
         }
-        if ((Integer)duracion.getValue()==0) {
+        if ((Integer)duracion.getValue()<=0) {
             valid = false;
-            duracion.setBackground(Color.RED);
-            duracion.setToolTipText("cantidad requerida");
+            duracionTxt.setBackground(Color.RED);
+            duracionTxt.setToolTipText("cantidad requerida");
         } else {
-            duracion.setBackground(null);
-            duracion.setToolTipText(null);
+            duracionTxt.setBackground(null);
+            duracionTxt.setToolTipText(null);
         }
         if (instrucciones.getText().isEmpty()) {
             valid = false;
             instrucciones.setBackground(Color.RED);
             instrucciones.setToolTipText("cantidad requerida");
+
+            instruccionesTxt.setBackground(Color.RED);
+            instruccionesTxt.setToolTipText("cantidad requerida");
         } else {
             instrucciones.setBackground(null);
             instrucciones.setToolTipText(null);
+
+            instruccionesTxt.setBackground(null);
+            instruccionesTxt.setToolTipText(null);
         }
 
         return valid;

@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 
 public class View_Prescribir implements PropertyChangeListener {
     private JPanel panel;
@@ -80,7 +81,7 @@ public class View_Prescribir implements PropertyChangeListener {
                 }
             }
         });
-        /*
+
         detalles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,7 +92,13 @@ public class View_Prescribir implements PropertyChangeListener {
                     detalles.setEnabled(false);
                 }
             }
-        });*/
+        });
+        limpiar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.clear();
+            }
+        });
     }
 
     public JPanel getPanel() {
@@ -125,6 +132,12 @@ public class View_Prescribir implements PropertyChangeListener {
         guardarMedicamentoView.setLocationRelativeTo(panel);
         guardarMedicamentoView.setVisible(true);
     }
+    public void abrirDetalle(int row) {
+        guardarMedicamentoView.setParaDetalle(true);
+        guardarMedicamentoView.setRowDetalle(row);
+        guardarMedicamentoView.setLocationRelativeTo(panel);
+        guardarMedicamentoView.setVisible(true);
+    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -139,6 +152,11 @@ public class View_Prescribir implements PropertyChangeListener {
                 }else{
                     nombrePaciente.setText(model.getCurrentReceta().getPaciente().getNombre());
                 }
+                if(model.getCurrentReceta().getFechaDeRetiro() == null) {
+                    fechaRetiro.clear();
+                }
+                int[] col = {TableModel.MEDICAMENTO, TableModel.PRESENTACION, TableModel.INDICACION, TableModel.CANTIDAD, TableModel.DURACION};
+                tablaPrescripciones.setModel(new TableModel(col, model.getCurrentReceta().getPrescripciones()));
 
 
         }

@@ -40,9 +40,7 @@ public class Controller_Prescribir {
     }
     public void setPaciente(int row){
         Paciente paciente = model.getPacientes().get(row);
-        Receta receta = new Receta();
-        receta.setPaciente(paciente);
-        model.setCurrentReceta(receta);
+        model.marcarPaciente(paciente);
     }
 
     //--Buscar Medicamentos--
@@ -60,7 +58,7 @@ public class Controller_Prescribir {
         model.borrarPrescripcion(row);
     }
 
-    //--Detalle prescripcion--
+    //--Guardar prescripcion--
     public void crearPrescripcion(Prescripcion prescripcion){
         model.agregarPrescripcion(prescripcion);
     }
@@ -77,7 +75,12 @@ public class Controller_Prescribir {
         Prescripcion p= model.getPrescripciones().get(row);
 
         model.setCurrentDetalle(p);
-        view.abrirGuardarMedicamento();
+        view.abrirDetalle(row);
+    }
+
+    //--Detalle--
+    public void actualizarPrescripcion(int row,Prescripcion prescripcion){
+        model.actualizarPrescripcion(row,prescripcion);
     }
 
 }
