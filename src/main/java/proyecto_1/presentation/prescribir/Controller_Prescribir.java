@@ -5,6 +5,7 @@ import proyecto_1.presentation.prescribir.Model_Prescribir;
 import proyecto_1.presentation.prescribir.View_Prescribir;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,15 @@ public class Controller_Prescribir {
     }
     //--Recetas--
     public void clear(){
+        model.setCurrentReceta(new Receta());
+        model.setMedicamentos(new ArrayList<>());
+        model.setPacientes(new ArrayList<>());
+        model.setPrescripciones(new ArrayList<>());
+        model.setCurrentDetalle(new Prescripcion());
+    }
+    public void create() throws Exception{
+        Receta receta = model.getCurrentReceta();
+        Service.getInstance().create(receta);
         model.setCurrentReceta(new Receta());
     }
 
@@ -81,6 +91,13 @@ public class Controller_Prescribir {
     //--Detalle--
     public void actualizarPrescripcion(int row,Prescripcion prescripcion){
         model.actualizarPrescripcion(row,prescripcion);
+    }
+
+    //--Fecha--
+    public void actualizarFecha(LocalDate fecha){
+        Receta receta = model.getCurrentReceta();
+        receta.setFechaDeRetiro(fecha);
+        model.setCurrentReceta(receta);
     }
 
 }

@@ -52,6 +52,7 @@ public class View_GuardarMedicamento extends JDialog  implements PropertyChangeL
                     if(validar()){
                         Prescripcion n = take();
                         controller.actualizarPrescripcion(rowDetalle,n);
+                        dispose();
                     }
                 }else{
                     if (validar()) {
@@ -63,10 +64,10 @@ public class View_GuardarMedicamento extends JDialog  implements PropertyChangeL
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                         }
-
+                        dispose();
                     }
                 }
-                dispose();
+
 
             }
         });

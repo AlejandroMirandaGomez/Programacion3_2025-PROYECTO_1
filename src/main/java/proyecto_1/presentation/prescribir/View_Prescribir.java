@@ -1,13 +1,19 @@
 package proyecto_1.presentation.prescribir;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
+import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
+
 import proyecto_1.presentation.prescribir.buscarMedicamento.View_buscarMedicamento;
 import proyecto_1.presentation.prescribir.buscarPaciente.View_BuscarPaciente;
 import proyecto_1.presentation.prescribir.guardarMedicamento.View_GuardarMedicamento;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ContainerAdapter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
@@ -99,6 +105,28 @@ public class View_Prescribir implements PropertyChangeListener {
                 controller.clear();
             }
         });
+
+        fechaRetiro.addDateChangeListener(new DateChangeListener() {
+            @Override
+            public void dateChanged(DateChangeEvent event) {
+                controller.actualizarFecha(event.getNewDate());
+            }
+        });
+
+        guardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(validar()){
+                    try {
+                        controller.create();
+                        JOptionPane.showMessageDialog(panel, "RECETA APLICADO", "Registro", JOptionPane.INFORMATION_MESSAGE);
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
 
     public JPanel getPanel() {
@@ -129,6 +157,7 @@ public class View_Prescribir implements PropertyChangeListener {
 
     }
     public void abrirGuardarMedicamento() {
+        guardarMedicamentoView.setParaDetalle(false);
         guardarMedicamentoView.setLocationRelativeTo(panel);
         guardarMedicamentoView.setVisible(true);
     }
@@ -161,5 +190,36 @@ public class View_Prescribir implements PropertyChangeListener {
 
         }
 
+    }
+    private boolean validar() {
+        boolean valid = true;
+        if (model.getCurrentReceta().getPaciente() == null) {
+            valid = false;
+            buscarPacienteBtn.setBackground(Color.RED);
+            buscarPacienteBtn.setToolTipText("paciente requerido");
+        } else {
+            buscarPacienteBtn.setBackground(null);
+            buscarPacienteBtn.setToolTipText(null);
+        }
+        if (model.getPrescripciones().isEmpty()) {
+            valid = false;
+            agregarMedicamentoBtn.setBackground(Color.RED);
+            agregarMedicamentoBtn.setToolTipText("medicamento requerido");
+        } else {
+            agregarMedicamentoBtn.setBackground(null);
+            agregarMedicamentoBtn.setToolTipText(null);
+        }
+        if (fechaRetiro.getDate()==null) {
+            valid = false;
+            fechaRetiro.setBackground(Color.RED);
+            fechaRetiro.setToolTipText("fecha requerida");
+
+        } else {
+            fechaRetiro.setBackground(null);
+            fechaRetiro.setToolTipText(null);
+
+        }
+
+        return valid;
     }
 }

@@ -62,10 +62,11 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
         buttonOK.addActionListener(e -> {
             int row = tablaMedicamentos.getSelectedRow();
             if (row >= 0) {
+                dispose();
                 controller.seleccionarMedicamentoParaPrescripcion(row);
 
             }
-            dispose();
+
         });
 
         buttonCancel.addActionListener(new ActionListener() {

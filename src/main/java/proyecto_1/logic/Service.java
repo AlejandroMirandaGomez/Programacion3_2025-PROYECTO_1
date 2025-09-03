@@ -293,6 +293,9 @@ public class Service {
 
         return result;
     }
+    public void create(Receta e) throws Exception {
+        data.getRecetas().add(e);
+    }
 
 
 

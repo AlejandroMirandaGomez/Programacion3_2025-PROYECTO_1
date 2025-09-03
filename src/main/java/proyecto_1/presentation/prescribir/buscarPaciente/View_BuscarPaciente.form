@@ -90,7 +90,6 @@
                     <item value="Id"/>
                     <item value="Nombre"/>
                     <item value="Telefono"/>
-                    <item value="Fecha de nacimiento"/>
                   </model>
                 </properties>
               </component>
