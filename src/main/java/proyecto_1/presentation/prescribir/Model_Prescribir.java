@@ -41,12 +41,6 @@ public class Model_Prescribir extends AbstractModel{
         currentDetalle=new Prescripcion();
 
 
-        /*
-        prescripciones.add(new Prescripcion("Tomar una al dia",14,new Medicamento("111","Acetaminofen","Pastilla"),500));
-        prescripciones.add(new Prescripcion("Tomar una en mañana",6,new Medicamento("112","Panadol","Pastilla"),450));
-        prescripciones.add(new Prescripcion("Tomar una en noche",8,new Medicamento("113","Paracetamol","Pastilla"),350));
-        prescripciones.add(new Prescripcion("Tomar dos al dia",1,new Medicamento("114","Ibrupofeno","Pastilla"),230));
-        prescripciones.add(new Prescripcion("Tomar cada dos dias",7,new Medicamento("115","Crema de rosas","Crema"),25));*/
     }
 
     @Override

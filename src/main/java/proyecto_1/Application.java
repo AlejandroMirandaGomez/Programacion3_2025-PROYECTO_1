@@ -9,6 +9,9 @@ import proyecto_1.presentation.despacho.View_Despacho;
 import proyecto_1.presentation.farmaceutas.Controller_Farmaceutas;
 import proyecto_1.presentation.farmaceutas.Model_Farmaceutas;
 import proyecto_1.presentation.farmaceutas.View_Farmaceutas;
+import proyecto_1.presentation.historico.Controller_Historico;
+import proyecto_1.presentation.historico.Model_Historico;
+import proyecto_1.presentation.historico.View_Historico;
 import proyecto_1.presentation.login.Controller_Login;
 import proyecto_1.presentation.login.Model_Login;
 import proyecto_1.presentation.login.View_Login;
@@ -81,8 +84,12 @@ public class Application {
         View_Medicamentos view_medicamentos = new View_Medicamentos();
         Model_Medicamentos model_medicamentos = new Model_Medicamentos();
         Controller_Medicamentos controller_medicamentos = new Controller_Medicamentos(view_medicamentos, model_medicamentos);
+        // *************************************************************************************************************
 
-
+        //Historico MVC
+        View_Historico view_historico = new View_Historico();
+        Model_Historico model_historico = new Model_Historico();
+        Controller_Historico controller_historico = new Controller_Historico(view_historico, model_historico);
         // *************************************************************************************************************
 
 
@@ -108,6 +115,7 @@ public class Application {
         tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
         tabbedPane.addTab("Pacientes", view_pacientes.getPanel());
         tabbedPane.addTab("Medicamentos", view_medicamentos.getPanel());
+        tabbedPane.addTab("Historico", view_historico.getPanel());
 
 
     }
