@@ -3,17 +3,14 @@ package proyecto_1.logic;
 public class Farmaceuta {
     private String id;
     private String nombre;
-    private String password;
 
-    public  Farmaceuta(String id, String nombre, String password) {
+    public  Farmaceuta(String id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.password = password;
     }
     public Farmaceuta(){
         this.id = "";
         this.nombre = "";
-        this.password = "";
     }
 
     public String getId() {
@@ -27,11 +24,5 @@ public class Farmaceuta {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    public String getPassword(){
-        return password;
-    }
-    public void setPassword(String password){
-        this.password = password;
     }
 }

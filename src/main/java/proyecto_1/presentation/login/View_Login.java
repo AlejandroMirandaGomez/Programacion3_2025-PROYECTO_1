@@ -1,6 +1,7 @@
 package proyecto_1.presentation.login;
 
 import proyecto_1.logic.Medico;
+import proyecto_1.logic.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +29,9 @@ public class View_Login implements PropertyChangeListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    controller.readLogin(idFld.getText(), claveFld.getText());
+                    Usuario usuario = take();
+                    controller.login(usuario);
+                    model.setCurrent(usuario);
                 }
                 catch(Exception ex){
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -67,6 +70,13 @@ public class View_Login implements PropertyChangeListener{
                 JOptionPane.showMessageDialog(panel, "Loggeado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
                 break;
         }
+    }
+
+    public Usuario take(){
+        Usuario usuario = new Usuario();
+        usuario.setId(this.idFld.getText());
+        usuario.setPassword(this.claveFld.getText());
+        return usuario;
     }
 
 

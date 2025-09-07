@@ -1,6 +1,7 @@
 package proyecto_1.presentation.medicos;
 
 import proyecto_1.logic.Medico;
+import proyecto_1.logic.Usuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,8 +38,10 @@ public class View_Medicos implements PropertyChangeListener{
             public void actionPerformed(ActionEvent e) {
                 if(validate()){
                     Medico n = take();
+                    Usuario user = takeUser();
                     try{
                         if(Objects.equals(model.getCurrent().getId(), "")){
+                            controller.createUser(user);
                             controller.create(n);
                             JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "", JOptionPane.INFORMATION_MESSAGE);
                         } else{
@@ -180,9 +183,20 @@ public class View_Medicos implements PropertyChangeListener{
         e.setId(this.IdFld.getText());
         e.setNombre(this.NombreFld.getText());
         e.setEspecialidad(this.EspecialidadFld.getText());
-        e.setPassword(IdFld.getText());
+
+
 
         return e;
+
+    }
+
+    public Usuario takeUser(){
+        Usuario user = new Usuario();
+        user.setId(this.IdFld.getText());
+        user.setPassword(this.IdFld.getText());
+        user.setRol("MED");
+
+        return user;
 
     }
 

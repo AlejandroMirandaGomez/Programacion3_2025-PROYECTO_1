@@ -2,6 +2,8 @@ package proyecto_1.presentation.login;
 
 import proyecto_1.logic.Medico;
 import proyecto_1.logic.Service;
+import proyecto_1.logic.Sesion;
+import proyecto_1.logic.Usuario;
 
 import javax.naming.ldap.Control;
 
@@ -17,10 +19,12 @@ public class Controller_Login {
         view.setModel(model);
     }
 
-    public void readLogin(String id, String Password) throws Exception {
-        Medico medico = new Medico();
-        medico.setId(id);
-        medico.setPassword(Password);
-        model.setCurrentMedico(Service.getInstance().read(medico));
+
+    public void login(Usuario usuario) throws Exception{
+        Usuario logged = Service.getInstance().read(usuario);
+        if(!logged.getPassword().equals(usuario.getPassword())){
+            throw new Exception("Usuario o clave incorrectos");
+        }
+        Sesion.setUsuario(logged);
     }
 }

@@ -1,6 +1,7 @@
 package proyecto_1.presentation.farmaceutas;
 
 import proyecto_1.logic.Farmaceuta;
+import proyecto_1.logic.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,8 +38,10 @@ public class View_Farmaceutas implements PropertyChangeListener {
             public void actionPerformed(ActionEvent e) {
                 if(validate()){
                     Farmaceuta n = take();
+                    Usuario user = takeUser();
                     try{
                         if(Objects.equals(model.getCurrent().getId(), "")){
+                            controller.createUser(user);
                             controller.create(n);
                             JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "Registro", JOptionPane.INFORMATION_MESSAGE);
                         } else{
@@ -177,9 +180,18 @@ public class View_Farmaceutas implements PropertyChangeListener {
         Farmaceuta e = new Farmaceuta();
         e.setId(this.IdFld.getText());
         e.setNombre(this.NombreFld.getText());
-        e.setPassword(IdFld.getText());
 
         return e;
+
+    }
+
+    public Usuario takeUser(){
+        Usuario user = new Usuario();
+        user.setId(this.IdFld.getText());
+        user.setPassword(this.IdFld.getText());
+        user.setRol("FAR");
+
+        return user;
 
     }
 

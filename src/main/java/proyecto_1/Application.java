@@ -107,7 +107,7 @@ public class Application {
         window.setIconImage(new ImageIcon(Application.class.getResource("/Icons/hospital.png")).getImage());
         //tabbedPane.addTab("Login", view.getPanel());
 
-
+        tabbedPane.addTab("Login", view.getPanel());
         tabbedPane.addTab("Medicos", view_medicos.getPanel());
         tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
         tabbedPane.addTab("Despacho", view_despacho.getPanel());

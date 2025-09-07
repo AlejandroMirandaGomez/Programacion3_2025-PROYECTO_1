@@ -4,12 +4,10 @@ public class Administrador {
 
     private String id;
     private String nombre;
-    private String password;
 
-    public  Administrador(String id, String nombre, String password) {
+    public  Administrador(String id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.password = password;
     }
 
     public String getId() {
@@ -23,11 +21,5 @@ public class Administrador {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    public String getPassword(){
-        return password;
-    }
-    public void setPassword(String password){
-        this.password = password;
     }
 }

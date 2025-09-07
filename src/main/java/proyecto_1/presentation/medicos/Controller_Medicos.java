@@ -2,6 +2,7 @@ package proyecto_1.presentation.medicos;
 
 import proyecto_1.logic.Medico;
 import proyecto_1.logic.Service;
+import proyecto_1.logic.Usuario;
 
 import javax.swing.text.View;
 import java.util.List;
@@ -22,6 +23,11 @@ public class Controller_Medicos {
         Service.getInstance().create(e);
         model.setCurrent(new Medico());
         model.setMedicos(Service.getInstance().findAll());
+    }
+
+    public void createUser(Usuario e) throws Exception{
+        Service.getInstance().create(e);
+
     }
 
     public void read(String id) throws Exception{

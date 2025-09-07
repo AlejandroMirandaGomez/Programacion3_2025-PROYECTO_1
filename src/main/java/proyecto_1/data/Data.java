@@ -13,6 +13,7 @@ public class Data {
     private List<Paciente> pacientes;
     private List<Receta> recetas;
     private List<Medicamento> medicamentos;
+    private List<Usuario> usuarios;
 
     public Data() {
         medicos = new ArrayList<>();
@@ -20,6 +21,7 @@ public class Data {
         pacientes = new ArrayList<>();
         medicamentos = new ArrayList<>();
         farmaceutas = new ArrayList<>();
+        usuarios = new ArrayList<>();
 
         seed();
     }
@@ -29,13 +31,14 @@ public class Data {
     public List<Receta> getRecetas() { return recetas; }
     public List<Paciente> getPacientes() { return pacientes; }
     public List<Medicamento> getMedicamentos() { return medicamentos; }
+    public List<Usuario> getUsuarios() { return usuarios; }
 
     // --- Carga de datos de prueba ---
     private void seed() {
         // 0) Médicos (ajusta el constructor si tu clase Medico usa otra firma)
-        Medico me1 = new Medico("ME-001", "Dra. Elena Ruiz", "Clínica General", "123");
-        Medico me2 = new Medico("ME-002", "Dr. Pablo Soto", "Medicina Interna", "123");
-        Medico me3 = new Medico("ME-003", "Dra. Karla Méndez", "Pediatría", "123");
+        Medico me1 = new Medico("ME-001", "Dra. Elena Ruiz", "Clínica General");
+        Medico me2 = new Medico("ME-002", "Dr. Pablo Soto", "Medicina Interna");
+        Medico me3 = new Medico("ME-003", "Dra. Karla Méndez", "Pediatría");
         medicos.addAll(Arrays.asList(me1, me2, me3));
 
         // 1) Pacientes

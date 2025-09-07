@@ -2,6 +2,7 @@ package proyecto_1.presentation.farmaceutas;
 
 import proyecto_1.logic.Farmaceuta;
 import proyecto_1.logic.Service;
+import proyecto_1.logic.Usuario;
 import proyecto_1.presentation.medicos.Model_Medicos;
 import proyecto_1.presentation.medicos.View_Medicos;
 
@@ -23,6 +24,11 @@ public class Controller_Farmaceutas {
         Service.getInstance().create(e);
         model.setCurrent(new Farmaceuta());
         model.setFarmaceutas(Service.getInstance().findAllFarmaceutas());
+    }
+
+    public void createUser(Usuario e) throws Exception{
+        Service.getInstance().create(e);
+
     }
 
 

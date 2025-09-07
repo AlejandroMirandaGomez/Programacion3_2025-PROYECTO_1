@@ -43,10 +43,7 @@ public class Service {
                 .orElse(null);
 
         if (result != null) {
-            if(result.getPassword().equals(e.getPassword())){
-                return result;
-            }
-            throw new Exception("Contrasena incorrecta");
+            return result;
         } else {
             throw new Exception("Medico no existe");
         }
@@ -296,6 +293,43 @@ public class Service {
     public void create(Receta e) throws Exception {
         data.getRecetas().add(e);
     }
+
+
+    // Usuarios
+
+    public Usuario read(Usuario e) throws Exception {
+        Usuario result = data.getUsuarios().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (result != null) {
+            return result;
+        } else {
+            throw new Exception("Usuario no existe");
+        }
+    }
+
+
+    public void create(Usuario e) throws Exception {
+        Usuario result = data.getUsuarios().stream()
+                .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (result == null) {
+            data.getUsuarios().add(e);
+        } else {
+            throw new Exception("Usuario ya existe");
+        }
+    }
+
+    public List<Usuario> getListaUsuarios() {
+        return data.getUsuarios();
+    }
+
+
+
 
 
 

@@ -1,16 +1,17 @@
 package proyecto_1.presentation.login;
 
+import proyecto_1.logic.Usuario;
 import proyecto_1.presentation.AbstractModel;
 import proyecto_1.logic.Medico;
 
 import java.beans.PropertyChangeListener;
 
 public class Model_Login extends AbstractModel{
-    Medico currentMed;
+    Usuario current;
 
     public static final String CURRENT = "current";
 
-    public Model_Login(){ currentMed = new Medico() ;}
+    public Model_Login(){ current = new Usuario() ;}
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -18,12 +19,12 @@ public class Model_Login extends AbstractModel{
         //firePropertyChange(CURRENT);
     }
 
-    public Medico getCurrentMed() {
-        return currentMed;
+    public Usuario getCurrent() {
+        return current;
     }
 
-    public void setCurrentMedico(Medico currentMed) {
-        this.currentMed = currentMed;
+    public void setCurrent(Usuario current) {
+        this.current = current;
         firePropertyChange(CURRENT);
     }
 }
