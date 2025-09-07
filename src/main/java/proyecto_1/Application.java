@@ -3,6 +3,9 @@ package proyecto_1;
 import proyecto_1.presentation.acercaDe.Controller_AcercaDe;
 import proyecto_1.presentation.acercaDe.Model_AcercaDe;
 import proyecto_1.presentation.acercaDe.View_AcercaDe;
+import proyecto_1.presentation.dashboard.Controller_Dashboard;
+import proyecto_1.presentation.dashboard.Model_Dashboard;
+import proyecto_1.presentation.dashboard.View_Dashboard;
 import proyecto_1.presentation.despacho.Controller_Despacho;
 import proyecto_1.presentation.despacho.Model_Despacho;
 import proyecto_1.presentation.despacho.View_Despacho;
@@ -92,6 +95,11 @@ public class Application {
         Controller_Historico controller_historico = new Controller_Historico(view_historico, model_historico);
         // *************************************************************************************************************
 
+        //Dashboard MVC
+        View_Dashboard view_dashboard = new View_Dashboard();
+        Model_Dashboard model_dashboard = new Model_Dashboard();
+        Controller_Dashboard controller_dashboard = new Controller_Dashboard(view_dashboard, model_dashboard);
+        // *************************************************************************************************************
 
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -116,6 +124,7 @@ public class Application {
         tabbedPane.addTab("Pacientes", view_pacientes.getPanel());
         tabbedPane.addTab("Medicamentos", view_medicamentos.getPanel());
         tabbedPane.addTab("Historico", view_historico.getPanel());
+        tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
 
 
     }
