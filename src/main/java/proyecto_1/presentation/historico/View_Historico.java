@@ -109,6 +109,7 @@ public class View_Historico implements PropertyChangeListener {
         this.buscarPaciente.setController(controller);
         this.editarEstado.setController(controller);
     }
+
     public void setModel(Model_Historico model) {
         this.model = model;
         model.addPropertyChangeListener(this);

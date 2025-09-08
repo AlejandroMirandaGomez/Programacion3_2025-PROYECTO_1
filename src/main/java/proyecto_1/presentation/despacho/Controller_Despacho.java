@@ -44,7 +44,7 @@ public class Controller_Despacho {
         model.setPacientes(pacientes);
     }
     public void filtrarPacientes(String tipo, String texto) {
-        List<Paciente> result =Service.getInstance().filtrarPacientes(tipo, texto);
+        List<Paciente> result = Service.getInstance().filtrarPacientes(tipo, texto);
         model.setPacientes(result);
     }
 
@@ -53,11 +53,12 @@ public class Controller_Despacho {
         model.setCurrentEstado(s);
     }
 
-    public void setCurrentPaciente(Paciente p){
-        model.setCurrentaciente(p);
-    }
+    public void setCurrentPaciente(Paciente p){ model.setCurrentaciente(p); }
 
     public void setCurrentReceta(Receta r){ model.setCurrentReceta(r); }
 
-    public void setEstado_of_CurrentReceta(String newEstado) { model.setEstado_of_CurrentReceta(newEstado); }
+    public void setEstado_of_CurrentReceta(String newEstado) {
+        model.setEstado_of_CurrentReceta(newEstado);
+
+    }
 }

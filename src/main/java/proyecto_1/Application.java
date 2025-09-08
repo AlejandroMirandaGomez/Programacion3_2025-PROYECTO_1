@@ -126,6 +126,14 @@ public class Application {
         tabbedPane.addTab("Historico", view_historico.getPanel());
         tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
 
+        // Listener: se dispara cada vez que cambia la pestaña seleccionada
+        tabbedPane.addChangeListener(e -> {
+            if (tabbedPane.getSelectedComponent() == view_dashboard.getPanel()) {
+                SwingUtilities.invokeLater(() -> {
+                    controller_dashboard.getAllRecetas();
+                });
+            }
+        });
 
     }
 }

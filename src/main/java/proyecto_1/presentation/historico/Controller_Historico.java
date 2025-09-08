@@ -61,5 +61,4 @@ public class Controller_Historico {
 
     public void setCurrentReceta(Receta r){ model.setCurrentReceta(r); }
 
-    public void setEstado_of_CurrentReceta(String newEstado) { model.setEstado_of_CurrentReceta(newEstado); }
 }
