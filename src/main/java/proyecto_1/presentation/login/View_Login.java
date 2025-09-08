@@ -2,6 +2,7 @@ package proyecto_1.presentation.login;
 
 import proyecto_1.logic.Medico;
 import proyecto_1.logic.Usuario;
+import proyecto_1.presentation.login.changePassword.View_ChangePassword;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 
-public class View_Login implements PropertyChangeListener{
+public class View_Login extends JDialog implements PropertyChangeListener{
     private JPanel panel;
     private JTextField idFld;
     private JTextField claveFld;
@@ -23,7 +24,21 @@ public class View_Login implements PropertyChangeListener{
     private JButton loginButton;
     private JButton claveButton;
 
+    private boolean authenticated = false;
+
+    private View_ChangePassword view;
+
     public View_Login() {
+        setContentPane(panel);
+        setModal(true);
+
+        setLocationRelativeTo(null);
+        setTitle("Login");
+        setSize(600, 300);
+
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        view = new View_ChangePassword();
 
         LoginButton.addActionListener(new ActionListener() {
             @Override
@@ -32,6 +47,8 @@ public class View_Login implements PropertyChangeListener{
                     Usuario usuario = take();
                     controller.login(usuario);
                     model.setCurrent(usuario);
+                    authenticated = true;
+                    dispose();
                 }
                 catch(Exception ex){
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -45,6 +62,12 @@ public class View_Login implements PropertyChangeListener{
                 claveFld.setText("");
             }
         });
+        claveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.setVisible(true);
+            }
+        });
     }
 
     public JPanel getPanel() {
@@ -56,10 +79,13 @@ public class View_Login implements PropertyChangeListener{
     Model_Login model;
 
     public void setController(Controller_Login controller) {
+
         this.controller = controller;
+        view.setController(controller);
     }
     public void setModel(Model_Login model) {
         this.model = model;
+        view.setModel(model);
         model.addPropertyChangeListener(this);
     }
 
@@ -67,7 +93,7 @@ public class View_Login implements PropertyChangeListener{
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case Model_Login.CURRENT:
-                JOptionPane.showMessageDialog(panel, "Loggeado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
+                //JOptionPane.showMessageDialog(panel, "Loggeado con exito", "Informacion", JOptionPane.PLAIN_MESSAGE);
                 break;
         }
     }
@@ -77,6 +103,10 @@ public class View_Login implements PropertyChangeListener{
         usuario.setId(this.idFld.getText());
         usuario.setPassword(this.claveFld.getText());
         return usuario;
+    }
+
+    public boolean isAuthenticated() {
+        return authenticated;
     }
 
 

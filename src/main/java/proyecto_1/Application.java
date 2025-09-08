@@ -1,5 +1,6 @@
 package proyecto_1;
 
+import proyecto_1.logic.Sesion;
 import proyecto_1.presentation.acercaDe.Controller_AcercaDe;
 import proyecto_1.presentation.acercaDe.Model_AcercaDe;
 import proyecto_1.presentation.acercaDe.View_AcercaDe;
@@ -41,12 +42,27 @@ public class Application {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch (Exception ex) {};
 
+        doLogin();
+        if(Sesion.isLoggedIn()){
+            doRun();
+        }
+
+    }
+    private static void doLogin(){
         // Login MVC:
         View_Login view = new View_Login();
+        view.setTitle("LOGIN");
+        view.pack();
+        view.setLocationRelativeTo(null);
         Model_Login model = new Model_Login();
         Controller_Login controller = new Controller_Login(view, model);
-        // *************************************************************************************************************
+        view.setVisible(true);
 
+        if (!view.isAuthenticated()) {
+            System.exit(0);
+        }
+    }
+    private static void doRun(){
         // AcercaDe MVC:
         View_AcercaDe view_acercaDe = new View_AcercaDe();
         Model_AcercaDe model_acercaDe = new Model_AcercaDe();
@@ -93,7 +109,6 @@ public class Application {
         View_Historico view_historico = new View_Historico();
         Model_Historico model_historico = new Model_Historico();
         Controller_Historico controller_historico = new Controller_Historico(view_historico, model_historico);
-        // *************************************************************************************************************
 
         //Dashboard MVC
         View_Dashboard view_dashboard = new View_Dashboard();
@@ -113,27 +128,65 @@ public class Application {
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         window.setIconImage(new ImageIcon(Application.class.getResource("/Icons/hospital.png")).getImage());
-        //tabbedPane.addTab("Login", view.getPanel());
 
-        tabbedPane.addTab("Login", view.getPanel());
-        tabbedPane.addTab("Medicos", view_medicos.getPanel());
-        tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
-        tabbedPane.addTab("Despacho", view_despacho.getPanel());
-        tabbedPane.addTab("Farmaceutas", view_farmaceutas.getPanel());
-        tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
-        tabbedPane.addTab("Pacientes", view_pacientes.getPanel());
-        tabbedPane.addTab("Medicamentos", view_medicamentos.getPanel());
-        tabbedPane.addTab("Historico", view_historico.getPanel());
-        tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
+        window.setTitle("Hospital - " + Sesion.getUsuario().getId() + " (" + Sesion.getUsuario().getRol() + ")");
 
-        // Listener: se dispara cada vez que cambia la pestaña seleccionada
-        tabbedPane.addChangeListener(e -> {
-            if (tabbedPane.getSelectedComponent() == view_dashboard.getPanel()) {
-                SwingUtilities.invokeLater(() -> {
-                    controller_dashboard.getAllRecetas();
+        switch(Sesion.getUsuario().getRol()){
+            case "ADM":
+                tabbedPane.addTab("Medicos", view_medicos.getPanel());
+                tabbedPane.addTab("Farmaceutas", view_farmaceutas.getPanel());
+                tabbedPane.addTab("Pacientes", view_pacientes.getPanel());
+                tabbedPane.addTab("Medicamentos", view_medicamentos.getPanel());
+                tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
+
+                tabbedPane.addChangeListener(e->{
+                    if(tabbedPane.getSelectedComponent() == view_dashboard.getPanel()) {
+                        SwingUtilities.invokeLater(() -> {
+                            controller_dashboard.getAllRecetas();
+                        });
+                    }
                 });
-            }
-        });
+
+                tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
+
+                //Temporal para pruebas
+
+                tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
+                tabbedPane.addTab("Despacho", view_despacho.getPanel());
+
+                break;
+            case "MED":
+                tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
+                tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
+
+                tabbedPane.addChangeListener(e->{
+                    if(tabbedPane.getSelectedComponent() == view_dashboard.getPanel()) {
+                        SwingUtilities.invokeLater(() -> {
+                            controller_dashboard.getAllRecetas();
+                        });
+                    }
+                });
+                tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
+                break;
+            case "FAR":
+                tabbedPane.addTab("Despacho", view_despacho.getPanel());
+                tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
+
+                tabbedPane.addChangeListener(e->{
+                    if(tabbedPane.getSelectedComponent() == view_dashboard.getPanel()) {
+                        SwingUtilities.invokeLater(() -> {
+                            controller_dashboard.getAllRecetas();
+                        });
+                    }
+                });
+                tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
+
+        }
+
 
     }
+
 }

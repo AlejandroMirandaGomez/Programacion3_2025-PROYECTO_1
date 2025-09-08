@@ -119,6 +119,16 @@ public class Data {
         recetas.add(r3);
         recetas.add(r4);
         recetas.add(r5);
+
+        //Agregar al admin para que sirva xd
+        Usuario adminFacil = new Usuario("1", "1", "ADM");
+        usuarios.add(adminFacil);
+        Usuario admin = new Usuario("ADM111", "1234", "ADM");
+        usuarios.add(admin);
+        Usuario med = new Usuario("MED111", "1234", "MED");
+        usuarios.add(med);
+        Usuario far = new Usuario("FAR111", "1234", "FAR");
+        usuarios.add(far);
     }
 }
 
