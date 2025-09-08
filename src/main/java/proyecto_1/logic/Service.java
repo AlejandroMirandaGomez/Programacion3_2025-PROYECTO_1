@@ -2,6 +2,8 @@ package proyecto_1.logic;
 
 import proyecto_1.data.Data;
 
+import proyecto_1.data.XmlPersister;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +20,22 @@ public class Service {
 
     private Data data;
 
+
     private Service(){
-        data = new Data();
+        try{
+            data= XmlPersister.instance().load();
+        }
+        catch(Exception e){
+            data =  new Data();
+        }
+    }
+
+    public void stop(){
+        try {
+            XmlPersister.instance().store(data);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     //Medicos
@@ -39,6 +55,19 @@ public class Service {
     public Medico read(Medico e) throws Exception {
         Medico result = data.getMedicos().stream()
                 .filter(i -> i.getId().equals(e.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (result != null) {
+            return result;
+        } else {
+            throw new Exception("Medico no existe");
+        }
+    }
+
+    public Medico read(String e) throws Exception {
+        Medico result = data.getMedicos().stream()
+                .filter(i -> i.getId().equals(e))
                 .findFirst()
                 .orElse(null);
 
@@ -293,6 +322,14 @@ public class Service {
     public void create(Receta e) throws Exception {
         data.getRecetas().add(e);
     }
+
+    public Medico getUsuario() throws Exception{
+        String id = Sesion.getUsuario().getId();
+
+        return Service.getInstance().read(id);
+    }
+
+
 
 
     // Usuarios

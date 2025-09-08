@@ -35,13 +35,15 @@ public class Controller_Prescribir {
     }
     public void create() throws Exception{
         Receta receta = model.getCurrentReceta();
-        Service.getInstance().create(receta);
+        receta.setMedico(getMedico());
 
-        //Para funcionamiento
-        receta.setMedico(new Medico());
+        Service.getInstance().create(receta);
 
         model.setCurrentReceta(new Receta());
         model.setPrescripciones(new ArrayList<>());
+    }
+    public Medico getMedico() throws Exception{
+        return  Service.getInstance().getUsuario();
     }
 
     //--Buscar Paciente--

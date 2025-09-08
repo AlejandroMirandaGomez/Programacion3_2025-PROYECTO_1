@@ -1,6 +1,7 @@
 package proyecto_1;
 
 import proyecto_1.logic.Sesion;
+import proyecto_1.logic.Service;
 import proyecto_1.presentation.acercaDe.Controller_AcercaDe;
 import proyecto_1.presentation.acercaDe.Model_AcercaDe;
 import proyecto_1.presentation.acercaDe.View_AcercaDe;
@@ -33,6 +34,8 @@ import proyecto_1.presentation.prescribir.Model_Prescribir;
 import proyecto_1.presentation.prescribir.View_Prescribir;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -186,6 +189,13 @@ public class Application {
 
         }
 
+        window.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                Service.getInstance().stop();
+            }
+        });
 
     }
 
