@@ -64,7 +64,8 @@ public class Data {
         // 3) Recetas + Prescripciones (todas con médico asignado)
         // --- Receta 1: María López (Dra. Ruiz)
         Receta r1 = new Receta();
-        r1.setFechaDeRetiro(LocalDate.now().minusDays(1));
+        //r1.setFechaDeRetiro(LocalDate.now().minusDays(1));
+        r1.setFechaDeRetiro(LocalDate.now().minusMonths(1));
         r1.setPaciente(pa1);
         r1.setMedico(me1);
 
@@ -109,7 +110,7 @@ public class Data {
         r5.setMedico(me1);
 
         Prescripcion p5_1 = new Prescripcion("Disolver 1 tableta en agua y tomar una vez al día.", 15, m7, 15);
-        Prescripcion p5_2 = new Prescripcion("Tomar 1 tableta cada 8 horas por dolor o fiebre.", 3, m1, 9);
+        Prescripcion p5_2 = new Prescripcion("Tomar 1 tableta cada 8 horas por dolor o fiebre.", 3, m1, 40);
         r5.agregarPrescripcion(p5_1);
         r5.agregarPrescripcion(p5_2);
 
