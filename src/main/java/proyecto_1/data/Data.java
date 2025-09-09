@@ -44,8 +44,6 @@ public class Data {
         farmaceutas = new ArrayList<>();
         usuarios = new ArrayList<>();
 
-
-        //seed();
     }
 
     public List<Medico> getMedicos() { return medicos; }
@@ -64,22 +62,22 @@ public class Data {
         medicos.addAll(Arrays.asList(me1, me2, me3));
 
         // 1) Pacientes
-        Paciente pa1 = new Paciente("P-001", "María López",   "8888-1111", LocalDate.of(1998, 3, 12));
-        Paciente pa2 = new Paciente("P-002", "Carlos Gómez",  "8888-2222", LocalDate.of(1987, 7, 25));
-        Paciente pa3 = new Paciente("P-003", "Ana Rodríguez", "8888-3333", LocalDate.of(2001, 1,  5));
+        Paciente pa1 = new Paciente("P-001", "María López", "8888-1111", LocalDate.of(1998, 3, 12));
+        Paciente pa2 = new Paciente("P-002", "Carlos Gómez", "8888-2222", LocalDate.of(1987, 7, 25));
+        Paciente pa3 = new Paciente("P-003", "Ana Rodríguez", "8888-3333", LocalDate.of(2001, 1, 5));
         Paciente pa4 = new Paciente("P-004", "Luis Martínez", "8888-4444", LocalDate.of(1995, 11, 9));
-        Paciente pa5 = new Paciente("P-005", "Sofía Vargas",  "8888-5555", LocalDate.of(2003, 5,  18));
+        Paciente pa5 = new Paciente("P-005", "Sofía Vargas", "8888-5555", LocalDate.of(2003, 5, 18));
 
         pacientes.addAll(Arrays.asList(pa1, pa2, pa3, pa4, pa5));
 
         // 2) Medicamentos
-        Medicamento m1 = new Medicamento("M-001", "Paracetamol",  "500 mg tabletas");
-        Medicamento m2 = new Medicamento("M-002", "Ibuprofeno",   "400 mg tabletas");
-        Medicamento m3 = new Medicamento("M-003", "Amoxicilina",  "500 mg cápsulas");
-        Medicamento m4 = new Medicamento("M-004", "Omeprazol",    "20 mg cápsulas");
-        Medicamento m5 = new Medicamento("M-005", "Loratadina",   "10 mg tabletas");
-        Medicamento m6 = new Medicamento("M-006", "Salbutamol",   "Inhalador 100 mcg");
-        Medicamento m7 = new Medicamento("M-007", "Vitamina C",   "1 g efervescente");
+        Medicamento m1 = new Medicamento("M-001", "Paracetamol", "500 mg tabletas");
+        Medicamento m2 = new Medicamento("M-002", "Ibuprofeno", "400 mg tabletas");
+        Medicamento m3 = new Medicamento("M-003", "Amoxicilina", "500 mg cápsulas");
+        Medicamento m4 = new Medicamento("M-004", "Omeprazol", "20 mg cápsulas");
+        Medicamento m5 = new Medicamento("M-005", "Loratadina", "10 mg tabletas");
+        Medicamento m6 = new Medicamento("M-006", "Salbutamol", "Inhalador 100 mcg");
+        Medicamento m7 = new Medicamento("M-007", "Vitamina C", "1 g efervescente");
 
         medicamentos.addAll(Arrays.asList(m1, m2, m3, m4, m5, m6, m7));
 
@@ -146,12 +144,6 @@ public class Data {
         //Agregar al admin para que sirva xd
         Usuario adminFacil = new Usuario("1", "1", "ADM");
         usuarios.add(adminFacil);
-        Usuario admin = new Usuario("ADM111", "1234", "ADM");
-        usuarios.add(admin);
-        Usuario med = new Usuario("MED111", "1234", "MED");
-        usuarios.add(med);
-        Usuario far = new Usuario("FAR111", "1234", "FAR");
-        usuarios.add(far);
     }
 }
 

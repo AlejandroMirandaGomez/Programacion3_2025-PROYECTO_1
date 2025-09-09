@@ -22,7 +22,6 @@ public class View_Medicamentos implements PropertyChangeListener {
     private JButton borrarButton;
     private JLabel NombreLab;
     private JLabel FiltrarLab;
-    private JButton reporteButton;
     private JButton buscarButton;
     private JTextField FiltrarFld;
     private JComboBox filtrar;
