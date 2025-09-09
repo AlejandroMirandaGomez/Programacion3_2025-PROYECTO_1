@@ -141,6 +141,13 @@ public class Application {
                 tabbedPane.addTab("Pacientes", view_pacientes.getPanel());
                 tabbedPane.addTab("Medicamentos", view_medicamentos.getPanel());
                 tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addChangeListener(e->{
+                    if(tabbedPane.getSelectedComponent() == view_historico.getPanel()) {
+                        SwingUtilities.invokeLater(() -> {
+                            controller_historico.getRecetas();
+                        });
+                    }
+                });
                 tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
 
                 tabbedPane.addChangeListener(e->{
@@ -156,11 +163,25 @@ public class Application {
                 //Temporal para pruebas
 
                 tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
+                tabbedPane.addChangeListener(e->{
+                    if(tabbedPane.getSelectedComponent() == view_prescribir.getPanel()) {
+                        SwingUtilities.invokeLater(() -> {
+                            controller_Prescribir.getPacientes();
+                        });
+                    }
+                });
                 tabbedPane.addTab("Despacho", view_despacho.getPanel());
 
                 break;
             case "MED":
                 tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
+                tabbedPane.addChangeListener(e->{
+                    if(tabbedPane.getSelectedComponent() == view_prescribir.getPanel()) {
+                        SwingUtilities.invokeLater(() -> {
+                            controller_Prescribir.getPacientes();
+                        });
+                    }
+                });
                 tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
 
                 tabbedPane.addChangeListener(e->{
@@ -171,6 +192,13 @@ public class Application {
                     }
                 });
                 tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addChangeListener(e->{
+                    if(tabbedPane.getSelectedComponent() == view_historico.getPanel()) {
+                        SwingUtilities.invokeLater(() -> {
+                            controller_historico.getRecetas();
+                        });
+                    }
+                });
                 tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
                 break;
             case "FAR":
@@ -185,6 +213,13 @@ public class Application {
                     }
                 });
                 tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addChangeListener(e->{
+                    if(tabbedPane.getSelectedComponent() == view_historico.getPanel()) {
+                        SwingUtilities.invokeLater(() -> {
+                            controller_historico.getRecetas();
+                        });
+                    }
+                });
                 tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
 
         }

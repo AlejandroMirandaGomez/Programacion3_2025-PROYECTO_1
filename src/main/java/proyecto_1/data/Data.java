@@ -45,7 +45,7 @@ public class Data {
         usuarios = new ArrayList<>();
 
 
-        seed();
+        //seed();
     }
 
     public List<Medico> getMedicos() { return medicos; }

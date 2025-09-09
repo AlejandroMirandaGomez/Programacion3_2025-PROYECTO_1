@@ -24,7 +24,7 @@ public class TableModel  extends AbstractTableModel<Receta> implements javax.swi
             case NOMBRE_PACIENTE:
                 return receta.getPaciente().getNombre();
             case FECHA_RETIRO:
-                return receta.getFechaDeRetiro().getDayOfMonth();
+                return receta.getFechaDeRetiro().toString();
             case NOMBRE_MEDICO:
                  return receta.getMedico().getNombre();
             case ESTADO:
