@@ -163,8 +163,8 @@ public class Model_Dashboard extends AbstractModel {
                 // Asegura presencia del mes (0 si no estaba)
                 serie.putIfAbsent(ym, 0);
 
-                int cantidad = p.getCantidad(); // tu método es int
-                serie.put(ym, serie.get(ym) + cantidad); // suma en el mes
+                int cantidad = p.getCantidad();
+                serie.put(ym, serie.get(ym) + cantidad);
             }
         }
 
