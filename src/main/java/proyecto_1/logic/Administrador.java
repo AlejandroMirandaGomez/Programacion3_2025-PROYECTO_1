@@ -1,7 +1,12 @@
 package proyecto_1.logic;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlID;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Administrador {
 
+    @XmlID
     private String id;
     private String nombre;
 

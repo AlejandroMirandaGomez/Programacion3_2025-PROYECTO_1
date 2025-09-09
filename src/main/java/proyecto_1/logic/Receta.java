@@ -3,22 +3,43 @@ package proyecto_1.logic;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import jakarta.xml.bind.annotation.*;
+import proyecto_1.logic.adapters.LocalDateAdapter;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Receta {
     // --- Atributos ---
+
+    @XmlID
+    private String id;
+
+    @XmlElement(name = "fechaNacimiento")
+    @jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaDeRetiro;
+
+    @XmlIDREF
     private Paciente paciente;
+
+    @XmlIDREF
     private Medico medico;
+
+    @XmlElementWrapper(name = "prescripciones")
+    @XmlElement(name = "prescripcion")
     private List<Prescripcion> prescripciones;
     private String estado;
 
     // --- Constructores ---
     public Receta() {
+        this.id = UUID.randomUUID().toString();
+
         this.prescripciones = new ArrayList<>();
         this.estado = "Confeccionada";
     }
 
     public Receta(LocalDate fechaDeRetiro, Paciente paciente, Medico medico, List<Prescripcion> prescripciones) {
+        this.id = UUID.randomUUID().toString();
         this.fechaDeRetiro = fechaDeRetiro;
         this.paciente = paciente;
         this.medico = medico;
@@ -27,6 +48,11 @@ public class Receta {
     }
 
     // --- Getters y Setters ---
+
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
+
     public LocalDate getFechaDeRetiro() {
         return fechaDeRetiro;
     }

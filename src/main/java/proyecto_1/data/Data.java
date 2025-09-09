@@ -1,18 +1,39 @@
 package proyecto_1.data;
 
 import proyecto_1.logic.*;
+import jakarta.xml.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Data {
+    @XmlElementWrapper(name = "medicos")
+    @XmlElement(name = "medico")
     private List<Medico> medicos;
+
+    @XmlElementWrapper(name = "farmaceutas")
+    @XmlElement(name = "farmaceuta")
     private List<Farmaceuta> farmaceutas;
+
+    @XmlElementWrapper(name = "pacientes")
+    @XmlElement(name = "paciente")
     private List<Paciente> pacientes;
+
+
+    @XmlElementWrapper(name = "recetas")
+    @XmlElement(name = "receta")
     private List<Receta> recetas;
+
+    @XmlElementWrapper(name = "medicamentos")
+    @XmlElement(name = "medicamento")
     private List<Medicamento> medicamentos;
+
+    @XmlElementWrapper(name = "usuarios")
+    @XmlElement(name = "usuario")
     private List<Usuario> usuarios;
 
     public Data() {
@@ -22,6 +43,7 @@ public class Data {
         medicamentos = new ArrayList<>();
         farmaceutas = new ArrayList<>();
         usuarios = new ArrayList<>();
+
 
         seed();
     }
@@ -36,7 +58,7 @@ public class Data {
     // --- Carga de datos de prueba ---
     private void seed() {
         // 0) Médicos (ajusta el constructor si tu clase Medico usa otra firma)
-        Medico me1 = new Medico("ME-001", "Dra. Elena Ruiz", "Clínica General");
+        Medico me1 = new Medico("MED111", "Dra. Elena Ruiz", "Clínica General");
         Medico me2 = new Medico("ME-002", "Dr. Pablo Soto", "Medicina Interna");
         Medico me3 = new Medico("ME-003", "Dra. Karla Méndez", "Pediatría");
         medicos.addAll(Arrays.asList(me1, me2, me3));

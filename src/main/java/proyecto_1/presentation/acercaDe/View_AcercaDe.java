@@ -6,7 +6,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class View_AcercaDe implements PropertyChangeListener {
-    private JProgressBar progressBar1;
     private JPanel panel;
 
     public JPanel getPanel() {

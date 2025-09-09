@@ -25,5 +25,13 @@
             <artifactId>jfreechart</artifactId>
             <version>1.5.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+
     </dependencies>
 </project>
