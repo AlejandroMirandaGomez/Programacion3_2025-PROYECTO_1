@@ -136,11 +136,11 @@ public class Application {
 
         switch(Sesion.getUsuario().getRol()){
             case "ADM":
-                tabbedPane.addTab("Medicos", view_medicos.getPanel());
-                tabbedPane.addTab("Farmaceutas", view_farmaceutas.getPanel());
-                tabbedPane.addTab("Pacientes", view_pacientes.getPanel());
-                tabbedPane.addTab("Medicamentos", view_medicamentos.getPanel());
-                tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addTab("Medicos", new ImageIcon(Application.class.getResource("/Icons/doctor.png")),view_medicos.getPanel());
+                tabbedPane.addTab("Farmaceutas",new ImageIcon(Application.class.getResource("/Icons/farmaceutico.png")), view_farmaceutas.getPanel());
+                tabbedPane.addTab("Pacientes", new ImageIcon(Application.class.getResource("/Icons/paciente.png")), view_pacientes.getPanel());
+                tabbedPane.addTab("Medicamentos",new ImageIcon(Application.class.getResource("/Icons/pastillas.png")), view_medicamentos.getPanel());
+                tabbedPane.addTab("Historico", new ImageIcon(Application.class.getResource("/Icons/historico.png")), view_historico.getPanel());
                 tabbedPane.addChangeListener(e->{
                     if(tabbedPane.getSelectedComponent() == view_historico.getPanel()) {
                         SwingUtilities.invokeLater(() -> {
@@ -148,7 +148,7 @@ public class Application {
                         });
                     }
                 });
-                tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
+                tabbedPane.addTab("Dashboard", new ImageIcon(Application.class.getResource("/Icons/grafico.png")),view_dashboard.getPanel());
 
                 tabbedPane.addChangeListener(e->{
                     if(tabbedPane.getSelectedComponent() == view_dashboard.getPanel()) {
@@ -158,11 +158,11 @@ public class Application {
                     }
                 });
 
-                tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
+                tabbedPane.addTab("Acerca De",new ImageIcon(Application.class.getResource("/Icons/acerca de.png")), view_acercaDe.getPanel());
 
                 //Temporal para pruebas
 
-                tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
+                tabbedPane.addTab("Prescribir",new ImageIcon(Application.class.getResource("/Icons/Prescribir.png")), view_prescribir.getPanel());
                 tabbedPane.addChangeListener(e->{
                     if(tabbedPane.getSelectedComponent() == view_prescribir.getPanel()) {
                         SwingUtilities.invokeLater(() -> {
@@ -170,11 +170,11 @@ public class Application {
                         });
                     }
                 });
-                tabbedPane.addTab("Despacho", view_despacho.getPanel());
+                tabbedPane.addTab("Despacho",new ImageIcon(Application.class.getResource("/Icons/Despacho.png")), view_despacho.getPanel());
 
                 break;
             case "MED":
-                tabbedPane.addTab("Prescribir", view_prescribir.getPanel());
+                tabbedPane.addTab("Prescribir",new ImageIcon(Application.class.getResource("/Icons/Prescribir.png")), view_prescribir.getPanel());
                 tabbedPane.addChangeListener(e->{
                     if(tabbedPane.getSelectedComponent() == view_prescribir.getPanel()) {
                         SwingUtilities.invokeLater(() -> {
@@ -182,7 +182,7 @@ public class Application {
                         });
                     }
                 });
-                tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
+                tabbedPane.addTab("Dashboard", new ImageIcon(Application.class.getResource("/Icons/grafico.png")),view_dashboard.getPanel());
 
                 tabbedPane.addChangeListener(e->{
                     if(tabbedPane.getSelectedComponent() == view_dashboard.getPanel()) {
@@ -191,7 +191,7 @@ public class Application {
                         });
                     }
                 });
-                tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addTab("Historico",new ImageIcon(Application.class.getResource("/Icons/historico.png")), view_historico.getPanel());
                 tabbedPane.addChangeListener(e->{
                     if(tabbedPane.getSelectedComponent() == view_historico.getPanel()) {
                         SwingUtilities.invokeLater(() -> {
@@ -199,11 +199,11 @@ public class Application {
                         });
                     }
                 });
-                tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
+                tabbedPane.addTab("Acerca De",new ImageIcon(Application.class.getResource("/Icons/acerca de.png")), view_acercaDe.getPanel());
                 break;
             case "FAR":
-                tabbedPane.addTab("Despacho", view_despacho.getPanel());
-                tabbedPane.addTab("Dashboard", view_dashboard.getPanel());
+                tabbedPane.addTab("Despacho", new ImageIcon(Application.class.getResource("/Icons/Despacho.png")),view_despacho.getPanel());
+                tabbedPane.addTab("Dashboard",new ImageIcon(Application.class.getResource("/Icons/grafico.png")), view_dashboard.getPanel());
 
                 tabbedPane.addChangeListener(e->{
                     if(tabbedPane.getSelectedComponent() == view_dashboard.getPanel()) {
@@ -212,7 +212,7 @@ public class Application {
                         });
                     }
                 });
-                tabbedPane.addTab("Historico", view_historico.getPanel());
+                tabbedPane.addTab("Historico",new ImageIcon(Application.class.getResource("/Icons/historico.png")), view_historico.getPanel());
                 tabbedPane.addChangeListener(e->{
                     if(tabbedPane.getSelectedComponent() == view_historico.getPanel()) {
                         SwingUtilities.invokeLater(() -> {
@@ -220,7 +220,7 @@ public class Application {
                         });
                     }
                 });
-                tabbedPane.addTab("Acerca De", view_acercaDe.getPanel());
+                tabbedPane.addTab("Acerca De", new ImageIcon(Application.class.getResource("/Icons/acerca de.png")),view_acercaDe.getPanel());
 
         }
 
