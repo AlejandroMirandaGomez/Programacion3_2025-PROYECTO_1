@@ -134,6 +134,11 @@ public class View_Dashboard implements PropertyChangeListener {
     private void onCurrentMedicamentoChange() {
         if(model.getFechaDesde() != null && model.getFechaHasta() != null) {
             controller.addMedicamentoResumen(model.getCurrentMedicamento(), model.getFechaDesde(), model.getFechaHasta());
+            fechaDesde.setBackground(null);
+            fechaHasta.setBackground(null);
+        } else {
+            fechaDesde.setBackground(Color.RED);
+            fechaHasta.setBackground(Color.RED);
         }
     }
 }

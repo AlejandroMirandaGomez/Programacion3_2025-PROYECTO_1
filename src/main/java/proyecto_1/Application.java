@@ -130,7 +130,7 @@ public class Application {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        window.setIconImage(new ImageIcon(Application.class.getResource("/Icons/hospital.png")).getImage());
+        window.setIconImage(new ImageIcon(Application.class.getResource("/Icons/edificioHospitalBlanco.png")).getImage());
 
         window.setTitle("Hospital - " + Sesion.getUsuario().getId() + " (" + Sesion.getUsuario().getRol() + ")");
 

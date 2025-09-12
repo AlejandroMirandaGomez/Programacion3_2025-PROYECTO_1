@@ -4,9 +4,13 @@ import proyecto_1.presentation.despacho.Controller_Despacho;
 import proyecto_1.presentation.despacho.Model_Despacho;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 public class View_EditarEstado extends JDialog  implements PropertyChangeListener {
     private JPanel contentPane;
@@ -20,6 +24,7 @@ public class View_EditarEstado extends JDialog  implements PropertyChangeListene
     private JPanel datos;
     private JPanel Prescripciones;
     private JTable tablaPrescripciones;
+    private JLabel msjAdvertencia;
 
     public View_EditarEstado() {
         setContentPane(contentPane);
@@ -100,6 +105,22 @@ public class View_EditarEstado extends JDialog  implements PropertyChangeListene
                 seleccionEstado.setSelectedItem(model.getCurrentReceta().getEstado());
                 int[] cols = {TableModel.MEDICAMENTO, TableModel.PRESENTACION, TableModel.INDICACION, TableModel.CANTIDAD, TableModel.DURACION};
                 tablaPrescripciones.setModel(new TableModel(cols, model.getCurrentReceta().getPrescripciones()));
+                LocalDate fechaRetiro = model.getCurrentReceta().getFechaDeRetiro();
+                LocalDate hoy = LocalDate.now();
+                long diferencia = ChronoUnit.DAYS.between(hoy, fechaRetiro);
+
+                //Validacion:
+                if (Objects.equals(model.getCurrentReceta().getEstado(), "Confeccionada")
+                        && (diferencia < -3 || diferencia > 3)
+                ) {
+                    seleccionEstado.setEnabled(false);
+                    msjAdvertencia.setText("← La fecha de retiro NO está dentro de +/- 3 días desde hoy");
+                    msjAdvertencia.setForeground(Color.RED);
+                } else{
+                    seleccionEstado.setEnabled(true);
+                    msjAdvertencia.setText("← Puedes modificar la receta");
+                    msjAdvertencia.setForeground(Color.decode("#00731E"));
+                }
                 break;
         }
         this.contentPane.revalidate();
