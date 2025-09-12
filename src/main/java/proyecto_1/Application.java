@@ -160,18 +160,6 @@ public class Application {
 
                 tabbedPane.addTab("Acerca De",new ImageIcon(Application.class.getResource("/Icons/acerca de.png")), view_acercaDe.getPanel());
 
-                //Temporal para pruebas
-
-                tabbedPane.addTab("Prescribir",new ImageIcon(Application.class.getResource("/Icons/Prescribir.png")), view_prescribir.getPanel());
-                tabbedPane.addChangeListener(e->{
-                    if(tabbedPane.getSelectedComponent() == view_prescribir.getPanel()) {
-                        SwingUtilities.invokeLater(() -> {
-                            controller_Prescribir.getPacientes();
-                        });
-                    }
-                });
-                tabbedPane.addTab("Despacho",new ImageIcon(Application.class.getResource("/Icons/Despacho.png")), view_despacho.getPanel());
-
                 break;
             case "MED":
                 tabbedPane.addTab("Prescribir",new ImageIcon(Application.class.getResource("/Icons/Prescribir.png")), view_prescribir.getPanel());
