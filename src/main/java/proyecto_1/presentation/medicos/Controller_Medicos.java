@@ -69,5 +69,9 @@ public class Controller_Medicos {
 
     }
 
+    public void selectCurrent(Medico n){
+        model.setCurrent(n);
+    }
+
 
 }

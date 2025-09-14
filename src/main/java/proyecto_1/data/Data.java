@@ -3,6 +3,7 @@ package proyecto_1.data;
 import proyecto_1.logic.*;
 import jakarta.xml.bind.annotation.*;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,6 +45,7 @@ public class Data {
         farmaceutas = new ArrayList<>();
         usuarios = new ArrayList<>();
 
+        seed();
     }
 
     public List<Medico> getMedicos() { return medicos; }
@@ -57,9 +59,11 @@ public class Data {
     private void seed() {
         // 0) Médicos (ajusta el constructor si tu clase Medico usa otra firma)
         Medico me1 = new Medico("MED111", "Dra. Elena Ruiz", "Clínica General");
-        Medico me2 = new Medico("ME-002", "Dr. Pablo Soto", "Medicina Interna");
-        Medico me3 = new Medico("ME-003", "Dra. Karla Méndez", "Pediatría");
+        Medico me2 = new Medico("MED-002", "Dr. Pablo Soto", "Medicina Interna");
+        Medico me3 = new Medico("MED-003", "Dra. Karla Méndez", "Pediatría");
         medicos.addAll(Arrays.asList(me1, me2, me3));
+        Usuario med1 = new Usuario("MED111", "1234", "MED");
+        usuarios.add(med1);
 
         // 1) Pacientes
         Paciente pa1 = new Paciente("P-001", "María López", "8888-1111", LocalDate.of(1998, 3, 12));

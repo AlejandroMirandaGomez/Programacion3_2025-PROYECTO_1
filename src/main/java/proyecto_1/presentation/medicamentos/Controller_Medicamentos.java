@@ -54,5 +54,9 @@ public class Controller_Medicamentos {
 
     }
 
+    public void selectCurrent(Medicamento n){
+        model.setCurrent(n);
+    }
+
 
 }

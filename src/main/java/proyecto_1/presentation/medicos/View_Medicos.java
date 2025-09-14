@@ -70,7 +70,7 @@ public class View_Medicos implements PropertyChangeListener{
                 if (viewRow != -1) {
                     int modelRow = medicos.convertRowIndexToModel(viewRow);
                     Medico n = model.getMedicos().get(modelRow);
-                    model.setCurrent(n);
+                    controller.selectCurrent(n);
                 }
             }
         });

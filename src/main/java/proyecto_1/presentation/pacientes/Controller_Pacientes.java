@@ -51,5 +51,9 @@ public class Controller_Pacientes {
 
     }
 
+    public void selectCurrent(Paciente e){
+        model.setCurrent(e);
+    }
+
 
 }

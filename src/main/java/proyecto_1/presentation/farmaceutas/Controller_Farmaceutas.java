@@ -57,5 +57,9 @@ public class Controller_Farmaceutas {
 
     }
 
+    public void selectCurrent(Farmaceuta n){
+        model.setCurrent(n);
+    }
+
 
 }

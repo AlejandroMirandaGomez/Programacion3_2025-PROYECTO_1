@@ -72,7 +72,7 @@ public class View_Pacientes implements PropertyChangeListener {
                 if (viewRow != -1) {
                     int modelRow = pacientes.convertRowIndexToModel(viewRow);
                     Paciente n = model.getPacientes().get(modelRow);
-                    model.setCurrent(n);
+                    controller.selectCurrent(n);
                 }
             }
         });

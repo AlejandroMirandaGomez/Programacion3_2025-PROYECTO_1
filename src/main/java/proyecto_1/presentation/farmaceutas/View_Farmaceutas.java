@@ -70,7 +70,7 @@ public class View_Farmaceutas implements PropertyChangeListener {
                 if (viewRow != -1) {
                     int modelRow = farmaceutas.convertRowIndexToModel(viewRow);
                     Farmaceuta n = model.getFarmaceutas().get(modelRow);
-                    model.setCurrent(n);
+                    controller.selectCurrent(n);
                 }
             }
         });

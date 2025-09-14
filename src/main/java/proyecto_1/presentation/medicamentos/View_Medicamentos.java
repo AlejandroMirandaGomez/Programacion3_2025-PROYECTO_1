@@ -69,7 +69,7 @@ public class View_Medicamentos implements PropertyChangeListener {
                 if (viewRow != -1) {
                     int modelRow = medicamentos.convertRowIndexToModel(viewRow);
                     Medicamento n = model.getMedicamentos().get(modelRow);
-                    model.setCurrent(n);
+                    controller.selectCurrent(n);
                 }
             }
         });
