@@ -20,6 +20,7 @@ USE `Proyecto2` ;
 CREATE TABLE IF NOT EXISTS `Proyecto2`.`Usuario` (
   `id` VARCHAR(45) NOT NULL,
   `clave` VARCHAR(45) NULL,
+  `rol` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
