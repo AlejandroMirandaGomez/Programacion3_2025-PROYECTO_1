@@ -98,7 +98,7 @@ public class MedicoDao {
     }
 
 
-    private Medico from(ResultSet rs, String alias){
+    public Medico from(ResultSet rs, String alias){
         try {
             Medico m= new Medico();
             m.setId(rs.getString(alias + ".id"));

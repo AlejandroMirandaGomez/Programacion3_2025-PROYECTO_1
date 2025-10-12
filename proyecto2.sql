@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `Proyecto2`.`Prescripcion` (
   `duracion` INT NULL,
   `cantidad` INT NULL,
   `medicamento` VARCHAR(10) NOT NULL,
-  `receta` INT NOT NULL,
+  `receta` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Preescripciones_Receta1_idx` (`receta` ASC) VISIBLE,
   INDEX `fk_Preescripciones_Medicamento1_idx` (`medicamento` ASC) VISIBLE,
