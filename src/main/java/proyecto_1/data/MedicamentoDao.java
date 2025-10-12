@@ -111,7 +111,7 @@ public class MedicamentoDao {
     }
 
 
-    private Medicamento from(ResultSet rs, String alias){
+    public Medicamento from(ResultSet rs, String alias){
         try {
             Medicamento p= new Medicamento();
             p.setCodigo(rs.getString(alias + ".codigo"));
