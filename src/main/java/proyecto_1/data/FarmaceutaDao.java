@@ -16,12 +16,6 @@ public class FarmaceutaDao {
         db= Database.instance();
     }
     public void create(Farmaceuta f) throws Exception{
-        String sqlUsuario = "insert into Usuario (id, clave) values(?,?)";
-        PreparedStatement stmU = db.prepareStatement(sqlUsuario);
-        stmU.setString(1, f.getId());
-        stmU.setString(2, f.getId());
-        db.executeUpdate(stmU);
-
         String sql="insert into Farmaceuta (id, nombre) "+
                 "values(?,?)";
         PreparedStatement stm = db.prepareStatement(sql);
