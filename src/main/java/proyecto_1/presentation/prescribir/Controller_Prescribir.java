@@ -21,7 +21,7 @@ public class Controller_Prescribir {
         this.model = model;
         view.setController(this);
         view.setModel(model);
-        //---Prueba: Pone los valores en las tablas---
+
         getPacientes();
         getMedicamentos();
     }

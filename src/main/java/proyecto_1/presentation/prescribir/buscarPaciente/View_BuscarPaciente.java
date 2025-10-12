@@ -53,7 +53,7 @@ public class View_BuscarPaciente extends JDialog  implements PropertyChangeListe
 
                     controller.setPaciente(row);
                 }
-                //dispose();//Con solo tocar la fila, sale de la ventana y marca el nombre
+
             }
         });
 

@@ -5,28 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import jakarta.xml.bind.annotation.*;
-import proyecto_1.logic.adapters.LocalDateAdapter;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Receta {
     // --- Atributos ---
 
-    @XmlID
+
     private String id;
 
-    @XmlElement(name = "fechaNacimiento")
-    @jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter(LocalDateAdapter.class)
+
     private LocalDate fechaDeRetiro;
 
-    @XmlIDREF
+
     private Paciente paciente;
 
-    @XmlIDREF
+
     private Medico medico;
 
-    @XmlElementWrapper(name = "prescripciones")
-    @XmlElement(name = "prescripcion")
+
     private List<Prescripcion> prescripciones;
     private String estado;
 

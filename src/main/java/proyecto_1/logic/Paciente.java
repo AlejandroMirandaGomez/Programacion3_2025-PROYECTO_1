@@ -1,25 +1,19 @@
 package proyecto_1.logic;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlID;
-import proyecto_1.logic.adapters.LocalDateAdapter;
+
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Paciente {
     // --- Atributos ---
 
-    @XmlID
+
     private String id;
     private String nombre;
     private String telefono;
 
-    @XmlElement(name = "fechaNacimiento")
-    @jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fechaNacimiento;
 
     // --- Constructores ---

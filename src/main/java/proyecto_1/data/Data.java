@@ -1,7 +1,7 @@
 package proyecto_1.data;
 
 import proyecto_1.logic.*;
-import jakarta.xml.bind.annotation.*;
+
 
 
 import java.time.LocalDate;
@@ -9,32 +9,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Data {
-    @XmlElementWrapper(name = "medicos")
-    @XmlElement(name = "medico")
+
     private List<Medico> medicos;
 
-    @XmlElementWrapper(name = "farmaceutas")
-    @XmlElement(name = "farmaceuta")
+
     private List<Farmaceuta> farmaceutas;
 
-    @XmlElementWrapper(name = "pacientes")
-    @XmlElement(name = "paciente")
+
     private List<Paciente> pacientes;
 
 
-    @XmlElementWrapper(name = "recetas")
-    @XmlElement(name = "receta")
     private List<Receta> recetas;
 
-    @XmlElementWrapper(name = "medicamentos")
-    @XmlElement(name = "medicamento")
     private List<Medicamento> medicamentos;
 
-    @XmlElementWrapper(name = "usuarios")
-    @XmlElement(name = "usuario")
+
     private List<Usuario> usuarios;
 
     public Data() {

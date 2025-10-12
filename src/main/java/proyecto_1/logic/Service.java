@@ -2,8 +2,6 @@ package proyecto_1.logic;
 
 import proyecto_1.data.Data;
 
-import proyecto_1.data.XmlPersister;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,17 +20,14 @@ public class Service {
 
 
     private Service(){
-        try{
-            data= XmlPersister.instance().load();
-        }
-        catch(Exception e){
-            data =  new Data();
-        }
+
+        data =  new Data();
+
     }
 
     public void stop(){
         try {
-            XmlPersister.instance().store(data);
+
         } catch (Exception e) {
             System.out.println(e);
         }

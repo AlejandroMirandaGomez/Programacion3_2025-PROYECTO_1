@@ -26,7 +26,6 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
     private Model_Prescribir model;
     private Controller_Prescribir controller;
 
-    //private proyecto_1.presentation.prescribir.guardarMedicamento.View_GuardarMedicamento guardarMedicamentoView;
 
 
     public View_buscarMedicamento() {
@@ -38,7 +37,6 @@ public class View_buscarMedicamento extends JDialog implements PropertyChangeLis
         setTitle("Buscar medicamentos");
         setSize(400, 250);
 
-        //guardarMedicamentoView =new View_GuardarMedicamento();
 
 
         busqueda.addActionListener(new ActionListener() {

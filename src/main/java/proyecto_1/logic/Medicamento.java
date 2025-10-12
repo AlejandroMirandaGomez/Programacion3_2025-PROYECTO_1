@@ -3,11 +3,11 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlID;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Medicamento {
     // --- Atributos ---
 
-    @XmlID
+
     private String codigo;
     private String nombre;
     private String presentacion;
