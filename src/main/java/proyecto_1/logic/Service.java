@@ -1,6 +1,7 @@
 package proyecto_1.logic;
 
 import proyecto_1.data.Data;
+import proyecto_1.data.PacienteDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +18,12 @@ public class Service {
     }
 
     private Data data;
-
+    private PacienteDao pacienteDao;
 
     private Service(){
 
         data =  new Data();
-
+        pacienteDao = new PacienteDao();
     }
 
     public void stop(){
@@ -165,6 +166,7 @@ public class Service {
     //--Pacientes--
 
     public void create(Paciente e) throws Exception {
+        pacienteDao.create(e);
         Paciente result = data.getPacientes().stream()
                 .filter(i -> i.getId().equals(e.getId()))
                 .findFirst()
@@ -210,6 +212,7 @@ public class Service {
     }
 
     public void removePaciente(Paciente e) throws Exception {
+        pacienteDao.delete(e);
         Paciente result = data.getPacientes().stream()
                 .filter(i -> i.getId().equals(e.getId()))
                 .findFirst()
