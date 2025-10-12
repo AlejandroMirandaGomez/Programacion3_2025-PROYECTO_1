@@ -44,10 +44,10 @@ public class Controller_Pacientes {
         model.setPacientes(Service.getInstance().getListaPacientes());
     }
 
-    public void edit(Paciente e, Paciente n) throws Exception{
-        e.setNombre(n.getNombre());
-        e.setTelefono(n.getTelefono());
-        e.setFechaNacimiento(n.getFechaNacimiento());
+    public void edit(Paciente n) throws Exception{
+        Service.getInstance().update(n);
+        model.setCurrent(new Paciente());
+        model.setPacientes(Service.getInstance().getListaPacientes());
 
     }
 

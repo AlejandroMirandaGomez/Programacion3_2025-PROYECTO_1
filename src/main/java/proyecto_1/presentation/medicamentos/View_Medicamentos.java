@@ -43,7 +43,7 @@ public class View_Medicamentos implements PropertyChangeListener {
                             controller.create(n);
                             JOptionPane.showMessageDialog(panel, "REGISTRO APLICADO", "Registro", JOptionPane.INFORMATION_MESSAGE);
                         } else{
-                            controller.edit(model.getCurrent(), n);
+                            controller.edit(n);
                             FiltrarFld.postActionEvent();
                             JOptionPane.showMessageDialog(panel, "EDICION APLICADA", "Registro", JOptionPane.INFORMATION_MESSAGE);
                         }

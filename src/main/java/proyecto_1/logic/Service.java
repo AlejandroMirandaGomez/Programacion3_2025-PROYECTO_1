@@ -1,6 +1,8 @@
 package proyecto_1.logic;
 
 import proyecto_1.data.Data;
+import proyecto_1.data.Database;
+import proyecto_1.data.MedicamentoDao;
 import proyecto_1.data.PacienteDao;
 
 import java.util.ArrayList;
@@ -19,16 +21,18 @@ public class Service {
 
     private Data data;
     private PacienteDao pacienteDao;
+    private MedicamentoDao medicamentoDao;
 
     private Service(){
 
         data =  new Data();
         pacienteDao = new PacienteDao();
+        medicamentoDao = new MedicamentoDao();
     }
 
     public void stop(){
         try {
-
+            Database.instance().close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -167,19 +171,15 @@ public class Service {
 
     public void create(Paciente e) throws Exception {
         pacienteDao.create(e);
-        Paciente result = data.getPacientes().stream()
-                .filter(i -> i.getId().equals(e.getId()))
-                .findFirst()
-                .orElse(null);
-        if (result == null) {
-            data.getPacientes().add(e);
-        } else {
-            throw new Exception("Paciente ya existe");
-        }
+
     }
 
     public List<Paciente> getListaPacientes() {
-        return data.getPacientes();
+        return pacienteDao.findAll();
+    }
+
+    public void update(Paciente e) throws Exception {
+        pacienteDao.update(e);
     }
 
     public List<Paciente> filtrarPacientes(String tipo, String texto) {
@@ -187,24 +187,13 @@ public class Service {
 
         switch (tipo){
             case "Id":
-                result = data.getPacientes().stream()
-                        .filter(m -> m.getId().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                result = pacienteDao.searchById(texto);
                 break;
             case "Nombre":
-                result = data.getPacientes().stream()
-                        .filter(m -> m.getNombre().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                result = pacienteDao.searchByName(texto);
                 break;
             case "Telefono":
-                result = data.getPacientes().stream()
-                        .filter(m -> m.getTelefono().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
-                break;
-            case "Fecha de Nacimiento":
-                result = data.getPacientes().stream()
-                        .filter(m -> m.getFechaNacimiento().toString().contains(texto))
-                        .collect(Collectors.toList());
+                result = pacienteDao.findByPhone(texto);
                 break;
         }
 
@@ -213,21 +202,13 @@ public class Service {
 
     public void removePaciente(Paciente e) throws Exception {
         pacienteDao.delete(e);
-        Paciente result = data.getPacientes().stream()
-                .filter(i -> i.getId().equals(e.getId()))
-                .findFirst()
-                .orElse(null);
-
-        if (result != null) {
-            data.getPacientes().remove(result);
-        } else {
-            throw new Exception("Paciente no existe");
-        }
     }
 
     //--Medicamento--
 
     public void create(Medicamento e) throws Exception {
+        medicamentoDao.create(e);
+        /*
         Medicamento result = data.getMedicamentos().stream()
                 .filter(i -> i.getCodigo().equals(e.getCodigo()))
                 .findFirst()
@@ -238,29 +219,29 @@ public class Service {
         } else {
             throw new Exception("Medicamento ya existe");
         }
+        */
+
+    }
+    public void update(Medicamento e) throws Exception {
+        medicamentoDao.update(e);
     }
 
     public List<Medicamento> getListaMedicamentos() {
-        return data.getMedicamentos();
+        //return data.getMedicamentos();
+        return medicamentoDao.findAll();
     }
     public List<Medicamento> filtrarMedicamentos(String tipo, String texto) {
         List<Medicamento> result=new ArrayList<Medicamento>();
 
         switch (tipo){
             case "Codigo":
-                result = data.getMedicamentos().stream()
-                        .filter(m -> m.getCodigo().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                result = medicamentoDao.searchById(texto);
                 break;
             case "Nombre":
-                result = data.getMedicamentos().stream()
-                        .filter(m -> m.getNombre().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                result = medicamentoDao.searchByName(texto);
                 break;
             case "Presentacion":
-                result = data.getMedicamentos().stream()
-                        .filter(m -> m.getPresentacion().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                result = medicamentoDao.findByForm(texto);
                 break;
         }
 
@@ -268,6 +249,8 @@ public class Service {
     }
 
     public void removeMedicamento(Medicamento e) throws Exception {
+        medicamentoDao.delete(e);
+        /*
         Medicamento result = data.getMedicamentos().stream()
                 .filter(i -> i.getCodigo().equals(e.getCodigo()))
                 .findFirst()
@@ -278,6 +261,8 @@ public class Service {
         } else {
             throw new Exception("Medicamento no existe");
         }
+
+         */
     }
 
     //--Recetas--

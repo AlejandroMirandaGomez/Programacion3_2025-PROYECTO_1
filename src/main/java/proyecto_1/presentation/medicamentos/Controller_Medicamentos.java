@@ -48,9 +48,10 @@ public class Controller_Medicamentos {
         model.setMedicamentos(Service.getInstance().getListaMedicamentos());
     }
 
-    public void edit(Medicamento e, Medicamento n) throws Exception{
-        e.setNombre(n.getNombre());
-        e.setPresentacion(n.getPresentacion());
+    public void edit(Medicamento n) throws Exception{
+        Service.getInstance().update(n);
+        model.setCurrent(new Medicamento());
+        model.setMedicamentos(Service.getInstance().getListaMedicamentos());
 
     }
 
