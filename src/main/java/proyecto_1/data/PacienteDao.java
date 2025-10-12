@@ -112,7 +112,7 @@ public class PacienteDao {
     }
 
 
-    private Paciente from(ResultSet rs, String alias){
+    public Paciente from(ResultSet rs, String alias){
         try {
             Paciente p= new Paciente();
             p.setId(rs.getString(alias + ".id"));
