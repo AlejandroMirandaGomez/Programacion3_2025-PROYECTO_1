@@ -20,6 +20,7 @@ public class Service {
     private PacienteDao pacienteDao;
     private MedicamentoDao medicamentoDao;
     private MedicoDao medicoDao;
+    private FarmaceutaDao farmaceutaDao;
 
     private Service(){
 
@@ -27,6 +28,7 @@ public class Service {
         pacienteDao = new PacienteDao();
         medicamentoDao = new MedicamentoDao();
         medicoDao = new MedicoDao();
+        farmaceutaDao = new FarmaceutaDao();
     }
 
     public void stop(){
@@ -122,6 +124,8 @@ public class Service {
     //Farmaceutas
 
     public void create(Farmaceuta e) throws Exception {
+        farmaceutaDao.create(e);
+        /*
         Farmaceuta result = data.getFarmaceutas().stream()
                 .filter(i -> i.getId().equals(e.getId()))
                 .findFirst()
@@ -131,10 +135,12 @@ public class Service {
         } else {
             throw new Exception("Farmaceuta ya existe");
         }
+
+         */
     }
 
     public List<Farmaceuta> findAllFarmaceutas(){
-        return data.getFarmaceutas();
+        return farmaceutaDao.findAll();
     }
 
     public List<Farmaceuta> filtrarFarmaceutas(String tipo, String texto) {
@@ -142,14 +148,10 @@ public class Service {
 
         switch (tipo) {
             case "Id":
-                list = data.getFarmaceutas().stream()
-                        .filter(m -> m.getId().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                list = farmaceutaDao.searchById(texto);
                 break;
             case "Nombre":
-                list = data.getFarmaceutas().stream()
-                        .filter(m -> m.getNombre().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                list = farmaceutaDao.searchByName(texto);
                 break;
 
 
@@ -157,8 +159,13 @@ public class Service {
         return list;
     }
 
+    public void update(Farmaceuta e) throws Exception {
+        farmaceutaDao.update(e);
+    }
+
     public void removeFarmaceuta(Farmaceuta e) throws Exception {
-        Farmaceuta result = data.getFarmaceutas().stream()
+        farmaceutaDao.delete(e);
+        /*Farmaceuta result = data.getFarmaceutas().stream()
                 .filter(i -> i.getId().equals(e.getId()))
                 .findFirst()
                 .orElse(null);
@@ -168,6 +175,8 @@ public class Service {
         } else {
             throw new Exception("Farmaceuta no existe");
         }
+
+         */
     }
 
     //--Pacientes--
