@@ -1,9 +1,6 @@
 package proyecto_1.logic;
 
-import proyecto_1.data.Data;
-import proyecto_1.data.Database;
-import proyecto_1.data.MedicamentoDao;
-import proyecto_1.data.PacienteDao;
+import proyecto_1.data.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +19,14 @@ public class Service {
     private Data data;
     private PacienteDao pacienteDao;
     private MedicamentoDao medicamentoDao;
+    private MedicoDao medicoDao;
 
     private Service(){
 
         data =  new Data();
         pacienteDao = new PacienteDao();
         medicamentoDao = new MedicamentoDao();
+        medicoDao = new MedicoDao();
     }
 
     public void stop(){
@@ -41,15 +40,16 @@ public class Service {
     //Medicos
 
     public void create(Medico e) throws Exception {
-        Medico result = data.getMedicos().stream()
-                .filter(i -> i.getId().equals(e.getId()))
-                .findFirst()
-                .orElse(null);
-        if (result == null) {
-            data.getMedicos().add(e);
-        } else {
-            throw new Exception("Medico ya existe");
-        }
+//        Medico result = data.getMedicos().stream()
+//                .filter(i -> i.getId().equals(e.getId()))
+//                .findFirst()
+//                .orElse(null);
+//        if (result == null) {
+//            data.getMedicos().add(e);
+//        } else {
+//            throw new Exception("Medico ya existe");
+//        }
+        medicoDao.create(e);
     }
 
     public Medico read(Medico e) throws Exception {
@@ -79,7 +79,8 @@ public class Service {
     }
 
     public List<Medico> findAll(){
-        return data.getMedicos();
+        //return data.getMedicos();
+        return medicoDao.findAll();
     }
 
     public List<Medico> filtrarMedicos(String tipo, String texto) {
@@ -103,16 +104,18 @@ public class Service {
     }
 
     public void removeMedico(Medico e) throws Exception{
-        Medico result = data.getMedicos().stream()
-                .filter(i -> i.getId().equals(e.getId()))
-                .findFirst()
-                .orElse(null);
+//        Medico result = data.getMedicos().stream()
+//                .filter(i -> i.getId().equals(e.getId()))
+//                .findFirst()
+//                .orElse(null);
+//
+//        if (result != null) {
+//            data.getMedicos().remove(result);
+//        }else {
+//            throw new Exception("Medico no existe");
+//        }
 
-        if (result != null) {
-            data.getMedicos().remove(result);
-        }else {
-            throw new Exception("Medico no existe");
-        }
+        medicoDao.remove(e);
 
 
     }
