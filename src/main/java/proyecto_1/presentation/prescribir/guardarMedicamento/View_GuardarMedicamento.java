@@ -115,6 +115,7 @@ public class View_GuardarMedicamento extends JDialog  implements PropertyChangeL
         prescripcion.setCantidad((Integer)cantidad.getValue());
         prescripcion.setDuracion((Integer)duracion.getValue());
         prescripcion.setIndicaciones((String)instrucciones.getText());
+        prescripcion.setReceta(model.getCurrentReceta());
         return prescripcion;
     }
 

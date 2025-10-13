@@ -51,8 +51,10 @@ public class Data {
         //Agregar al admin
         Usuario adminFacil = new Usuario("1", "1", "ADM");
         Usuario adminFacil2 = new Usuario("admin", "admin", "ADM");
+        Usuario medicoFacil = new Usuario("2", "2", "MED");
         usuarios.add(adminFacil);
         usuarios.add(adminFacil2);
+        usuarios.add(medicoFacil);
     }
 
 //    // --- Carga de datos de prueba ---

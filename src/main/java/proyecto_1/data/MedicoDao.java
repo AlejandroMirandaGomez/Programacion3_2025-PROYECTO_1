@@ -2,6 +2,7 @@ package proyecto_1.data;
 
 import proyecto_1.logic.Medicamento;
 import proyecto_1.logic.Medico;
+import proyecto_1.logic.Prescripcion;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,6 +29,21 @@ public class MedicoDao {
         int count=db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Medico ya existe");
+        }
+    }
+
+    public Medico read(String id) throws Exception{
+        String sql="select * from Medico m where m.id=? ";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setString(1,id);
+        ResultSet rs = stm.executeQuery();
+
+        Medico m;
+        if(rs.next()){
+            m = from(rs, "m");
+            return m;
+        } else {
+            throw new Exception("Medico no existe");
         }
     }
 

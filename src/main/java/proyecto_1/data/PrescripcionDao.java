@@ -17,23 +17,25 @@ public class PrescripcionDao {
         db = Database.instance();
     }
 
-    // id lo asigna la BD
     public void create(Prescripcion p) throws Exception {
-        String sql = "insert into Prescripcion (indicaciones, duracion, cantidad, medicamento, receta) values (?,?,?,?,?)";
+        String sql = "insert into Prescripcion " +
+                "(indicaciones, duracion, cantidad, medicamento, receta) " +
+                "values (?,?,?,?,?)";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setString(1, p.getIndicaciones());
         stm.setInt(2, p.getDuracion());
         stm.setInt(3, p.getCantidad());
         stm.setString(4, p.getMedicamento().getCodigo());
         stm.setString(5, p.getReceta().getId());
+
         int count = db.executeUpdate(stm);
         if (count == 0) throw new Exception("Prescripcion no creada");
-        try (ResultSet rs = stm.getGeneratedKeys()) {
-            if (rs.next()) {
-                p.setId(rs.getInt(1)); // id es int
-            }
-        }
+
+        PreparedStatement keyStm = db.prepareStatement("SELECT LAST_INSERT_ID()");
+        ResultSet rs = db.executeQuery(keyStm);
+        if (rs.next()) p.setId(rs.getInt(1));
     }
+
 
     public Prescripcion read(int id) throws Exception {
         String sql = "select * from Prescripcion p " +
@@ -52,8 +54,10 @@ public class PrescripcionDao {
             p = from(rs, "p");
             p.setMedicamento(mDao.from(rs, "m"));
             p.setReceta(rDao.from(rs, "r"));
+            return p;
+        } else{
+            throw new Exception("Prescripcion no existe");
         }
-        throw new Exception("Prescripcion no existe");
     }
 
     public void update(Prescripcion p) throws Exception {

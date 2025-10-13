@@ -15,6 +15,7 @@ public class Prescripcion {
     public Prescripcion() {};
 
     public Prescripcion(String indicaciones, int duracion, Medicamento medicamento, int cantidad) {
+        this.id = 0;
         this.indicaciones = indicaciones;
         this.duracion = duracion;
         this.medicamento = medicamento;
@@ -22,7 +23,8 @@ public class Prescripcion {
         this.receta = null;
     }
 
-    public Prescripcion(String indicaciones, int duracion, Medicamento medicamento, int cantidad,  Receta receta) {
+    public Prescripcion(int id, String indicaciones, int duracion, Medicamento medicamento, int cantidad,  Receta receta) {
+        this.id = id;
         this.indicaciones = indicaciones;
         this.duracion = duracion;
         this.medicamento = medicamento;

@@ -1,5 +1,6 @@
 package proyecto_1.logic;
 
+import com.privatejgoodies.common.base.Preconditions;
 import proyecto_1.data.*;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class Service {
     private PacienteDao pacienteDao;
     private MedicamentoDao medicamentoDao;
     private MedicoDao medicoDao;
+    private RecetaDao recetaDao;
+    private PrescripcionDao prescripcionDao;
 
     private Service(){
 
@@ -27,6 +30,8 @@ public class Service {
         pacienteDao = new PacienteDao();
         medicamentoDao = new MedicamentoDao();
         medicoDao = new MedicoDao();
+        recetaDao = new RecetaDao();
+        prescripcionDao = new PrescripcionDao();
     }
 
     public void stop(){
@@ -66,16 +71,17 @@ public class Service {
     }
 
     public Medico read(String e) throws Exception {
-        Medico result = data.getMedicos().stream()
-                .filter(i -> i.getId().equals(e))
-                .findFirst()
-                .orElse(null);
+//        Medico result = data.getMedicos().stream()
+//                .filter(i -> i.getId().equals(e))
+//                .findFirst()
+//                .orElse(null);
+//        if (result != null) {
+//            return result;
+//        } else {
+//            throw new Exception("Medico no existe");
+//        }
 
-        if (result != null) {
-            return result;
-        } else {
-            throw new Exception("Medico no existe");
-        }
+        return medicoDao.read(e);
     }
 
     public List<Medico> findAll(){
@@ -174,7 +180,6 @@ public class Service {
 
     public void create(Paciente e) throws Exception {
         pacienteDao.create(e);
-
     }
 
     public List<Paciente> getListaPacientes() {
@@ -306,7 +311,11 @@ public class Service {
         return result;
     }
     public void create(Receta e) throws Exception {
-        data.getRecetas().add(e);
+        recetaDao.create(e);
+        for(Prescripcion p : e.getPrescripciones()){
+            create(p);
+        }
+        //data.getRecetas().add(e);
     }
 
     public Medico getUsuario() throws Exception{
@@ -315,7 +324,10 @@ public class Service {
         return Service.getInstance().read(id);
     }
 
-
+    //--Prescripciones--
+    public void create(Prescripcion e) throws Exception {
+        prescripcionDao.create(e);
+    }
 
 
     // Usuarios
