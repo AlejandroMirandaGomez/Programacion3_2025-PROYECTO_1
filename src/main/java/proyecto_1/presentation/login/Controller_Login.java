@@ -31,7 +31,9 @@ public class Controller_Login {
     public void changePassword(Usuario usuario, String newPassword)throws  Exception{
         Usuario logged = Service.getInstance().read(usuario);
         if(logged.getPassword().equals(usuario.getPassword())){
+            //logged.setPassword(newPassword);
             logged.setPassword(newPassword);
+            Service.getInstance().update(logged);
         }
     }
 }

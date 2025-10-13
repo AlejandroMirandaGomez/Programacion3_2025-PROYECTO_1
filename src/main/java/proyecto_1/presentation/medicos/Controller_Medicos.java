@@ -64,8 +64,10 @@ public class Controller_Medicos {
     }
 
     public void edit(Medico e, Medico n) throws Exception{
-        e.setNombre(n.getNombre());
-        e.setEspecialidad(n.getEspecialidad());
+
+        Service.getInstance().update(n);
+//        e.setNombre(n.getNombre());
+//        e.setEspecialidad(n.getEspecialidad());
 
     }
 
