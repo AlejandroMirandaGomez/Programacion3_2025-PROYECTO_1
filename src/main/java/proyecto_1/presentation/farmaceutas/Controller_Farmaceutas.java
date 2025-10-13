@@ -52,8 +52,10 @@ public class Controller_Farmaceutas {
         model.setFarmaceutas(Service.getInstance().findAllFarmaceutas());
     }
 
-    public void edit(Farmaceuta e, Farmaceuta n) throws Exception{
-        e.setNombre(n.getNombre());
+    public void edit(Farmaceuta n) throws Exception{
+        Service.getInstance().update(n);
+        model.setCurrent(new Farmaceuta());
+        model.setFarmaceutas(Service.getInstance().findAllFarmaceutas());
 
     }
 
