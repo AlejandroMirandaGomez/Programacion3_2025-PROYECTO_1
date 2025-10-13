@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `Proyecto2`.`Receta` (
   `id` VARCHAR(45) NOT NULL,
   `fechaDeRetiro` DATE NULL,
   `estado` VARCHAR(20) NULL,
-  `paciente` VARCHAR(10) NOT NULL,
-  `medico` VARCHAR(10) NOT NULL,
+  `paciente` VARCHAR(45) NOT NULL,
+  `medico` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Receta_Paciente1_idx` (`paciente` ASC) VISIBLE,
   INDEX `fk_Receta_Medico1_idx` (`medico` ASC) VISIBLE,
@@ -94,10 +94,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Proyecto2`.`Prescripcion` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `indicaciones` VARCHAR(45) NULL,
+  `indicaciones` VARCHAR(256) NULL,
   `duracion` INT NULL,
   `cantidad` INT NULL,
-  `medicamento` VARCHAR(10) NOT NULL,
+  `medicamento` VARCHAR(45) NOT NULL,
   `receta` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Preescripciones_Receta1_idx` (`receta` ASC) VISIBLE,
