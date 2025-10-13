@@ -59,7 +59,7 @@ public class RecetaDao {
     }
 
     public void update(Receta r) throws Exception {
-        String sql = "update receta set fechaDeRetiro=?, estado=?, paciente=?, medico=?" +
+        String sql = "update receta set fechaDeRetiro=?, estado=?, paciente=?, medico=? " +
                 "where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
         stm.setDate(1, Date.valueOf( r.getFechaDeRetiro() ));
@@ -83,13 +83,89 @@ public class RecetaDao {
 
     }
 
-    public List<Receta> readAll() throws Exception {
+    public List<Receta> findAll()  {
         List<Receta> resultado = new ArrayList<>();
         try {
-            String sql = "select * from Receta r" +
-                    "inner join Paciente p on p.id=r.paciente" +
+            String sql = "select * from Receta r " +
+                    "inner join Paciente p on p.id=r.paciente " +
                     "inner join Medico m on m.id=r.medico";
             PreparedStatement stm = db.prepareStatement(sql);
+            ResultSet rs =  db.executeQuery(stm);
+            Receta r;
+            PacienteDao pDao = new PacienteDao();
+            MedicoDao mDao = new MedicoDao();
+            PrescripcionDao prescripcionDao = new PrescripcionDao();
+            while (rs.next()){
+                r = from(rs, "r");
+                r.setPaciente(pDao.from(rs, "p"));
+                r.setMedico(mDao.from(rs, "m"));
+                r.setPrescripciones(prescripcionDao.searchByReceta(r.getId()));
+                resultado.add(r);
+            }
+        } catch (SQLException ex) {}
+        return resultado;
+    }
+    public List<Receta> searchByPaciente(String id)   {
+        List<Receta> resultado = new ArrayList<>();
+        try {
+            String sql = "select * from Receta r " +
+                    "inner join Paciente p on p.id=r.paciente " +
+                    "inner join Medico m on m.id=r.medico " +
+                    "where r.paciente LIKE ?";
+
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1, "%"+id+"%");
+            ResultSet rs =  db.executeQuery(stm);
+            Receta r;
+            PacienteDao pDao = new PacienteDao();
+            MedicoDao mDao = new MedicoDao();
+            PrescripcionDao prescripcionDao = new PrescripcionDao();
+            while (rs.next()){
+                r = from(rs, "r");
+                r.setPaciente(pDao.from(rs, "p"));
+                r.setMedico(mDao.from(rs, "m"));
+                r.setPrescripciones(prescripcionDao.searchByReceta(r.getId()));
+                resultado.add(r);
+            }
+        } catch (SQLException ex) {}
+        return resultado;
+    }
+    public List<Receta> searchByEstado(String estado)  {
+        List<Receta> resultado = new ArrayList<>();
+        try {
+            String sql = "select * from Receta r " +
+                    "inner join Paciente p on p.id=r.paciente " +
+                    "inner join Medico m on m.id=r.medico " +
+                    "where r.estado LIKE ?";
+
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1, "%"+estado+"%");
+            ResultSet rs =  db.executeQuery(stm);
+            Receta r;
+            PacienteDao pDao = new PacienteDao();
+            MedicoDao mDao = new MedicoDao();
+            PrescripcionDao prescripcionDao = new PrescripcionDao();
+            while (rs.next()){
+                r = from(rs, "r");
+                r.setPaciente(pDao.from(rs, "p"));
+                r.setMedico(mDao.from(rs, "m"));
+                r.setPrescripciones(prescripcionDao.searchByReceta(r.getId()));
+                resultado.add(r);
+            }
+        } catch (SQLException ex) {}
+        return resultado;
+    }
+    public List<Receta> searchByPaciente_Estado(String paciente, String estado)  {
+        List<Receta> resultado = new ArrayList<>();
+        try {
+            String sql = "select * from Receta r " +
+                    "inner join Paciente p on p.id=r.paciente " +
+                    "inner join Medico m on m.id=r.medico " +
+                    "where r.estado LIKE ? and r.paciente LIKE ?";
+
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1, "%"+estado+"%");
+            stm.setString(2, "%"+paciente+"%");
             ResultSet rs =  db.executeQuery(stm);
             Receta r;
             PacienteDao pDao = new PacienteDao();
@@ -103,6 +179,9 @@ public class RecetaDao {
         } catch (SQLException ex) {}
         return resultado;
     }
+
+
+
 
     public Receta from(ResultSet rs, String alias) {
         try {

@@ -84,8 +84,8 @@ public class PrescripcionDao {
     public List<Prescripcion> readAll() throws Exception {
         List<Prescripcion> resultado = new ArrayList<>();
         try {
-            String sql = "select * from Prescripcion p" +
-                    "inner join Medicamento m on m.codigo=p.medicamento" +
+            String sql = "select * from Prescripcion p " +
+                    "inner join Medicamento m on m.codigo=p.medicamento " +
                     "inner join Receta r on r.id=p.receta";
             PreparedStatement stm = db.prepareStatement(sql);
             ResultSet rs = db.executeQuery(stm);
@@ -115,5 +115,29 @@ public class PrescripcionDao {
         } catch (SQLException ex) {
             return null;
         }
+    }
+
+    public List<Prescripcion> searchByReceta(String id) {
+        List<Prescripcion> resultado = new ArrayList<>();
+        try {
+            String sql = "select * from Prescripcion p " +
+                    "inner join Medicamento m on m.codigo=p.medicamento " +
+                    "inner join Receta r on r.id=p.receta " +
+                    "where p.id LIKE ?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1, "%"+id+"%");
+            ResultSet rs = db.executeQuery(stm);
+            Prescripcion p;
+            MedicamentoDao mDao = new MedicamentoDao();
+            RecetaDao rDao = new RecetaDao();
+
+            while (rs.next()) {
+                p = from(rs, "p");
+                p.setMedicamento(mDao.from(rs, "m"));
+                p.setReceta(rDao.from(rs, "r"));
+                resultado.add(p);
+            }
+        } catch (SQLException ex) {}
+        return resultado;
     }
 }

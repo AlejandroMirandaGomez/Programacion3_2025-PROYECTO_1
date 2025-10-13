@@ -75,16 +75,7 @@ public class Service {
     }
 
     public Medico read(String e) throws Exception {
-        Medico result = data.getMedicos().stream()
-                .filter(i -> i.getId().equals(e))
-                .findFirst()
-                .orElse(null);
-
-        if (result != null) {
-            return result;
-        } else {
-            throw new Exception("Medico no existe");
-        }
+        return medicoDao.read(e);
     }
 
     public List<Medico> findAll(){
@@ -293,21 +284,19 @@ public class Service {
     //--Recetas--
 
     public List<Receta> getListaRecetas() {
-        return data.getRecetas();
+        return recetaDao.findAll();
+        //return data.getRecetas();
     }
+
     public List<Receta> filtrarRecetas(String tipo, String texto) {
         List<Receta> result=new ArrayList<Receta>();
 
         switch (tipo){
             case "ID_PACIENTE":
-                result = data.getRecetas().stream()
-                        .filter(r -> r.getPaciente().getId().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                result = recetaDao.searchByPaciente(texto);
                 break;
             case "ESTADO":
-                result = data.getRecetas().stream()
-                        .filter(r -> r.getEstado().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+                result = recetaDao.searchByEstado(texto);
                 break;
         }
 
@@ -318,21 +307,28 @@ public class Service {
         List<Receta> result = new ArrayList<Receta>();
         switch (tipo) {
             case "ID_PACIENTE_Y_ESTADO":
-                result = data.getRecetas().stream()
-                        .filter(r -> r.getPaciente().getId().toLowerCase().contains(texto1.toLowerCase()))
-                        .collect(Collectors.toList()).stream().filter(r -> r.getEstado().toLowerCase().contains(texto2.toLowerCase()))
-                        .collect(Collectors.toList());
+                result = recetaDao.searchByPaciente_Estado(texto1, texto2);
+//                result = data.getRecetas().stream()
+//                        .filter(r -> r.getPaciente().getId().toLowerCase().contains(texto1.toLowerCase()))
+//                        .collect(Collectors.toList()).stream().filter(r -> r.getEstado().toLowerCase().contains(texto2.toLowerCase()))
+//                        .collect(Collectors.toList());
                 break;
         }
 
         return result;
     }
+
+
     public void create(Receta e) throws Exception {
         recetaDao.create(e);
         for(Prescripcion p : e.getPrescripciones()){
             create(p);
         }
         //data.getRecetas().add(e);
+    }
+
+    public void update(Receta e) throws Exception {
+        recetaDao.update(e);
     }
 
     public Medico getUsuario() throws Exception{
