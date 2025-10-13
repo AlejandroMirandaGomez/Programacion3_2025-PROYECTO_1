@@ -20,6 +20,7 @@ public class Service {
     private PacienteDao pacienteDao;
     private MedicamentoDao medicamentoDao;
     private MedicoDao medicoDao;
+    private UsuarioDao usuarioDao;
 
     private Service(){
 
@@ -27,6 +28,7 @@ public class Service {
         pacienteDao = new PacienteDao();
         medicamentoDao = new MedicamentoDao();
         medicoDao = new MedicoDao();
+        usuarioDao = new UsuarioDao();
     }
 
     public void stop(){
@@ -88,14 +90,16 @@ public class Service {
 
         switch (tipo) {
             case "Id":
-                list = data.getMedicos().stream()
-                        .filter(m -> m.getId().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+//                list = data.getMedicos().stream()
+//                        .filter(m -> m.getId().toLowerCase().contains(texto.toLowerCase()))
+//                        .collect(Collectors.toList());
+                list = medicoDao.searchById(texto);
                 break;
             case "Nombre":
-                list = data.getMedicos().stream()
-                        .filter(m -> m.getNombre().toLowerCase().contains(texto.toLowerCase()))
-                        .collect(Collectors.toList());
+//                list = data.getMedicos().stream()
+//                        .filter(m -> m.getNombre().toLowerCase().contains(texto.toLowerCase()))
+//                        .collect(Collectors.toList());
+                list = medicoDao.searchByName(texto);
                 break;
 
 
@@ -118,6 +122,10 @@ public class Service {
         medicoDao.remove(e);
 
 
+    }
+
+    public void update(Medico e)throws Exception{
+        medicoDao.update(e);
     }
     //Farmaceutas
 
@@ -321,34 +329,42 @@ public class Service {
     // Usuarios
 
     public Usuario read(Usuario e) throws Exception {
-        Usuario result = data.getUsuarios().stream()
-                .filter(i -> i.getId().equals(e.getId()))
-                .findFirst()
-                .orElse(null);
+//        Usuario result = data.getUsuarios().stream()
+//                .filter(i -> i.getId().equals(e.getId()))
+//                .findFirst()
+//                .orElse(null);
+//
+//        if (result != null) {
+//            return result;
+//        } else {
+//            throw new Exception("Usuario no existe");
+//        }
+        return usuarioDao.read(e.getId());
 
-        if (result != null) {
-            return result;
-        } else {
-            throw new Exception("Usuario no existe");
-        }
+
     }
 
 
     public void create(Usuario e) throws Exception {
-        Usuario result = data.getUsuarios().stream()
-                .filter(i -> i.getId().equals(e.getId()))
-                .findFirst()
-                .orElse(null);
-
-        if (result == null) {
-            data.getUsuarios().add(e);
-        } else {
-            throw new Exception("Usuario ya existe");
-        }
+//        Usuario result = data.getUsuarios().stream()
+//                .filter(i -> i.getId().equals(e.getId()))
+//                .findFirst()
+//                .orElse(null);
+//
+//        if (result == null) {
+//            data.getUsuarios().add(e);
+//        } else {
+//            throw new Exception("Usuario ya existe");
+//        }
+        usuarioDao.create(e);
     }
 
     public List<Usuario> getListaUsuarios() {
-        return data.getUsuarios();
+        return usuarioDao.findAll();
+    }
+
+    public void update(Usuario e) throws Exception {
+        usuarioDao.update(e);
     }
 
 
