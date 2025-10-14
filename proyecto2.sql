@@ -143,6 +143,17 @@ CREATE TABLE IF NOT EXISTS `Proyecto2`.`Administrador` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+insert into usuario
+(id, clave, rol)
+values(1,1,'ADM');
+
+insert into usuario
+(id, clave, rol)
+values(2,2,'MED');
+
+insert into Medico
+(id, nombre, especialidad)
+values("2", "Keylor Medico", "Psicologia")
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

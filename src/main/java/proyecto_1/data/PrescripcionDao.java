@@ -123,9 +123,9 @@ public class PrescripcionDao {
             String sql = "select * from Prescripcion p " +
                     "inner join Medicamento m on m.codigo=p.medicamento " +
                     "inner join Receta r on r.id=p.receta " +
-                    "where p.id LIKE ?";
+                    "where p.receta = ?";
             PreparedStatement stm = db.prepareStatement(sql);
-            stm.setString(1, "%"+id+"%");
+            stm.setString(1, id);
             ResultSet rs = db.executeQuery(stm);
             Prescripcion p;
             MedicamentoDao mDao = new MedicamentoDao();

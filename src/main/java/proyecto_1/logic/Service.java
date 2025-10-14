@@ -277,10 +277,8 @@ public class Service {
         } else {
             throw new Exception("Medicamento no existe");
         }
-
          */
     }
-
     //--Recetas--
 
     public List<Receta> getListaRecetas() {
@@ -290,7 +288,6 @@ public class Service {
 
     public List<Receta> filtrarRecetas(String tipo, String texto) {
         List<Receta> result=new ArrayList<Receta>();
-
         switch (tipo){
             case "ID_PACIENTE":
                 result = recetaDao.searchByPaciente(texto);
@@ -299,7 +296,6 @@ public class Service {
                 result = recetaDao.searchByEstado(texto);
                 break;
         }
-
         return result;
     }
 
@@ -314,7 +310,6 @@ public class Service {
 //                        .collect(Collectors.toList());
                 break;
         }
-
         return result;
     }
 
@@ -357,10 +352,7 @@ public class Service {
 //            throw new Exception("Usuario no existe");
 //        }
         return usuarioDao.read(e.getId());
-
-
     }
-
 
     public void create(Usuario e) throws Exception {
 //        Usuario result = data.getUsuarios().stream()
@@ -383,10 +375,4 @@ public class Service {
     public void update(Usuario e) throws Exception {
         usuarioDao.update(e);
     }
-
-
-
-
-
-
 }

@@ -46,12 +46,13 @@ public class RecetaDao {
         Receta r;
         PacienteDao pDao = new PacienteDao();
         MedicoDao mDao = new MedicoDao();
+        PrescripcionDao prescripcionDao = new PrescripcionDao();
 
         if (rs.next()){
             r = from(rs, "r");
             r.setPaciente(pDao.from(rs, "p"));
             r.setMedico(mDao.from(rs, "m"));
-
+            r.setPrescripciones(prescripcionDao.searchByReceta(r.getId()));
             return r;
         } else {
             throw new Exception("No se encontro el receta");

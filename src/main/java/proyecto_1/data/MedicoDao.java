@@ -35,7 +35,7 @@ public class MedicoDao {
     public Medico read(String id) throws Exception{
         String sql="select * from Medico m where m.id=? ";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(1,id);
+        stm.setString(1, id);
         ResultSet rs = stm.executeQuery();
 
         Medico m;
