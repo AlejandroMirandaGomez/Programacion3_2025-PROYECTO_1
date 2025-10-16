@@ -57,7 +57,7 @@ ENGINE = InnoDB;
 -- Table `Proyecto2`.`Receta`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Proyecto2`.`Receta` (
-  `id` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `fechaDeRetiro` DATE NULL,
   `estado` VARCHAR(20) NULL,
   `paciente` VARCHAR(45) NOT NULL,
@@ -97,17 +97,17 @@ CREATE TABLE IF NOT EXISTS `Proyecto2`.`Prescripcion` (
   `indicaciones` VARCHAR(256) NULL,
   `duracion` INT NULL,
   `cantidad` INT NULL,
+  `receta` INT NOT NULL,
   `medicamento` VARCHAR(45) NOT NULL,
-  `receta` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Preescripciones_Receta1_idx` (`receta` ASC) VISIBLE,
-  INDEX `fk_Preescripciones_Medicamento1_idx` (`medicamento` ASC) VISIBLE,
+  INDEX `fk_Prescripcion_Medicamento1_idx` (`medicamento` ASC) VISIBLE,
   CONSTRAINT `fk_Preescripciones_Receta1`
     FOREIGN KEY (`receta`)
     REFERENCES `Proyecto2`.`Receta` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Preescripciones_Medicamento1`
+  CONSTRAINT `fk_Prescripcion_Medicamento1`
     FOREIGN KEY (`medicamento`)
     REFERENCES `Proyecto2`.`Medicamento` (`codigo`)
     ON DELETE NO ACTION
@@ -143,6 +143,13 @@ CREATE TABLE IF NOT EXISTS `Proyecto2`.`Administrador` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+use database Proyecto2;
+
 insert into usuario
 (id, clave, rol)
 values(1,1,'ADM');
@@ -153,8 +160,4 @@ values(2,2,'MED');
 
 insert into Medico
 (id, nombre, especialidad)
-values("2", "Keylor Medico", "Psicologia")
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+values("2", "Keylor Medico", "Psicologia");

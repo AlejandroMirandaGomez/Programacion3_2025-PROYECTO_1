@@ -26,7 +26,7 @@ public class PrescripcionDao {
         stm.setInt(2, p.getDuracion());
         stm.setInt(3, p.getCantidad());
         stm.setString(4, p.getMedicamento().getCodigo());
-        stm.setString(5, p.getReceta().getId());
+        stm.setInt(5, p.getReceta().getId());
 
         int count = db.executeUpdate(stm);
         if (count == 0) throw new Exception("Prescripcion no creada");
@@ -67,7 +67,7 @@ public class PrescripcionDao {
         stm.setInt(2, p.getDuracion());
         stm.setInt(3, p.getCantidad());
         stm.setString(4, p.getMedicamento().getCodigo());
-        stm.setString(5, p.getReceta().getId());
+        stm.setInt(5, p.getReceta().getId());
         stm.setInt(6, p.getId());
         int count = db.executeUpdate(stm);
         if (count == 0) throw new Exception("Prescripcion no existe");
@@ -117,7 +117,7 @@ public class PrescripcionDao {
         }
     }
 
-    public List<Prescripcion> searchByReceta(String id) {
+    public List<Prescripcion> searchByReceta(Integer id) {
         List<Prescripcion> resultado = new ArrayList<>();
         try {
             String sql = "select * from Prescripcion p " +
@@ -125,7 +125,7 @@ public class PrescripcionDao {
                     "inner join Receta r on r.id=p.receta " +
                     "where p.receta = ?";
             PreparedStatement stm = db.prepareStatement(sql);
-            stm.setString(1, id);
+            stm.setInt(1, id);
             ResultSet rs = db.executeQuery(stm);
             Prescripcion p;
             MedicamentoDao mDao = new MedicamentoDao();

@@ -19,19 +19,22 @@ public class RecetaDao {
     }
 
     public void create(Receta r) throws Exception {
-        String sql = "insert into Receta (id, fechaDeRetiro, estado, paciente, medico)"+
-                " values (?, ?, ?, ?, ?)";
+        String sql = "insert into Receta (fechaDeRetiro, estado, paciente, medico)"+
+                " values (?, ?, ?, ?)";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(1, r.getId());
-        stm.setDate(2, Date.valueOf( r.getFechaDeRetiro() ));
-        stm.setString(3, r.getEstado());
-        stm.setString(4, r.getPaciente().getId());
-        stm.setString(5, r.getMedico().getId());
+        stm.setDate(1, Date.valueOf( r.getFechaDeRetiro() ));
+        stm.setString(2, r.getEstado());
+        stm.setString(3, r.getPaciente().getId());
+        stm.setString(4, r.getMedico().getId());
 
         int count = db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Error al insertar receta");
         }
+
+        PreparedStatement keyStm = db.prepareStatement("SELECT LAST_INSERT_ID()");
+        ResultSet rs = db.executeQuery(keyStm);
+        if (rs.next()) r.setId(rs.getInt(1));
     }
 
     public Receta read(String id) throws Exception {
@@ -66,7 +69,7 @@ public class RecetaDao {
         stm.setDate(1, Date.valueOf( r.getFechaDeRetiro() ));
         stm.setString(2, r.getEstado());
         stm.setString(3, r.getPaciente().getId());
-        stm.setString(4, r.getMedico().getId());
+        stm.setInt(4, r.getId());
         int count = db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Error al actualizar receta");
@@ -76,7 +79,7 @@ public class RecetaDao {
     public void delete(Receta r) throws Exception {
         String sql = "delete from Receta where id=?";
         PreparedStatement stm = db.prepareStatement(sql);
-        stm.setString(1, r.getId());
+        stm.setInt(1, r.getId());
         int count = db.executeUpdate(stm);
         if (count==0){
             throw new Exception("Error al eliminar receta");
@@ -181,13 +184,10 @@ public class RecetaDao {
         return resultado;
     }
 
-
-
-
     public Receta from(ResultSet rs, String alias) {
         try {
             Receta r = new Receta();
-            r.setId(rs.getString(alias + ".id"));
+            r.setId(rs.getInt(alias + ".id"));
             java.sql.Date fecha = rs.getDate(alias + ".fechaDeRetiro");
             if (fecha != null) {
                 r.setFechaDeRetiro(fecha.toLocalDate());
