@@ -127,11 +127,11 @@ public class Application {
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        // PANEL DIVIDIDO (izquierda: tabs, derecha: nuevo view)
+
         JSplitPane splitPane = new JSplitPane(
-                JSplitPane.HORIZONTAL_SPLIT,      // División vertical
-                tabbedPane,                       // Panel izquierdo
-                view_usuarios.getPanel()              // Panel derecho
+                JSplitPane.HORIZONTAL_SPLIT,
+                tabbedPane,
+                view_usuarios.getPanel()
         );
         //Con esta forma se puede mover el tamaño de la ventana con el cursor
         /*
