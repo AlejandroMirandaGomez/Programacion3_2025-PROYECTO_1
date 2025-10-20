@@ -32,6 +32,7 @@ import proyecto_1.presentation.pacientes.View_Pacientes;
 import proyecto_1.presentation.prescribir.Controller_Prescribir;
 import proyecto_1.presentation.prescribir.Model_Prescribir;
 import proyecto_1.presentation.prescribir.View_Prescribir;
+import proyecto_1.presentation.usuarios.View_Usuarios;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -117,15 +118,37 @@ public class Application {
         View_Dashboard view_dashboard = new View_Dashboard();
         Model_Dashboard model_dashboard = new Model_Dashboard();
         Controller_Dashboard controller_dashboard = new Controller_Dashboard(view_dashboard, model_dashboard);
+
+        //Usuarios MVC
+        View_Usuarios view_usuarios = new View_Usuarios();
+
         // *************************************************************************************************************
 
         JFrame window = new JFrame();
         JTabbedPane tabbedPane = new JTabbedPane();
 
+        // PANEL DIVIDIDO (izquierda: tabs, derecha: nuevo view)
+        JSplitPane splitPane = new JSplitPane(
+                JSplitPane.HORIZONTAL_SPLIT,      // División vertical
+                tabbedPane,                       // Panel izquierdo
+                view_usuarios.getPanel()              // Panel derecho
+        );
+        //Con esta forma se puede mover el tamaño de la ventana con el cursor
+        /*
+        splitPane.setDividerLocation(1000);
+        splitPane.setOneTouchExpandable(false);
+        splitPane.setResizeWeight(0.75);
+        */
+        //Con esta forma no se puede mover el tamaño de la ventana con el cursor
+        splitPane.setDividerLocation(950);
+        splitPane.setEnabled(false);
+        splitPane.setDividerSize(1);
+        splitPane.setResizeWeight(1.0);
+
         window.setSize(1380,720);
         window.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("ALL TABS");
-        window.setContentPane(tabbedPane);
+        window.setContentPane(splitPane);
         window.setVisible(true);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
